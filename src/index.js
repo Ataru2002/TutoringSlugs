@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import SignInSide from './pages/SignInSide';
+import SignUpSide from './pages/SignUpSide';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <SignUpSide />
+
   </React.StrictMode>
 );
 
