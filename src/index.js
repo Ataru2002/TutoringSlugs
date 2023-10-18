@@ -5,11 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import SignInSide from './pages/SignInSide';
 import SignUpSide from './pages/SignUpSide';
+import Tutorforms from './pages/tutor_forms/Tutorforms';
+import Stepper from './pages/tutor_forms/Stepper';
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <SignUpSide />
+    {/* <SignUpSide />
+    <SignInSide /> */}
+    {/* <Tutorforms /> */}
+    <Stepper />
 
   </React.StrictMode>
 );

@@ -25,7 +25,7 @@ const names = [
   'Robitics',
 ];
 
-export default function MultipleSelectCheckmarks() {
+export default function Dropdownmajor() {
   const [personName, setPersonName] = React.useState([]);
 
   const handleChange = (event) => {

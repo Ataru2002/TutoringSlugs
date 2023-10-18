@@ -12,8 +12,8 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import DropDown from '../components/DropDown';
-import pengine from '../assests/pengine.jpg';
+import DropDown from '../components/Dropdownmajor';
+import lion_school_rocks from '../assests/lion_school_rocks.jpg';
 
 function Copyright(props) {
   return (
@@ -52,7 +52,7 @@ export default function SignUpSide() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: `url(${pengine})`,
+            backgroundImage: `url(${lion_school_rocks})`,
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
