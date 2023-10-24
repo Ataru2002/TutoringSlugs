@@ -8,6 +8,7 @@ import SignUpSide from './pages/SignUpSide';
 import Tutorforms from './pages/tutor_forms/Tutorforms';
 import Stepper from './pages/tutor_forms/Stepper';
 import ChangeSetting from './pages/ChangeSetting';
+import Search from './pages/Search';
 
 
 
@@ -18,7 +19,8 @@ root.render(
     <SignInSide /> */}
     {/* <Tutorforms /> */}
     {/* <Stepper /> */}
-    <ChangeSetting />
+    {/* <ChangeSetting /> */}
+    <Search />
   </React.StrictMode>
 );
 
