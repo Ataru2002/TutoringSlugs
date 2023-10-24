@@ -1,15 +1,8 @@
-import { Button } from '@mui/material';
+import { Switch } from "./Switch";
 
 function App() {
   return (
-    <div className="App">
-      <Button 
-        variant="outlined"
-        onClick={() => console.log('click event')}
-      >
-        Sign In
-      </Button>
-    </div>
+    <Switch />
   );
 }
 
