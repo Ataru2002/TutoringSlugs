@@ -24,20 +24,26 @@ export default function Search() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <Container>
-            <Container maxWidth="lg">
+      <Container
+        // sx={{ 
+        //     backgroundImage: `url(${lion_school_rocks})` 
+        // }}
+      >
+        <Container maxWidth="lg">
         <Header title="Tutoring Slugs" sections={sections} />
         <main>
             <Grid container 
             direction="column"
-            justifyContent="space-around"
+            justifyContent="center"
             alignItems="center"
-            columnSpacing={{ xs: 4, sm: 5, md: 6 }}>
-                <Grid container 
+            spacing={6}
+            >
+                <Grid item container 
                 spacing={6}
                 direction="row"
                 justifyContent="center"
-                alignItems="center">
+                alignItems="center"
+                >
                     <Grid item xs={6}>
                         <TextField
                             id="search_class"
@@ -53,11 +59,12 @@ export default function Search() {
                         </Button>
                     </Grid>
                 </Grid>
-                <Grid container 
+                <Grid item container 
                 spacing={6}
                 direction="row"
                 justifyContent="center"
-                alignItems="center">
+                alignItems="center"
+                style={{ height: "100%" }}>
                     <Grid item xs={6}>
                         <TextField
                             id="search_tutors"
