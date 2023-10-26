@@ -43,7 +43,7 @@ function getStepContent(step) {
   }
 }
 
-export default function Tutor_Signup() {
+export default function TutorSignUp() {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
