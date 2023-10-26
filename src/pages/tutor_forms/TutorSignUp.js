@@ -12,8 +12,8 @@ import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Tutorforms from './Tutorforms';
-import Upload_picture from './Upload_picture.js';
-import Unoffical_transcript from './Unoffical_transcript.js';
+import UploadPicture from './UploadPicture.js';
+import UnofficalTranscript from './UnofficalTranscript.js';
 
 function Copyright() {
   return (
@@ -35,9 +35,9 @@ function getStepContent(step) {
     case 0:
       return <Tutorforms />;
     case 1:
-      return <Upload_picture />;
+      return <UploadPicture />;
     case 2:
-      return <Unoffical_transcript />;
+      return <UnofficalTranscript />;
     default:
       throw new Error('Unknown step');
   }

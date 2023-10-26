@@ -2,8 +2,7 @@ import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
-import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
+import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../components/Header';
@@ -32,7 +31,8 @@ export default function Search() {
             <Grid container 
             direction="column"
             justifyContent="space-around"
-            alignItems="center">
+            alignItems="center"
+            columnSpacing={{ xs: 4, sm: 5, md: 6 }}>
                 <Grid container 
                 spacing={6}
                 direction="row"
@@ -48,9 +48,9 @@ export default function Search() {
                         />
                     </Grid>
                     <Grid item >
-                        <IconButton>
-                            {/* <  SearchIcon /> */}
-                        </IconButton>
+                        <Button variant="contained">
+                            Search
+                        </Button>
                     </Grid>
                 </Grid>
                 <Grid container 
@@ -68,9 +68,9 @@ export default function Search() {
                         />
                     </Grid>
                     <Grid item >
-                        <IconButton>
-                            {/* <  SearchIcon /> */}
-                        </IconButton>
+                        <Button variant="contained">
+                            Search
+                        </Button>
                     </Grid>
                 </Grid>
             </Grid>
