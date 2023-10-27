@@ -11,9 +11,9 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
-import Tutorforms from './Tutorforms';
-import UploadPicture from './UploadPicture.js';
-import UnofficalTranscript from './UnofficalTranscript.js';
+import TutorForms from './TutorForms';
+import UploadPicture from '../../components/UploadPicture';
+import UnofficalTranscript from '../../components/UnofficalTranscript';
 
 function Copyright() {
   return (
@@ -33,7 +33,7 @@ const steps = ['Tutor Info', 'Self Photo', 'Unoffical Transcript'];
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <Tutorforms />;
+      return <TutorForms />;
     case 1:
       return <UploadPicture />;
     case 2:

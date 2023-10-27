@@ -7,7 +7,6 @@ import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import lion_school_rocks from '../assests/lion_school_rocks.jpg';
 
 const origin_url = window.location.origin;
 
@@ -15,7 +14,7 @@ const sections = [
   { title: 'Wanna be a tutor?', url: origin_url + '/tutor_signup' },
   { title: 'About us', url: '#' },
   { title: 'Change your setting', url: origin_url + '/change_setting' },
-  { title: 'Change your tutor setting', url: '#' },
+  { title: 'Change your tutor setting', url: origin_url + '/change_tutor_setting' },
 ];
 
 const defaultTheme = createTheme();
