@@ -7,7 +7,6 @@ import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import lion_school_rocks from '../assests/lion_school_rocks.jpg';
 
 const origin_url = window.location.origin;
 
@@ -15,7 +14,7 @@ const sections = [
   { title: 'Wanna be a tutor?', url: origin_url + '/tutor_signup' },
   { title: 'About us', url: '#' },
   { title: 'Change your setting', url: origin_url + '/change_setting' },
-  { title: 'Change your tutor setting', url: '#' },
+  { title: 'Change your tutor setting', url: origin_url + '/change_tutor_setting' },
 ];
 
 const defaultTheme = createTheme();
@@ -24,20 +23,26 @@ export default function Search() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <Container>
-            <Container maxWidth="lg">
+      <Container
+        // sx={{ 
+        //     backgroundImage: `url(${lion_school_rocks})` 
+        // }}
+      >
+        <Container maxWidth="lg">
         <Header title="Tutoring Slugs" sections={sections} />
         <main>
             <Grid container 
             direction="column"
-            justifyContent="space-around"
+            justifyContent="center"
             alignItems="center"
-            columnSpacing={{ xs: 4, sm: 5, md: 6 }}>
-                <Grid container 
+            spacing={6}
+            >
+                <Grid item container 
                 spacing={6}
                 direction="row"
                 justifyContent="center"
-                alignItems="center">
+                alignItems="center"
+                >
                     <Grid item xs={6}>
                         <TextField
                             id="search_class"
@@ -53,11 +58,12 @@ export default function Search() {
                         </Button>
                     </Grid>
                 </Grid>
-                <Grid container 
+                <Grid item container 
                 spacing={6}
                 direction="row"
                 justifyContent="center"
-                alignItems="center">
+                alignItems="center"
+                style={{ height: "100%" }}>
                     <Grid item xs={6}>
                         <TextField
                             id="search_tutors"
