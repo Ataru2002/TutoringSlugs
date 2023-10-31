@@ -121,9 +121,8 @@ export default function SignUpSide() {
                 fullWidth
                 name="Confirm password"
                 label="Confirm password"
-                type="Confirm password"
-                id="Confirm password"
-                autoComplete="Confirm password"
+                type="password"
+                id="Confirm-password"
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}

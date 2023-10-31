@@ -6,11 +6,13 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import sarah from '../assests/sarah.jpg';
+import BasicRating from '../components/BasicRatings';
 
 const origin_url = window.location.origin;
 
@@ -32,29 +34,53 @@ export default function Results() {
         <Header title="Tutoring Slugs" sections={sections} />
         <main>
             <Grid container 
-            direction="column"
+            spacing={6}
             justifyContent="center"
             alignItems="center"
             >
                 <Grid item container 
-                direction="row"
+                spacing={6}
                 justifyContent="center"
                 alignItems="center"
                 >
-                    <Card>
+                    <Grid item xs={6}>
+                        <TextField
+                            id="search_class"
+                            name="search_class"
+                            label="Search Class"
+                            fullWidth
+                            variant="standard"
+                        />
+                    </Grid>
+                    <Grid item >
+                        <Button variant="contained">
+                            Search
+                        </Button>
+                    </Grid>
+                </Grid>
+                <Grid item container 
+                justifyContent="center"
+                alignItems="center"
+                >
+                    <Card
+                        sx={{
+                            width: "60%",
+                          }}
+                    >
                         <CardActionArea>
                             <CardMedia
                             component="img"
-                            height="140"
+                            height="500"
                             image={sarah}
                             alt="sarah"
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
-                                    Sarah Rammaha
+                                    Sarah Rammaha 
                                 </Typography>
+                                <BasicRating />
                                 <Typography variant="body2" color="text.secondary">
-                                    Excellent experince for tutoring. Has 2 years of experience. 
+                                    Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. 
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
                                     Rate: 30 dollars per hour
@@ -69,15 +95,18 @@ export default function Results() {
                     </Card>
                 </Grid>
                 <Grid item container 
-                direction="row"
                 justifyContent="center"
                 alignItems="center"
                 >
-                    <Card>
+                    <Card
+                        sx={{
+                            width: "60%",
+                        }}
+                    >
                         <CardActionArea>
                             <CardMedia
                             component="img"
-                            height="140"
+                            height="500"
                             image={sarah}
                             alt="sarah"
                             />
