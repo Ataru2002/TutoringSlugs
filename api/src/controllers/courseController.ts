@@ -21,12 +21,12 @@ class CourseController {
                         found = true;
                     }
                 }
+                if(!found) res.status(404).send("Course not found");
             })
         }
         else {
             res.status(400).send("No course id provided");
         }
-        if(!found) res.status(404).send("Course not found");
     }
 
     // List: Ideally we would paginate this data so we don't return a giant object

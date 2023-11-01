@@ -8,6 +8,7 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
   let jwtPayload;
   
   //Try to validate the token and get data
+
   try {
     jwtPayload = <any>jwt.verify(token, config.jwtSecret);
     res.locals.jwtPayload = jwtPayload;
