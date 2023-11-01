@@ -13,6 +13,28 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import DropDown from '../components/Dropdownmajor';
 import lion_school_rocks from '../assests/lion_school_rocks.jpg';
+import { initializeApp } from "firebase/app";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAr9AWEzY55OMgNGJLRPNkeg3EIv7rT52A",
+  authDomain: "tutoringslugs.firebaseapp.com",
+  projectId: "tutoringslugs",
+  storageBucket: "tutoringslugs.appspot.com",
+  messagingSenderId: "577248810803",
+  appId: "1:577248810803:web:5807a43fb92cd400075046",
+  measurementId: "G-BNWVD69VNX",
+};
+
+initializeApp(firebaseConfig);
+const auth = getAuth();
+
+
 
 function Copyright(props) {
   return (
@@ -36,9 +58,40 @@ export default function SignUpSide() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
+      fname: data.get('First Name'),
+      lname: data.get('Last Name'),
       email: data.get('email'),
-      password: data.get('password'),
+      password: data.get('password'), 
+      cpassword: data.get('Confirm password')
     });
+    const fName = data.get('First Name');
+    const lName = data.get('Last Name')
+    const email = data.get('email');
+    const password = data.get('password');
+    const cpassword = data.get('Confirm password');
+
+    if(password != cpassword){
+      alert("Password doesn't match with confirm password");
+    }else if (!email.toString().includes("ucsc.edu")) {
+      alert("Email doesn't contain ucsc.edu");
+    } else {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(function(cred){
+          updateProfile(auth.currentUser, {
+            displayName: fName + ' ' + lName
+          })
+          console.log(cred.user);
+          return;
+        }).catch((err) => {
+          alert(err.message);
+          //will alert if:
+          //- password has less than 4 characters
+          //- the account already existed
+        });
+
+        //for frontend: switch back to the login page
+        //for frontend: change the appearance of confirm password
+    }
   };
 
   return (
