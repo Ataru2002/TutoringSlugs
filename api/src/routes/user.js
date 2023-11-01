@@ -4,10 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const routes_1 = require("./src/routes/routes");
+const UserController_1 = __importDefault(require("../controllers/UserController"));
+const checkjwt_1 = require("../middlewares/checkjwt");
 const app = (0, express_1.default)();
-const PORT = 8080;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
-});
-(0, routes_1.use)(app);
+var router = express_1.default.Router();
+router.get("/", [checkjwt_1.checkJwt], UserController_1.default.get);
+exports.default = router;

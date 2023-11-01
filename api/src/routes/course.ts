@@ -1,12 +1,13 @@
 import express, {Application, Router} from 'express';
-import * as courseController from '../controllers/courseController';
+import CourseController from '../controllers/CourseController';
 
 const app : Application = express();
 var router : Router = express.Router();
 
-router.get("/", courseController.index);
+router.get("/get", CourseController.get);
+router.get("/list", CourseController.list);
+router.post("/tutor", CourseController.tutor);
 
-module.exports = router;
-
+export default router;
 
 

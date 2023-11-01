@@ -1,5 +1,12 @@
-import express, {Application, Router} from 'express';
+import express, {Application, Router} from "express";
+import auth from "./auth";
+import user from "./user";
+import course from "./course";
 
-export function use(app : Application){
-    app.use("/course", require('./course'));
-}
+const routes = Router();
+
+routes.use("/auth", auth);
+routes.use("/user", user);
+routes.use("/course", course);
+
+export default routes;
