@@ -20,6 +20,16 @@ function Header(props) {
         >
           {title}
         </Typography>
+        {/* <Typography
+          component="h3"
+          variant="h5"
+          color="inherit"
+          align="center"
+          noWrap
+          sx={{ flex: 1 }}
+        >
+          Hello, {user}
+        </Typography> */}
       </Toolbar>
       <Toolbar
         component="nav"

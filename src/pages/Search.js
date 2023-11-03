@@ -7,6 +7,28 @@ import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { initializeApp } from "firebase/app";
+import {
+  getAuth,
+} from "firebase/auth";
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAr9AWEzY55OMgNGJLRPNkeg3EIv7rT52A",
+  authDomain: "tutoringslugs.firebaseapp.com",
+  projectId: "tutoringslugs",
+  storageBucket: "tutoringslugs.appspot.com",
+  messagingSenderId: "577248810803",
+  appId: "1:577248810803:web:5807a43fb92cd400075046",
+  measurementId: "G-BNWVD69VNX",
+};
+
+initializeApp(firebaseConfig);
+const auth = getAuth();
+const user = firebase.auth().currentUser;
+
+console.log("AHHHHHH: ", user);
+
 
 const origin_url = window.location.origin;
 

@@ -34,8 +34,6 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 const auth = getAuth();
 
-
-
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -76,12 +74,12 @@ export default function SignUpSide() {
       alert("Email doesn't contain ucsc.edu");
     } else {
       createUserWithEmailAndPassword(auth, email, password)
-        .then(function(cred){
+        .then((cred) => {
           updateProfile(auth.currentUser, {
             displayName: fName + ' ' + lName
           })
           console.log(cred.user);
-          return;
+          window.location.href = "/signin";
         }).catch((err) => {
           alert(err.message);
           //will alert if:
@@ -90,7 +88,7 @@ export default function SignUpSide() {
         });
 
         //for frontend: switch back to the login page
-        //for frontend: change the appearance of confirm password
+
     }
   };
 
