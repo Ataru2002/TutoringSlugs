@@ -19,13 +19,13 @@ const MenuProps = {
 };
 
 const names = [
-  'CSE 101',
-  'CMPM 80K',
-  'AM 100',
-  'MATH 100',
+  'Sarah Rammaha',
+  'Sarah Rammaha',
+  'Sarah Rammaha',
+  'Phuong Uyen Nguyen',
 ];
 
-export default function Dropdownclasses() {
+export default function Dropdowntutors() {
   const [personName, setPersonName] = React.useState([]);
 
   const handleChange = (event) => {
@@ -41,7 +41,7 @@ export default function Dropdownclasses() {
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Select Classes</InputLabel>
+        <InputLabel id="demo-multiple-checkbox-label">Select Tutors</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"

@@ -2,17 +2,13 @@ import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import sarah from '../assests/sarah.jpg';
-import BasicRating from '../components/BasicRatings';
+import DynamicBox from '../components/DynamicBox';
 
 const origin_url = window.location.origin;
 
@@ -26,6 +22,9 @@ const sections = [
 const defaultTheme = createTheme();
 
 export default function Results() {
+    const name = "Sarah Ramamha";
+    const description = "Excellent experince for tutoring. Has 2 years of experience. Rate: 30 dollars per hour"
+    const email = "srammaha@ucsc.edu";
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
@@ -58,77 +57,8 @@ export default function Results() {
                         </Button>
                     </Grid>
                 </Grid>
-                <Grid item container 
-                justifyContent="center"
-                alignItems="center"
-                >
-                    <Card
-                        sx={{
-                            width: "60%",
-                          }}
-                    >
-                        <CardActionArea>
-                            <CardMedia
-                            component="img"
-                            height="500"
-                            image={sarah}
-                            alt="sarah"
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    Sarah Rammaha 
-                                </Typography>
-                                <BasicRating />
-                                <Typography variant="body2" color="text.secondary">
-                                    Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. Excellent experince for tutoring. Has 2 years of experience. 
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    Rate: 30 dollars per hour
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                        <CardActions>
-                            <Button size="small" color="primary">
-                                Contact
-                            </Button>
-                        </CardActions>
-                    </Card>
-                </Grid>
-                <Grid item container 
-                justifyContent="center"
-                alignItems="center"
-                >
-                    <Card
-                        sx={{
-                            width: "60%",
-                        }}
-                    >
-                        <CardActionArea>
-                            <CardMedia
-                            component="img"
-                            height="500"
-                            image={sarah}
-                            alt="sarah"
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    Sarah Rammaha
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    Excellent experince for tutoring. Has 2 years of experience. 
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    Rate: 30 dollars per hour
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                        <CardActions>
-                            <Button size="small" color="primary">
-                                Contact
-                            </Button>
-                        </CardActions>
-                    </Card>
-                </Grid>
+                <DynamicBox image={sarah} name={name} description={description} email={email}/>
+                <DynamicBox image={sarah} name={name} description={description} email={email}/>
             </Grid>
         </main>
       </Container>
