@@ -15,8 +15,6 @@ import signin_message from '../assests/signin_message.jpg';
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
@@ -68,12 +66,13 @@ export default function SignInSide() {
     signInWithEmailAndPassword(auth, email, password)
       .then((cred) => {
         console.log("user logged in: ", cred.user);
-        //for frontend: switch to the main page if correct
+        window.location.href = "/search";
       })
       .catch((err) => {
         alert(err.message);
         //will alert the password is incorrect, invalid logins, etc
       });
+
   };
 
   return (

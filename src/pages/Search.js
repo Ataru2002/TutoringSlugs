@@ -7,6 +7,25 @@ import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { initializeApp } from "firebase/app";
+import {
+  getAuth,
+} from "firebase/auth";
+import Dropdownclasses from '../components/Dropdownclasses';
+import Dropdowntutors from '../components/Dropdowntutors';
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAr9AWEzY55OMgNGJLRPNkeg3EIv7rT52A",
+  authDomain: "tutoringslugs.firebaseapp.com",
+  projectId: "tutoringslugs",
+  storageBucket: "tutoringslugs.appspot.com",
+  messagingSenderId: "577248810803",
+  appId: "1:577248810803:web:5807a43fb92cd400075046",
+  measurementId: "G-BNWVD69VNX",
+};
+
+initializeApp(firebaseConfig);
 
 const origin_url = window.location.origin;
 
@@ -32,7 +51,7 @@ export default function Search() {
         <Header title="Tutoring Slugs" sections={sections} />
         <main>
             <Grid container 
-            direction="column"
+            direction="row"
             justifyContent="center"
             alignItems="center"
             spacing={6}
@@ -43,14 +62,8 @@ export default function Search() {
                 justifyContent="center"
                 alignItems="center"
                 >
-                    <Grid item xs={6}>
-                        <TextField
-                            id="search_class"
-                            name="search_class"
-                            label="Search Class"
-                            fullWidth
-                            variant="standard"
-                        />
+                    <Grid item>
+                        <Dropdownclasses />
                     </Grid>
                     <Grid item >
                         <Button variant="contained">
@@ -64,14 +77,8 @@ export default function Search() {
                 justifyContent="center"
                 alignItems="center"
                 style={{ height: "100%" }}>
-                    <Grid item xs={6}>
-                        <TextField
-                            id="search_tutors"
-                            name="search_tutors"
-                            label="Search Tutors"
-                            fullWidth
-                            variant="standard"
-                        />
+                    <Grid item>
+                        <Dropdowntutors />
                     </Grid>
                     <Grid item >
                         <Button variant="contained">
