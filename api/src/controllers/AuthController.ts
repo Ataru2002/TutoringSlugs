@@ -3,10 +3,15 @@ import config from "../config/config";
 import * as jwt from "jsonwebtoken";
 import * as admin from "firebase-admin";
 import serviceAccountKey from "../../serviceAccountKey.json";
+const { Firestore } = require("@google-cloud/firestore");
+
+const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccountKey as admin.ServiceAccount)
 });
+
+const db = getFirestore();
 
 class AuthController {
     static login = async (req: Request, res: Response) => {
@@ -14,7 +19,7 @@ class AuthController {
         var firebaseToken = req.body.token;
         console.log("firebase token: " + firebaseToken);
 
-        admin.auth().verifyIdToken(firebaseToken).then((decodedToken) => {
+        admin.auth().verifyIdToken(firebaseToken).then(async function(decodedToken){
             console.log("decoded token: ", decodedToken);
             var userId = decodedToken.uid;
 
@@ -24,6 +29,16 @@ class AuthController {
                 config.jwtSecret,
                 {expiresIn: "1h"}
             )
+            try {
+                const docRef = db.collection("users").doc("hello");
+                await docRef.set({
+                    email: decodedToken.email,
+                    name: decodedToken.name
+                });
+                console.log('Entered new data into the document');
+            } catch(err){
+                console.log(err);
+            }
 
             res.send(token);
         }).catch((err) => {
@@ -31,6 +46,9 @@ class AuthController {
             res.send(err);
         });
 
+    }
+
+    static signup = async (req: Request, res: Response) => {
     }
 
     static logout = async (req: Request, res: Response) => {

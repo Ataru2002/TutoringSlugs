@@ -40,9 +40,12 @@ const config_1 = __importDefault(require("../config/config"));
 const jwt = __importStar(require("jsonwebtoken"));
 const admin = __importStar(require("firebase-admin"));
 const serviceAccountKey_json_1 = __importDefault(require("../../serviceAccountKey.json"));
+const { Firestore } = require("@google-cloud/firestore");
+const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccountKey_json_1.default)
 });
+const db = getFirestore();
 class AuthController {
 }
 _a = AuthController;
@@ -50,16 +53,31 @@ AuthController.login = (req, res) => __awaiter(void 0, void 0, void 0, function*
     // Firebase token
     var firebaseToken = req.body.token;
     console.log("firebase token: " + firebaseToken);
-    admin.auth().verifyIdToken(firebaseToken).then((decodedToken) => {
-        console.log("decoded token: ", decodedToken);
-        var userId = decodedToken.uid;
-        // Sign JWT valid for 1 hour
-        const token = jwt.sign({ userId }, config_1.default.jwtSecret, { expiresIn: "1h" });
-        res.send(token);
+    admin.auth().verifyIdToken(firebaseToken).then(function (decodedToken) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("decoded token: ", decodedToken);
+            var userId = decodedToken.uid;
+            // Sign JWT valid for 1 hour
+            const token = jwt.sign({ userId }, config_1.default.jwtSecret, { expiresIn: "1h" });
+            try {
+                const docRef = db.collection("users").doc("hello");
+                yield docRef.set({
+                    email: decodedToken.email,
+                    name: decodedToken.name
+                });
+                console.log('Entered new data into the document');
+            }
+            catch (err) {
+                console.log(err);
+            }
+            res.send(token);
+        });
     }).catch((err) => {
         //console.error(err);
         res.send(err);
     });
+});
+AuthController.signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 AuthController.logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.send("logged out");
