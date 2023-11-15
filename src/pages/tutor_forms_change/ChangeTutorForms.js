@@ -37,7 +37,11 @@ export default function TutorUpdate() {
     lastName: "",
     phoneNum: "",
     description: "",
+    email: "",
     public: false,
+    coursesTutored: "",
+    selectedFile: "",
+    selectedImg: "",
     tutor: true,
   });
 
@@ -46,9 +50,9 @@ export default function TutorUpdate() {
       case 0:
         return <TutorForms setTutor={setTutor} />;
       case 1:
-        return <UploadPicture />;
+        return <UploadPicture setTutor={setTutor}/>;
       case 2:
-        return <UnofficalTranscript />;
+        return <UnofficalTranscript setTutor={setTutor}/>;
       default:
         throw new Error('Unknown step');
     }
@@ -62,24 +66,28 @@ export default function TutorUpdate() {
     setActiveStep(activeStep - 1);
   };
 
+  const goHome = () => {
+    const origin_url = window.location.origin;
+
+  };
+
   const handleSubmit = (tutor) => {
-    // fetch("http://localhost:8080/course/tutor", {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //       userId: tutor.firstName,
-    //       name: tutor.lastName,
-    //       courseId: "cse-30",
-    //   }),
-    //    headers: {
-    //       'Content-type': 'application/json; charset=UTF-8',
-    //   },
-    // })
-    // .then((response) => response.json())
-    // .then((data) => {
-    //   // do nothing with the data for now
-    //   console.log(data)
-    // })
-    console.log(tutor)
+    fetch("http://localhost:8080/course/tutor", {
+      method: 'POST',
+      body: JSON.stringify({
+          userId: tutor.firstName,
+          name: tutor.lastName,
+          courseId: "cse-30",
+      }),
+       headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      // do nothing with the data for now
+      console.log(data)
+    })
     setActiveStep(activeStep + 1);
   };
 
@@ -121,6 +129,9 @@ export default function TutorUpdate() {
               <Typography variant="subtitle1">
                 The change will appear immediately on your profile.
               </Typography>
+              <Button onClick={goHome} sx={{ mt: 3, ml: 1 }}>
+                  Home
+              </Button>
             </React.Fragment>
           ) : (
             <React.Fragment>

@@ -37,8 +37,11 @@ export default function TutorSignUp() {
     lastName: "",
     phoneNum: "",
     description: "",
+    email: "",
     public: false,
     coursesTutored: "",
+    selectedFile: "",
+    selectedImg: "",
     tutor: true,
   });
 
@@ -47,9 +50,9 @@ export default function TutorSignUp() {
       case 0:
         return <TutorForms setTutor={setTutor} />;
       case 1:
-        return <UploadPicture />;
+        return <UploadPicture setTutor={setTutor} />;
       case 2:
-        return <UnofficalTranscript />;
+        return <UnofficalTranscript setTutor={setTutor}/>;
       default:
         throw new Error('Unknown step');
     }
@@ -80,7 +83,6 @@ export default function TutorSignUp() {
       // do nothing with the data for now
       console.log(data)
     })
-    console.log(tutor);
     setActiveStep(activeStep + 1);
   };
 
