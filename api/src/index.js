@@ -7,6 +7,12 @@ const express_1 = __importDefault(require("express"));
 const routes_1 = __importDefault(require("./routes/routes"));
 const app = (0, express_1.default)();
 const PORT = 8080;
+//app.use(cors());
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "file:///C:/Users/thoma/Desktop/TutoringSlugs/test.html"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
