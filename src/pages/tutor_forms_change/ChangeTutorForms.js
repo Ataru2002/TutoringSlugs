@@ -38,6 +38,7 @@ export default function TutorUpdate() {
     phoneNum: "",
     description: "",
     public: false,
+    tutor: true,
   });
 
   function getStepContent(step) {
@@ -133,7 +134,7 @@ export default function TutorUpdate() {
 
                 {activeStep === steps.length - 1 && (
                   <Button variant="contained"
-                  onClick={handleSubmit(tutor)} sx={{ mt: 3, ml: 1 }}>
+                  onClick={() => handleSubmit(tutor)} sx={{ mt: 3, ml: 1 }}>
                     Submit
                   </Button>
                 )}
