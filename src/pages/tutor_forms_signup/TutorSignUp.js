@@ -30,21 +30,28 @@ function Copyright() {
 
 const steps = ['Tutor Info', 'Self Photo', 'Unoffical Transcript'];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <TutorForms />;
-    case 1:
-      return <UploadPicture />;
-    case 2:
-      return <UnofficalTranscript />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
-
 export default function TutorSignUp() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [tutor, setTutor] = React.useState({
+    firstName: "",
+    lastName: "",
+    phoneNum: "",
+    description: "",
+    public: false,
+  });
+
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <TutorForms setTutor={setTutor} />;
+      case 1:
+        return <UploadPicture />;
+      case 2:
+        return <UnofficalTranscript />;
+      default:
+        throw new Error('Unknown step');
+    }
+  }
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -52,6 +59,27 @@ export default function TutorSignUp() {
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
+  };
+
+  const handleSubmit = (tutor) => {
+    // fetch("http://localhost:8080/course/tutor", {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //       userId: tutor.firstName,
+    //       name: tutor.lastName,
+    //       courseId: "cse-30",
+    //   }),
+    //    headers: {
+    //       'Content-type': 'application/json; charset=UTF-8',
+    //   },
+    // })
+    // .then((response) => response.json())
+    // .then((data) => {
+    //   // do nothing with the data for now
+    //   console.log(data)
+    // })
+    console.log(tutor)
+    setActiveStep(activeStep + 1);
   };
 
   return (
@@ -68,7 +96,7 @@ export default function TutorSignUp() {
       >
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            Tutroing Slugs
+            Tutoring Slugs
           </Typography>
         </Toolbar>
       </AppBar>
@@ -103,13 +131,19 @@ export default function TutorSignUp() {
                   </Button>
                 )}
 
-                <Button
-                  variant="contained"
-                  onClick={handleNext}
-                  sx={{ mt: 3, ml: 1 }}
-                >
-                  {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
-                </Button>
+                {activeStep === steps.length - 1 && (
+                  <Button variant="contained"
+                  onClick={handleSubmit(tutor)} sx={{ mt: 3, ml: 1 }}>
+                    Submit
+                  </Button>
+                )}
+
+                {activeStep !== steps.length - 1  && (
+                  <Button variant="contained"
+                  onClick={handleNext} sx={{ mt: 3, ml: 1 }}>
+                    Next
+                  </Button>
+                )}
               </Box>
             </React.Fragment>
           )}
