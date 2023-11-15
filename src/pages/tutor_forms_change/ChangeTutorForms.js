@@ -67,8 +67,7 @@ export default function TutorUpdate() {
   };
 
   const goHome = () => {
-    const origin_url = window.location.origin;
-
+    window.location.href = "/search";
   };
 
   const handleSubmit = (tutor) => {
@@ -129,7 +128,7 @@ export default function TutorUpdate() {
               <Typography variant="subtitle1">
                 The change will appear immediately on your profile.
               </Typography>
-              <Button onClick={goHome} sx={{ mt: 3, ml: 1 }}>
+              <Button variant="contained" onClick={goHome} sx={{ mt: 3, ml: 1 }}>
                   Home
               </Button>
             </React.Fragment>

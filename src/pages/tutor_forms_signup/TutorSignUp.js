@@ -66,6 +66,10 @@ export default function TutorSignUp() {
     setActiveStep(activeStep - 1);
   };
 
+  const goHome = () => {
+    window.location.href = "/search";
+  };
+
   const handleSubmit = (tutor) => {
     fetch("http://localhost:8080/course/tutor", {
       method: 'POST',
@@ -124,6 +128,9 @@ export default function TutorSignUp() {
               <Typography variant="subtitle1">
                 We will reach out to you after reviewing your application.
               </Typography>
+              <Button variant="contained" onClick={goHome} sx={{ mt: 3, ml: 1 }}>
+                  Home
+              </Button>
             </React.Fragment>
           ) : (
             <React.Fragment>
