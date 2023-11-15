@@ -51,11 +51,23 @@ class CourseController {
 
         console.log(JSON.stringify(req.body));
 
-        var courseId : string = req.body.courseId;
-        var userId : string = req.body.userId;
-        var name : string = req.body.name;
 
-        res.send("Success: " + name + " with user id " + userId + " signed up as tutor for course " + courseId);
+        var firstName : string = req.body.firstName;
+        var lastName : string = req.body.lastName;
+        var phoneNum : string = req.body.phoneNum;
+        var description : string = req.body.description;
+        var isPublic : boolean = req.body.public;
+        var coursesTutored : Array<string> = req.body.coursesTutored;
+        var selectedFile : string = req.body.selectedFile;
+        var selectedImg : string = req.body.selectedImg;
+        var tutor : string = req.body.tutor;
+        var email : string = req.body.email;
+
+        res.send({
+            message: "Success.",
+            firstName, lastName, phoneNum, description, isPublic, coursesTutored, selectedFile,
+            selectedImg, tutor, email
+        })
     }
 
 }
