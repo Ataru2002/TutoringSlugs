@@ -24,10 +24,7 @@ const firebaseConfig = {
 };
 
 initializeApp(firebaseConfig);
-const auth = getAuth();
-const user = firebase.auth().currentUser;
 
-console.log("AHHHHHH: ", user);
 
 
 const origin_url = window.location.origin;
