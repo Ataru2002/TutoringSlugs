@@ -25,17 +25,20 @@ const names = [
   'MATH 100',
 ];
 
-export default function Dropdownclasses() {
-  const [personName, setPersonName] = React.useState([]);
+export default function Dropdownclasses(props) {
+  const [classes, setClasses] = React.useState([]);
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
+    setClasses(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
+    props.setTutor(previousState => {
+        return { ...previousState, coursesTutored: event.target.value }
+    });
   };
 
   return (
@@ -46,7 +49,7 @@ export default function Dropdownclasses() {
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
-          value={personName}
+          value={classes}
           onChange={handleChange}
           input={<OutlinedInput label="Select Classes for Tutoring" />}
           renderValue={(selected) => selected.join(', ')}
@@ -54,7 +57,7 @@ export default function Dropdownclasses() {
         >
           {names.map((name) => (
             <MenuItem key={name} value={name}>
-              <Checkbox checked={personName.indexOf(name) > -1} />
+              <Checkbox checked={classes.indexOf(name) > -1} />
               <ListItemText primary={name} />
             </MenuItem>
           ))}

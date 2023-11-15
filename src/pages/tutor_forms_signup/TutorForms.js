@@ -68,7 +68,7 @@ export default function TutorFormNew(props) {
             })}
           />
         </Grid>
-        <Dropdownclasses />
+        <Dropdownclasses setTutor={props.setTutor}/>
         <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
