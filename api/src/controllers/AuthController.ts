@@ -9,28 +9,28 @@ admin.initializeApp({
 });
 
 class AuthController {
+
+    static signup = async (req: Request, res: Response) => {
+
+    }
+
     static login = async (req: Request, res: Response) => {
         // Firebase token
-        var firebaseToken = req.body.token;
-        console.log("firebase token: " + firebaseToken);
+        var idToken = req.body.idToken;
 
-        admin.auth().verifyIdToken(firebaseToken).then((decodedToken) => {
-            console.log("decoded token: ", decodedToken);
-            var userId = decodedToken.uid;
+        console.log("idtoken: ", idToken);
 
-            // Sign JWT valid for 1 hour
-            const token = jwt.sign(
-                {userId},
-                config.jwtSecret,
-                {expiresIn: "1h"}
-            )
+        var expiresIn = 60 * 1000 * 5;
 
-            res.send(token);
-        }).catch((err) => {
-            //console.error(err);
-            res.send(err);
-        });
-
+        admin.auth().createSessionCookie(idToken, { expiresIn })
+        .then((sessionCookie) => {
+            const options = { maxAge: expiresIn, httpOnly: false, secure: false, sameSite: 'none' as const};
+            res.cookie('session', sessionCookie, options);
+            res.end(JSON.stringify({status: "success"}));
+        }, (error) => {
+            console.log(error);
+            res.status(401).send("Unauthorized request.");
+        })
     }
 
     static logout = async (req: Request, res: Response) => {

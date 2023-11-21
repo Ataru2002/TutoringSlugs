@@ -36,8 +36,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-const config_1 = __importDefault(require("../config/config"));
-const jwt = __importStar(require("jsonwebtoken"));
 const admin = __importStar(require("firebase-admin"));
 const serviceAccountKey_json_1 = __importDefault(require("../../serviceAccountKey.json"));
 admin.initializeApp({
@@ -46,19 +44,21 @@ admin.initializeApp({
 class AuthController {
 }
 _a = AuthController;
+AuthController.signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+});
 AuthController.login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // Firebase token
-    var firebaseToken = req.body.token;
-    console.log("firebase token: " + firebaseToken);
-    admin.auth().verifyIdToken(firebaseToken).then((decodedToken) => {
-        console.log("decoded token: ", decodedToken);
-        var userId = decodedToken.uid;
-        // Sign JWT valid for 1 hour
-        const token = jwt.sign({ userId }, config_1.default.jwtSecret, { expiresIn: "1h" });
-        res.send(token);
-    }).catch((err) => {
-        //console.error(err);
-        res.send(err);
+    var idToken = req.body.idToken;
+    console.log("idtoken: ", idToken);
+    var expiresIn = 60 * 1000 * 5;
+    admin.auth().createSessionCookie(idToken, { expiresIn })
+        .then((sessionCookie) => {
+        const options = { maxAge: expiresIn, httpOnly: false, secure: false, sameSite: 'none' };
+        res.cookie('session', sessionCookie, options);
+        res.end(JSON.stringify({ status: "success" }));
+    }, (error) => {
+        console.log(error);
+        res.status(401).send("Unauthorized request.");
     });
 });
 AuthController.logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

@@ -4,6 +4,7 @@ import { checkJwt } from "../middlewares/checkjwt";
 
 var router : Router = express.Router();
 
+router.post("/signup", AuthController.signup);
 router.post("/login", AuthController.login);
 router.post("/logout", [checkJwt], AuthController.logout);
 
