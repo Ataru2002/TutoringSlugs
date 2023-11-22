@@ -6,7 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Dropdownclasses from '../../components/Dropdownclasses';
 
-export default function TutorFormUpdate() {
+export default function TutorFormUpdate(props) {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -21,6 +21,9 @@ export default function TutorFormUpdate() {
             fullWidth
             autoComplete="given-name"
             variant="standard"
+            onChange={(e) => props.setTutor(previousState => {
+              return { ...previousState, firstName: e.target.value }
+            })}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -31,6 +34,9 @@ export default function TutorFormUpdate() {
             fullWidth
             autoComplete="family-name"
             variant="standard"
+            onChange={(e) => props.setTutor(previousState => {
+              return { ...previousState, lastName: e.target.value }
+            })}
           />
         </Grid>
         <Grid item xs={12}>
@@ -41,6 +47,9 @@ export default function TutorFormUpdate() {
             fullWidth
             autoComplete="tel"
             variant="standard"
+            onChange={(e) => props.setTutor(previousState => {
+              return { ...previousState, phoneNum: e.target.value }
+            })}
           />
         </Grid>
         <Grid item xs={12}>
@@ -51,6 +60,9 @@ export default function TutorFormUpdate() {
             fullWidth
             multiline
             variant="standard"
+            onChange={(e) => props.setTutor(previousState => {
+              return { ...previousState, description: e.target.value }
+            })}
           />
         </Grid>
         <Dropdownclasses />
@@ -58,10 +70,16 @@ export default function TutorFormUpdate() {
           <FormControlLabel
             control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
             label="Put phone number in your public tutor page"
+            onChange={(e) => props.setTutor(previousState => {
+              return { ...previousState, public: e.target.value }
+            })}
           />
           <FormControlLabel
             control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
             label="Remove phone number in your public tutor page"
+            onChange={(e) => props.setTutor(previousState => {
+              return { ...previousState, public: e.target.value }
+            })}
           />
         </Grid>
       </Grid>

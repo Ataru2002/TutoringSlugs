@@ -11,14 +11,17 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccountKey as admin.ServiceAccount)
 });
 
-const db = getFirestore();
-
 class AuthController {
+
+    static signup = async (req: Request, res: Response) => {
+
+    }
+
     static login = async (req: Request, res: Response) => {
         // Firebase token
-        var firebaseToken = req.body.token;
-        console.log("firebase token: " + firebaseToken);
+        var idToken = req.body.idToken;
 
+<<<<<<< HEAD
         admin.auth().verifyIdToken(firebaseToken).then(async function(decodedToken){
             console.log("decoded token: ", decodedToken);
             var userId = decodedToken.uid;
@@ -45,7 +48,21 @@ class AuthController {
             //console.error(err);
             res.send(err);
         });
+=======
+        console.log("idtoken: ", idToken);
 
+        var expiresIn = 60 * 1000 * 5;
+>>>>>>> phuong
+
+        admin.auth().createSessionCookie(idToken, { expiresIn })
+        .then((sessionCookie) => {
+            const options = { maxAge: expiresIn, httpOnly: false, secure: false, sameSite: 'none' as const};
+            res.cookie('session', sessionCookie, options);
+            res.end(JSON.stringify({status: "success"}));
+        }, (error) => {
+            console.log(error);
+            res.status(401).send("Unauthorized request.");
+        })
     }
 
     static signup = async (req: Request, res: Response) => {

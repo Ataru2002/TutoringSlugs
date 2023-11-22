@@ -81,9 +81,20 @@ CourseController.list = (req, res) => __awaiter(void 0, void 0, void 0, function
 // Tutor: Enlists the user as a tutor for the specified course
 CourseController.tutor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(JSON.stringify(req.body));
-    var courseId = req.body.courseId;
-    var userId = req.body.userId;
-    var name = req.body.name;
-    res.send("Success: " + name + " with user id " + userId + " signed up as tutor for course " + courseId);
+    var firstName = req.body.firstName;
+    var lastName = req.body.lastName;
+    var phoneNum = req.body.phoneNum;
+    var description = req.body.description;
+    var isPublic = req.body.public;
+    var coursesTutored = req.body.coursesTutored;
+    var selectedFile = req.body.selectedFile;
+    var selectedImg = req.body.selectedImg;
+    var tutor = req.body.tutor;
+    var email = req.body.email;
+    res.send({
+        message: "Success.",
+        firstName, lastName, phoneNum, description, isPublic, coursesTutored, selectedFile,
+        selectedImg, tutor, email
+    });
 });
 exports.default = CourseController;
