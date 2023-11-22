@@ -34,6 +34,16 @@ const sections = [
 ];
 
 export default function Search() {
+
+  fetch("http://localhost:8080/user/", {
+    method: "GET",
+    credentials: "include",
+  }).then(res => {
+    res.json().then(json => {
+      console.log(json);
+    })
+  });
+
   return (
     <Container>
       <CssBaseline />
@@ -49,7 +59,7 @@ export default function Search() {
           padding: '22%',
         }}>
           <Container container>
-            <Grid container 
+            <Grid container
               direction="row"
               justifyContent="center"
               alignItems="center"
@@ -61,7 +71,7 @@ export default function Search() {
               <Typography variant="h5" color="inherit" paragraph>
                 Search for tutors based on classes or a specific tutor to help you succeed in school
               </Typography>
-              <Grid item container 
+              <Grid item container
               spacing={6}
               direction="row"
               justifyContent="center"
@@ -76,7 +86,7 @@ export default function Search() {
                       </Button>
                   </Grid>
               </Grid>
-              <Grid item container 
+              <Grid item container
               spacing={6}
               direction="row"
               justifyContent="center"
