@@ -38,12 +38,9 @@ var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 const admin = __importStar(require("firebase-admin"));
 const serviceAccountKey_json_1 = __importDefault(require("../../serviceAccountKey.json"));
-const { Firestore } = require("@google-cloud/firestore");
-const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccountKey_json_1.default)
 });
-const db = getFirestore();
 class AuthController {
 }
 _a = AuthController;
@@ -63,8 +60,6 @@ AuthController.login = (req, res) => __awaiter(void 0, void 0, void 0, function*
         console.log(error);
         res.status(401).send("Unauthorized request.");
     });
-});
-AuthController.signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 AuthController.logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.send("logged out");

@@ -1,10 +1,6 @@
 import express, {Application} from "express";
 import routes from "./routes/routes";
-<<<<<<< HEAD
-import cors from "cors";
-=======
 import cookies from "cookie-parser";
->>>>>>> phuong
 
 const app: Application = express();
 const PORT: number = 8080;
