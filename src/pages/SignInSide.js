@@ -15,8 +15,6 @@ import signin_message from '../assests/signin_message.jpg';
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 

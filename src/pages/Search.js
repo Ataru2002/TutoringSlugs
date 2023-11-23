@@ -9,8 +9,13 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { initializeApp } from "firebase/app";
 import {
-  getAuth,
-} from "firebase/auth";
+  getFirestore,
+  collection,
+  getDocs,
+  addDoc,
+} from "firebase/firestore";
+import allClassesData from "./all_classes.json";
+
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -24,7 +29,37 @@ const firebaseConfig = {
 };
 
 initializeApp(firebaseConfig);
+/* run this once manually, make sure to have all_classes.json in the same file
+const db = getFirestore();
+const coursesRef = collection(db, "Courses");
 
+console.log(allClassesData);
+let instances = [];
+getDocs(coursesRef).then((snapshot) => {
+  let temp = [];
+  snapshot.docs.forEach((doc) => {
+    temp.push({ ...doc.data() });
+  });
+  temp.forEach((test) => {
+    instances.push(test.courseName);
+  });
+  console.log(temp);
+  //console.log(instances);
+}).then(() => {
+  allClassesData.forEach(course => {
+    const courseName = course.course_name;
+    const courseURL = course.course_url;
+    const courses = course.classes;
+    if(!instances.includes(courseName)){
+      addDoc(coursesRef, {
+        courseName: courseName,
+        courseURL: courseURL,
+        courseList: courses,
+      });
+    } 
+  })
+})
+*/
 
 
 const origin_url = window.location.origin;
