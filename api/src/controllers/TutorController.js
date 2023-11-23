@@ -17,7 +17,7 @@ var __asyncValues = (this && this.__asyncValues) || function (o) {
 };
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
+const { getFirestore } = require('firebase-admin/firestore');
 const db = getFirestore();
 class TutorController {
 }

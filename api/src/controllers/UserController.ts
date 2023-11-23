@@ -1,10 +1,10 @@
 import {Request, Response} from 'express';
-import * as admin from "firebase-admin";
+import firebase from "../services/firebase";
 
 class UserController {
 
     static getUserData = async (req: Request, res: Response) => {
-        admin.auth().getUser(req.userId).then((user) => {
+        firebase.admin.auth().getUser(req.userId).then((user) => {
             res.send(user);
         })
         .catch((error) => {

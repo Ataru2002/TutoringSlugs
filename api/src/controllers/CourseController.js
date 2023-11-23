@@ -31,9 +31,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
+const firebase_1 = __importDefault(require("../services/firebase"));
 var course_list = [];
 class CourseController {
 }
@@ -80,7 +84,7 @@ CourseController.list = (req, res) => __awaiter(void 0, void 0, void 0, function
 });
 // Tutor: Enlists the user as a tutor for the specified course
 CourseController.tutor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(JSON.stringify(req.body));
+    var userId = req.body.userId;
     var firstName = req.body.firstName;
     var lastName = req.body.lastName;
     var phoneNum = req.body.phoneNum;
@@ -91,10 +95,13 @@ CourseController.tutor = (req, res) => __awaiter(void 0, void 0, void 0, functio
     var selectedImg = req.body.selectedImg;
     var tutor = req.body.tutor;
     var email = req.body.email;
-    res.send({
-        message: "Success.",
-        firstName, lastName, phoneNum, description, isPublic, coursesTutored, selectedFile,
-        selectedImg, tutor, email
-    });
+    const fields = { firstName, lastName, phoneNum, description, isPublic, coursesTutored, selectedFile, selectedImg, tutor, email };
+    try {
+        const updateRes = yield firebase_1.default.db.collection("users").doc(userId).update(fields);
+        res.send(updateRes);
+    }
+    catch (err) {
+        res.send(err);
+    }
 });
 exports.default = CourseController;

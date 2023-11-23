@@ -46,18 +46,6 @@ function Copyright(props) {
   );
 }
 
-function getCookie(cname) {
-     var name = cname + "=";
-     var ca = document.cookie.split(';');
-     for(var i=0; i<ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) ==' ') c = c.substring(1);
-        if(c.indexOf(name) == 0)
-           return c.substring(name.length,c.length);
-     }
-     return "";
-}
-
 export default function SignInSide() {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -83,7 +71,7 @@ export default function SignInSide() {
               },
               credentials: "include",
               body: JSON.stringify({
-                idToken
+                idToken, userInfo: user.user
               })
           }).then(res => {
             console.log(res.headers);

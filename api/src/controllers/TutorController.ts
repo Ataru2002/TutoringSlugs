@@ -1,6 +1,6 @@
 import { DocumentReference, DocumentSnapshot, DocumentData } from '@google-cloud/firestore';
 import {Request, Response} from 'express';
-const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
+const { getFirestore } = require('firebase-admin/firestore');
 
 const db = getFirestore();
 

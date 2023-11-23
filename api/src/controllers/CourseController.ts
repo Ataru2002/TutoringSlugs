@@ -1,6 +1,8 @@
 import {Request, Response} from 'express';
 import * as fs from 'fs';
+import firebase from "../services/firebase";
 var course_list : Array<String> = [];
+
 
 class CourseController {
 
@@ -48,9 +50,7 @@ class CourseController {
 
     // Tutor: Enlists the user as a tutor for the specified course
     static tutor = async (req: Request, res: Response) => {
-
-        console.log(JSON.stringify(req.body));
-
+        var userId : string = req.body.userId;
 
         var firstName : string = req.body.firstName;
         var lastName : string = req.body.lastName;
@@ -60,14 +60,17 @@ class CourseController {
         var coursesTutored : Array<string> = req.body.coursesTutored;
         var selectedFile : string = req.body.selectedFile;
         var selectedImg : string = req.body.selectedImg;
-        var tutor : string = req.body.tutor;
+        var tutor : boolean = req.body.tutor;
         var email : string = req.body.email;
 
-        res.send({
-            message: "Success.",
-            firstName, lastName, phoneNum, description, isPublic, coursesTutored, selectedFile,
-            selectedImg, tutor, email
-        })
+        const fields = {firstName, lastName, phoneNum, description, isPublic, coursesTutored, selectedFile, selectedImg, tutor, email}
+
+        try {
+            const updateRes = await firebase.db.collection("users").doc(userId).update(fields);
+            res.send(updateRes);
+        } catch(err){
+            res.send(err);
+        }
     }
 
 }
