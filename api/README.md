@@ -40,6 +40,8 @@ Params (url-encoded):
 - maybe lookin to firebase's refresh token instead of our own?
 - logout (delete refresh token)
 - apis: edit user settings on firebase
+- paginate tutor list
+- move firebase object to its own file
 
 once database is implemented:
 - properly implement course apis

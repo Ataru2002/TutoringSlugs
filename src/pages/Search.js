@@ -3,11 +3,10 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { initializeApp } from "firebase/app";
+<<<<<<< HEAD
 import {
   getFirestore,
   collection,
@@ -16,6 +15,13 @@ import {
 } from "firebase/firestore";
 import allClassesData from "./all_classes.json";
 
+=======
+import Dropdownclasses from '../components/Dropdownclasses';
+import Dropdowntutors from '../components/Dropdowntutors';
+import search_img from '../assests/search_img.png';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+>>>>>>> 3b0241e2b207d2412a3f713e64946cf46f578b37
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -29,6 +35,7 @@ const firebaseConfig = {
 };
 
 initializeApp(firebaseConfig);
+<<<<<<< HEAD
 /* run this once manually, make sure to have all_classes.json in the same file
 const db = getFirestore();
 const coursesRef = collection(db, "Courses");
@@ -61,86 +68,94 @@ getDocs(coursesRef).then((snapshot) => {
 })
 */
 
+=======
+>>>>>>> 3b0241e2b207d2412a3f713e64946cf46f578b37
 
 const origin_url = window.location.origin;
 
 const sections = [
   { title: 'Wanna be a tutor?', url: origin_url + '/tutor_signup' },
-  { title: 'About us', url: '#' },
   { title: 'Change your setting', url: origin_url + '/change_setting' },
   { title: 'Change your tutor setting', url: origin_url + '/change_tutor_setting' },
 ];
 
-const defaultTheme = createTheme();
-
 export default function Search() {
+
+  fetch("http://localhost:8080/user/", {
+    method: "GET",
+    credentials: "include",
+  }).then(res => {
+    res.json().then(json => {
+      console.log(json);
+    })
+  });
+
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <Container>
       <CssBaseline />
-      <Container
-        // sx={{ 
-        //     backgroundImage: `url(${lion_school_rocks})` 
-        // }}
-      >
-        <Container maxWidth="lg">
-        <Header title="Tutoring Slugs" sections={sections} />
-        <main>
-            <Grid container 
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-            spacing={6}
+      <Container maxWidth="lg">
+      <Header title="Tutoring Slugs" sections={sections} />
+      <main>
+        <Paper
+        sx={{
+          backgroundImage: `url(${search_img})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          padding: '22%',
+        }}>
+          <Container container>
+            <Grid container
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              spacing={2}
             >
-                <Grid item container 
-                spacing={6}
-                direction="row"
-                justifyContent="center"
-                alignItems="center"
-                >
-                    <Grid item xs={6}>
-                        <TextField
-                            id="search_class"
-                            name="search_class"
-                            label="Search Class"
-                            fullWidth
-                            variant="standard"
-                        />
-                    </Grid>
-                    <Grid item >
-                        <Button variant="contained">
-                            Search
-                        </Button>
-                    </Grid>
-                </Grid>
-                <Grid item container 
-                spacing={6}
-                direction="row"
-                justifyContent="center"
-                alignItems="center"
-                style={{ height: "100%" }}>
-                    <Grid item xs={6}>
-                        <TextField
-                            id="search_tutors"
-                            name="search_tutors"
-                            label="Search Tutors"
-                            fullWidth
-                            variant="standard"
-                        />
-                    </Grid>
-                    <Grid item >
-                        <Button variant="contained">
-                            Search
-                        </Button>
-                    </Grid>
-                </Grid>
+              <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+                Need Help?
+              </Typography>
+              <Typography variant="h5" color="inherit" paragraph>
+                Search for tutors based on classes or a specific tutor to help you succeed in school
+              </Typography>
+              <Grid item container
+              spacing={6}
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              >
+                  <Grid item>
+                      <Dropdownclasses />
+                  </Grid>
+                  <Grid item >
+                      <Button variant="contained">
+                          Search
+                      </Button>
+                  </Grid>
+              </Grid>
+              <Grid item container
+              spacing={6}
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              style={{ height: "100%" }}>
+                  <Grid item>
+                      <Dropdowntutors />
+                  </Grid>
+                  <Grid item >
+                      <Button variant="contained">
+                          Search
+                      </Button>
+                  </Grid>
+              </Grid>
             </Grid>
-        </main>
-      </Container>
-      <Footer
-        title="Footer"
-        description="Something here to give the footer a purpose!"
-      />
-      </Container>
-    </ThemeProvider>
+          </Container>
+        </Paper>
+      </main>
+    </Container>
+    <Footer
+      title="Tutoring Slugs | University of California, Santa Cruz | Support TutoringSlugsSupport@gmail.com"
+      description="Please fund us"
+    />
+    </Container>
   );
 }

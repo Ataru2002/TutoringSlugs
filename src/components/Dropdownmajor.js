@@ -26,13 +26,13 @@ const names = [
 ];
 
 export default function Dropdownmajor() {
-  const [personName, setPersonName] = React.useState([]);
+  const [major, setMajor] = React.useState([]);
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
+    setMajor(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
@@ -46,7 +46,7 @@ export default function Dropdownmajor() {
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
-          value={personName}
+          value={major}
           onChange={handleChange}
           input={<OutlinedInput label="Major" />}
           renderValue={(selected) => selected.join(', ')}
@@ -54,7 +54,7 @@ export default function Dropdownmajor() {
         >
           {names.map((name) => (
             <MenuItem key={name} value={name}>
-              <Checkbox checked={personName.indexOf(name) > -1} />
+              <Checkbox checked={major.indexOf(name) > -1} />
               <ListItemText primary={name} />
             </MenuItem>
           ))}

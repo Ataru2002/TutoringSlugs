@@ -8,11 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
+const firebase_1 = __importDefault(require("../services/firebase"));
 class UserController {
 }
 _a = UserController;
-UserController.get = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+UserController.getUserData = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    firebase_1.default.admin.auth().getUser(req.userId).then((user) => {
+        res.send(user);
+    })
+        .catch((error) => {
+        res.send(error);
+    });
 });
 exports.default = UserController;
