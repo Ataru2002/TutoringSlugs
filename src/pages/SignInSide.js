@@ -59,11 +59,6 @@ export default function SignInSide() {
     const password = data.get('password');
 
     signInWithEmailAndPassword(auth, email, password)
-<<<<<<< HEAD
-      .then((cred) => {
-        console.log("user logged in: ", cred.user);
-        window.location.href = "/search";
-=======
       .then((user) => {
         console.log("user logged in: ", JSON.stringify(user.user));
         return user.user.getIdToken().then((idToken) => {
@@ -86,7 +81,6 @@ export default function SignInSide() {
             })
           })
         })
->>>>>>> 3b0241e2b207d2412a3f713e64946cf46f578b37
       })
       .catch((err) => {
         alert(err.message);

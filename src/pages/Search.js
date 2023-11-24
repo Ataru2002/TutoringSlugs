@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { initializeApp } from "firebase/app";
-<<<<<<< HEAD
 import {
   getFirestore,
   collection,
@@ -15,13 +14,12 @@ import {
 } from "firebase/firestore";
 import allClassesData from "./all_classes.json";
 
-=======
 import Dropdownclasses from '../components/Dropdownclasses';
 import Dropdowntutors from '../components/Dropdowntutors';
 import search_img from '../assests/search_img.png';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
->>>>>>> 3b0241e2b207d2412a3f713e64946cf46f578b37
+
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -35,7 +33,6 @@ const firebaseConfig = {
 };
 
 initializeApp(firebaseConfig);
-<<<<<<< HEAD
 /* run this once manually, make sure to have all_classes.json in the same file
 const db = getFirestore();
 const coursesRef = collection(db, "Courses");
@@ -63,13 +60,11 @@ getDocs(coursesRef).then((snapshot) => {
         courseURL: courseURL,
         courseList: courses,
       });
-    } 
+    }
   })
 })
 */
 
-=======
->>>>>>> 3b0241e2b207d2412a3f713e64946cf46f578b37
 
 const origin_url = window.location.origin;
 
