@@ -7,7 +7,9 @@ class AuthController {
 
     static signup = async (req: Request, res: Response) => {
 
-        var mandatoryParams = ["userId", "firstName", "lastName", "email"];
+        // Display name and email are already automatically added to firebase auth database
+
+        var mandatoryParams = ["userId", "major"];
         var missingParam = checkMandatoryParams(req.body, mandatoryParams);
         if(missingParam != null){
             res.status(400).send({message: "The " + missingParam + " parameter is missing. Mandatory params are: " + mandatoryParams});
@@ -15,10 +17,9 @@ class AuthController {
         }
 
         var userId : string = req.body.userId;
-        var firstName : string = req.body.firstName;
-        var lastName : string = req.body.lastName;
-        var email : string = req.body.email;
-        var fields = {firstName, lastName, email};
+        var major : string = req.body.major;
+        var tutor : boolean = false;
+        var fields = {major, tutor};
 
         // Add user to the database
         try {
@@ -31,7 +32,7 @@ class AuthController {
 
     static login = async (req: Request, res: Response) => {
 
-        var mandatoryParams = ["userId", "firstName", "lastName", "email"];
+        var mandatoryParams = ["userId"];
         var missingParam = checkMandatoryParams(req.body, mandatoryParams);
         if(missingParam != null){
             res.status(400).send({message: "The " + missingParam + " parameter is missing. Mandatory params are: " + mandatoryParams});
@@ -42,9 +43,6 @@ class AuthController {
         var idToken = req.body.idToken;
 
         var userId = req.body.userId;
-        var firstName = req.body.firstName;
-        var lastName = req.body.lastName;
-        var email = req.body.email;
 
         // TODO: Change expires in
         var expiresIn = 60 * 1000 * 5;
@@ -59,7 +57,7 @@ class AuthController {
 
                 // User doesn't exist, add to database
                 if(!doc.exists){
-                    var fields = {firstName, lastName, email};
+                    var fields = {tutor: false};
                     const result = await firebase.db.collection(config.USERS_COLLECTION).doc(userId).set(fields);
                 }
             } catch(err){

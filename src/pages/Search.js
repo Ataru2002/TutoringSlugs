@@ -103,9 +103,14 @@ export default function Search() {
     method: "GET",
     credentials: "include",
   }).then((res) => {
-    res.json().then((json) => {
-      console.log(json);
-    });
+    if(res.status === 404){
+      window.location.href = "/signin";
+    }
+    else {
+      res.json().then((json) => {
+        console.log(json);
+      });
+    }
   });
 
   return (

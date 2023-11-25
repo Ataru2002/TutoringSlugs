@@ -20,17 +20,17 @@ class AuthController {
 }
 _a = AuthController;
 AuthController.signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var mandatoryParams = ["userId", "firstName", "lastName", "email"];
+    // Display name and email are already automatically added to firebase auth database
+    var mandatoryParams = ["userId", "major"];
     var missingParam = (0, util_1.checkMandatoryParams)(req.body, mandatoryParams);
     if (missingParam != null) {
         res.status(400).send({ message: "The " + missingParam + " parameter is missing. Mandatory params are: " + mandatoryParams });
         return;
     }
     var userId = req.body.userId;
-    var firstName = req.body.firstName;
-    var lastName = req.body.lastName;
-    var email = req.body.email;
-    var fields = { firstName, lastName, email };
+    var major = req.body.major;
+    var tutor = false;
+    var fields = { major, tutor };
     // Add user to the database
     try {
         const result = yield firebase_1.default.db.collection(config_1.default.USERS_COLLECTION).doc(userId).set(fields);
@@ -41,7 +41,7 @@ AuthController.signup = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 });
 AuthController.login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var mandatoryParams = ["userId", "firstName", "lastName", "email"];
+    var mandatoryParams = ["userId"];
     var missingParam = (0, util_1.checkMandatoryParams)(req.body, mandatoryParams);
     if (missingParam != null) {
         res.status(400).send({ message: "The " + missingParam + " parameter is missing. Mandatory params are: " + mandatoryParams });
@@ -50,9 +50,6 @@ AuthController.login = (req, res) => __awaiter(void 0, void 0, void 0, function*
     // Firebase token
     var idToken = req.body.idToken;
     var userId = req.body.userId;
-    var firstName = req.body.firstName;
-    var lastName = req.body.lastName;
-    var email = req.body.email;
     // TODO: Change expires in
     var expiresIn = 60 * 1000 * 5;
     firebase_1.default.admin.auth().createSessionCookie(idToken, { expiresIn })
@@ -64,7 +61,7 @@ AuthController.login = (req, res) => __awaiter(void 0, void 0, void 0, function*
                 const doc = yield usersRef.get();
                 // User doesn't exist, add to database
                 if (!doc.exists) {
-                    var fields = { firstName, lastName, email };
+                    var fields = { tutor: false };
                     const result = yield firebase_1.default.db.collection(config_1.default.USERS_COLLECTION).doc(userId).set(fields);
                 }
             }
@@ -81,8 +78,23 @@ AuthController.login = (req, res) => __awaiter(void 0, void 0, void 0, function*
         res.status(401).send("Unauthorized request.");
     });
 });
+// Revoke tokens on server side. Client side should delete cookies and redirect to login.
 AuthController.logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.clearCookie("session");
-    res.redirect("/signin");
+    var mandatoryParams = ["userId"];
+    var missingParam = (0, util_1.checkMandatoryParams)(req.body, mandatoryParams);
+    if (missingParam != null) {
+        res.status(400).send({ message: "The " + missingParam + " parameter is missing. Mandatory params are: " + mandatoryParams });
+        return;
+    }
+    var userId = req.body.userId;
+    try {
+        var result = yield firebase_1.default.admin.auth().revokeRefreshTokens(userId);
+        var userRecord = yield firebase_1.default.admin.auth().getUser(userId);
+        var timestamp = new Date(userRecord.tokensValidAfterTime).getTime() / 1000;
+        res.send({ message: `Tokens revoked at: ${timestamp}` });
+    }
+    catch (err) {
+        res.send(err);
+    }
 });
 exports.default = AuthController;

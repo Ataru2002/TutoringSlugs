@@ -54,12 +54,13 @@ export default function SignUpSide() {
       fname: data.get('First Name'),
       lname: data.get('Last Name'),
       email: data.get('email'),
-      password: data.get('password'), 
+      password: data.get('password'),
       cpassword: data.get('Confirm password')
     });
     const fName = data.get('First Name');
     const lName = data.get('Last Name')
     const email = data.get('email');
+    const major = data.get('major');
     const password = data.get('password');
     const cpassword = data.get('Confirm password');
 
@@ -74,7 +75,27 @@ export default function SignUpSide() {
             displayName: fName + ' ' + lName
           })
           console.log(cred.user);
-          window.location.href = "/signin";
+
+          // Call sign up on backend
+
+          fetch("http://localhost:8080/auth/signup", {
+              method: "POST",
+              headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json"
+              },
+              credentials: "include",
+              body: JSON.stringify({
+                userId: cred.user.uid,
+                major
+              })
+          }).then(res => {
+            res.json().then(json => {
+              console.log(json);
+              window.location.href = "/signin";
+            })
+          })
+
         }).catch((err) => {
           alert(err.message);
           //will alert if:
