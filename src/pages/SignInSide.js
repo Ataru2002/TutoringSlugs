@@ -59,34 +59,9 @@ export default function SignInSide() {
     const password = data.get('password');
 
     signInWithEmailAndPassword(auth, email, password)
-<<<<<<< HEAD
       .then((cred) => {
         console.log("user logged in: ", cred.user);
         window.location.href = "/search";
-=======
-      .then((user) => {
-        console.log("user logged in: ", JSON.stringify(user.user));
-        return user.user.getIdToken().then((idToken) => {
-          // post /login to set cookie
-          fetch("http://localhost:8080/auth/login", {
-              method: "POST",
-              headers: {
-                  Accept: "application/json",
-                  "Content-Type": "application/json"
-              },
-              credentials: "include",
-              body: JSON.stringify({
-                idToken, userInfo: user.user
-              })
-          }).then(res => {
-            console.log(res.headers);
-            res.json().then(json => {
-              console.log(json);
-              window.location.href = "/search";
-            })
-          })
-        })
->>>>>>> 3b0241e2b207d2412a3f713e64946cf46f578b37
       })
       .catch((err) => {
         alert(err.message);
