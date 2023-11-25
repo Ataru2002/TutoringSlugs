@@ -20,6 +20,7 @@ import search_img from "../assests/search_img.png";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import allClassesData from "./all_classes.json";
+import allMajors from "./data.txt"
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
