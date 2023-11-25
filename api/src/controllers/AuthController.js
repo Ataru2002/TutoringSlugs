@@ -86,7 +86,7 @@ AuthController.logout = (req, res) => __awaiter(void 0, void 0, void 0, function
         res.status(400).send({ message: "The " + missingParam + " parameter is missing. Mandatory params are: " + mandatoryParams });
         return;
     }
-    var userId = req.body.userId;
+    var userId = req.userId;
     try {
         var result = yield firebase_1.default.admin.auth().revokeRefreshTokens(userId);
         var userRecord = yield firebase_1.default.admin.auth().getUser(userId);

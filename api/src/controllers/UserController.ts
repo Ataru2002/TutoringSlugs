@@ -16,7 +16,7 @@ class UserController {
     }
 
     static updateUser = async (req: Request, res: Response) => {
-        var userId : string = req.body.userId;
+        var userId : string = req.userId;
 
         var email : string = req.body.email;
         var phoneNumber : string = req.body.phoneNumber;
@@ -35,7 +35,7 @@ class UserController {
         var major : string = req.body.major;
 
         // Update major in cloud firestore collection
-        if(typeof major !== "undefined"){
+        if(major != null && major.length > 0){
             try {
                 await firebase.db.collection(config.USERS_COLLECTION).doc(userId).set({major});
             } catch(err){
@@ -45,23 +45,29 @@ class UserController {
         }
 
         // Update authentication info, only update provided parameters
-        if(typeof email !== "undefined"){
+        if(email != null && email.length > 0){
             updateObj["email"] = email;
         }
-        if(typeof phoneNumber !== "undefined"){
+        if(phoneNumber != null && phoneNumber.length > 0){
             updateObj["phoneNumber"] = phoneNumber;
         }
-        if(typeof password !== "undefined"){
+        if(password != null && password.length > 0){
             updateObj["password"] = password;
         }
-        if(typeof firstName !== "undefined"){
+        if(firstName != null && firstName.length > 0){
             updateObj["displayName"] = firstName;
-            if(typeof lastName !== "undefined"){
+            if(lastName != null && lastName.length > 0){
                 updateObj["displayName"] = updateObj["displayName"] + " " + lastName;
             }
         }
-        if(typeof photoURL !== "undefined"){
+        if(photoURL != null && photoURL.length > 0){
             updateObj["photoURL"] = photoURL;
+        }
+
+        // Nothing is being updated
+        if(Object.keys(updateObj).length === 0){
+            res.send({message: "Updating 0 items"});
+            return;
         }
 
         try {

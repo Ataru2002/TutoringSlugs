@@ -99,6 +99,8 @@ const sections = [
 ];
 
 export default function Search() {
+
+  // Checks if user is signed in - redirects to sign in if not signed in
   fetch("http://localhost:8080/user/", {
     method: "GET",
     credentials: "include",
