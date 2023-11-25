@@ -37,7 +37,7 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 const coursesRef = collection(db, "Courses");
 let instances = [];
-let allClasses = [];
+let allClasses = {};
 
 getDocs(coursesRef).then((snapshot) => {
   let temp = [];
@@ -47,10 +47,10 @@ getDocs(coursesRef).then((snapshot) => {
   //instances contains all the names of the courses
   snapshot.docs.forEach((doc) => {
     temp.push({ ...doc.data() });
-    allClasses.push({ ...doc.data() });
   });
   temp.forEach((test) => {
     instances.push(test.courseName);
+    allClasses[test.courseName] = test.courseList;
   });
   console.log(temp);
   console.log(instances);
