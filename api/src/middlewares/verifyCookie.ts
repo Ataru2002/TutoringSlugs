@@ -12,8 +12,7 @@ export const verifyCookie = (req: Request, res: Response, next: NextFunction) =>
         next();
     })
     .catch((error) => {
-        // throw error somehow to frontened
-        console.log(error);
+        res.status(404).send(error);
     })
 
 }

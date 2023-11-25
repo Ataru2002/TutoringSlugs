@@ -6,5 +6,6 @@ const app : Application = express();
 var router : Router = express.Router();
 
 router.get("/", [verifyCookie] , UserController.getUserData);
+router.post("/tutor", [verifyCookie], UserController.tutor);
 
 export default router;

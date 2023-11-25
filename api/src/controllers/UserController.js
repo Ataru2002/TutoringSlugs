@@ -22,7 +22,7 @@ UserController.getUserData = (req, res) => __awaiter(void 0, void 0, void 0, fun
         res.send(user);
     })
         .catch((error) => {
-        res.send(error);
+        res.status(404).send(error);
     });
 });
 exports.default = UserController;
