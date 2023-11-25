@@ -22,13 +22,53 @@ function Copyright(props) {
 }
 
 export default function ChangeSetting() {
+
+  // Checks if user is signed in - redirects to sign in if not signed in
+  fetch("http://localhost:8080/user/", {
+    method: "GET",
+    credentials: "include",
+  }).then((res) => {
+    if(res.status === 404){
+      window.location.href = "/signin";
+    }
+  });
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
+    // @TODO: get value from major dropdown
+    // password and confirm password match
+
+    const firstName = data.get('First Name');
+    const lastName = data.get('Last Name');
+    const email = data.get('email');
+    const password = data.get('password');
+
+
     console.log({
       email: data.get('email'),
       password: data.get('password'),
     });
+
+    // Update user on the backend
+    fetch("http://localhost:8080/user/updateUser", {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          firstName, lastName, email, password
+        })
+    }).then(res => {
+      console.log(res.headers);
+      res.json().then(json => {
+        console.log(json);
+        window.location.href = "/search";
+      })
+    })
   };
 
   return (

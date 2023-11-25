@@ -41,7 +41,6 @@ class AuthController {
 
         // Firebase token
         var idToken = req.body.idToken;
-
         var userId = req.body.userId;
 
         // TODO: Change expires in
@@ -85,7 +84,7 @@ class AuthController {
             return;
         }
 
-        var userId = req.body.userId;
+        var userId = req.userId;
 
         try {
             var result = await firebase.admin.auth().revokeRefreshTokens(userId);
