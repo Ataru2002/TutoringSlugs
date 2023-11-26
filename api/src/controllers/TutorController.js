@@ -15,10 +15,13 @@ var __asyncValues = (this && this.__asyncValues) || function (o) {
     function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
     function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-const { getFirestore } = require('firebase-admin/firestore');
-const db = getFirestore();
+const config_1 = __importDefault(require("../config/config"));
+const firebase_1 = __importDefault(require("../services/firebase"));
 class TutorController {
 }
 _a = TutorController;
@@ -26,16 +29,25 @@ TutorController.list = (req, res) => __awaiter(void 0, void 0, void 0, function*
     var _b, e_1, _c, _d;
     var objs = [];
     try {
-        var docs = yield db.collection("users").listDocuments();
+        var docs = yield firebase_1.default.db.collection(config_1.default.USERS_COLLECTION).listDocuments();
         try {
             for (var _e = true, docs_1 = __asyncValues(docs), docs_1_1; docs_1_1 = yield docs_1.next(), _b = docs_1_1.done, !_b; _e = true) {
                 _d = docs_1_1.value;
                 _e = false;
                 var doc = _d;
                 var data = yield doc.get();
-                var obj = data.data();
-                if ("coursesTutoring" in obj && obj["coursesTutoring"].length > 0) {
-                    objs.push(data.data());
+                let obj = data.data();
+                var userId = doc.id;
+                if ("tutor" in obj && obj["tutor"]) {
+                    // Get user info
+                    const userRecord = yield firebase_1.default.admin.auth().getUser(userId);
+                    var userInfo = userRecord.toJSON();
+                    obj.displayName = userInfo.displayName;
+                    obj.email = userInfo.email;
+                    obj.photoURL = userInfo.photoURL;
+                    objs.push({
+                        [userId]: obj
+                    });
                 }
             }
         }
