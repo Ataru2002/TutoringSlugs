@@ -6,8 +6,5 @@ var router : Router = express.Router();
 
 router.get("/get", CourseController.get);
 router.get("/list", CourseController.list);
-router.post("/tutor", CourseController.tutor);
 
 export default router;
-
-

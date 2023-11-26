@@ -35,8 +35,7 @@ const verifyCookie = (req, res, next) => {
         next();
     })
         .catch((error) => {
-        // throw error somehow to frontened
-        console.log(error);
+        res.status(404).send(error);
     });
 };
 exports.verifyCookie = verifyCookie;

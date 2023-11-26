@@ -31,6 +31,18 @@ function Copyright() {
 const steps = ['Tutor Info', 'Self Photo', 'Unoffical Transcript'];
 
 export default function TutorSignUp() {
+  // Checks if user is signed in - redirects to sign in if not signed in
+  fetch("http://localhost:8080/user/", {
+    method: "GET",
+    credentials: "include",
+  }).then((res) => {
+    if(res.status === 404){
+      window.location.href = "/signin";
+    }
+  }).catch((err) => {
+    console.log(err);
+  });
+
   const [activeStep, setActiveStep] = React.useState(0);
   const [tutor, setTutor] = React.useState({
     firstName: "",
@@ -44,6 +56,17 @@ export default function TutorSignUp() {
     selectedImg: "",
     tutor: true,
   });
+
+  const sendBody = JSON.stringify({
+          phoneNum: tutor.phoneNum,
+          description: tutor.description,
+          isPublic: tutor.public,
+          coursesTutored: tutor.coursesTutored,
+          selectedFile: tutor.selectedFile,
+          selectedImg: tutor.selectedImg,
+          tutor: tutor.tutor
+  });
+  console.log("Send body: " + sendBody);
 
   function getStepContent(step) {
     switch (step) {
@@ -71,21 +94,33 @@ export default function TutorSignUp() {
   };
 
   const handleSubmit = (tutor) => {
-    fetch("http://localhost:8080/course/tutor", {
-      method: 'POST',
-      body: JSON.stringify({
-          userId: tutor.firstName,
-          name: tutor.lastName,
-          courseId: "cse-30",
-      }),
-       headers: {
-          'Content-type': 'application/json; charset=UTF-8',
+    fetch("http://localhost:8080/user/updateTutor", {
+      method: "POST",
+      headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
       },
+      credentials: "include",
+      body: JSON.stringify({
+          phoneNum: tutor.phoneNum,
+          description: tutor.description,
+          isPublic: tutor.public,
+          coursesTutored: tutor.coursesTutored,
+          selectedFile: tutor.selectedFile,
+          selectedImg: tutor.selectedImg,
+          tutor: tutor.tutor
+      }),
     })
-    .then((response) => response.json())
-    .then((data) => {
-      // do nothing with the data for now
-      console.log(data)
+    .then((res) => {
+      if(res.status === 404){
+        window.location.href = "/signin";
+      }
+      res.json().then((data) => {
+        // do nothing with the data for now
+        console.log(data);
+      })
+    }).catch((err) => {
+      console.log(err);
     })
     setActiveStep(activeStep + 1);
   };

@@ -1,8 +1,7 @@
-import { DocumentReference, DocumentSnapshot, DocumentData } from '@google-cloud/firestore';
+import { DocumentData } from '@google-cloud/firestore';
 import {Request, Response} from 'express';
-const { getFirestore } = require('firebase-admin/firestore');
-
-const db = getFirestore();
+import config from "../config/config";
+import firebase from '../services/firebase';
 
 class TutorController {
 
@@ -10,13 +9,23 @@ class TutorController {
         var objs : Array<DocumentData | undefined> = [];
 
         try {
-            var docs = await db.collection("users").listDocuments();
+            var docs = await firebase.db.collection(config.USERS_COLLECTION).listDocuments();
 
             for await(var doc of docs){
                 var data = await doc.get();
-                var obj = data.data();
-                if("coursesTutoring" in obj && obj["coursesTutoring"].length > 0){
-                    objs.push(data.data());
+                let obj = data.data();
+                var userId = doc.id;
+                if("tutor" in obj && obj["tutor"]){
+                    // Get user info
+                    const userRecord = await firebase.admin.auth().getUser(userId);
+                    var userInfo : {[key: string]: any} = userRecord.toJSON();
+
+                    obj.displayName = userInfo.displayName;
+                    obj.email = userInfo.email;
+                    obj.photoURL = userInfo.photoURL;
+                    objs.push({
+                        [userId]: obj
+                    });
                 }
             }
             res.send(objs);

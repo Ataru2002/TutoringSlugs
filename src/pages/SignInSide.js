@@ -47,6 +47,15 @@ function Copyright(props) {
 }
 
 export default function SignInSide() {
+  fetch("http://localhost:8080/user/", {
+    method: "GET",
+    credentials: "include",
+  }).then(res => {
+    if(res.status !== 404){
+      window.location.href = "/search";
+    }
+  });
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -71,7 +80,11 @@ export default function SignInSide() {
               },
               credentials: "include",
               body: JSON.stringify({
-                idToken, userInfo: user.user
+                idToken,
+                userId: user.user.uid,
+                firstName: user.user.displayName.split(" ")[0],
+                lastName: user.user.displayName.split(" ")[1],
+                email: user.user.email
               })
           }).then(res => {
             console.log(res.headers);

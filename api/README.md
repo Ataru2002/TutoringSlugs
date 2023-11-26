@@ -13,36 +13,68 @@ The web server will be running on [http://localhost:8080](http://localhost:8080)
 
 # Current endpoints
 
-### `GET /course/list`
-Params: none
+### `GET /user/`
+Params: userId
 
-Returns a list of all courses. 
-### `GET /course/get`
-Query params: 
-- id (ex: cse-40)
+Gets userId from session cookie and returns user data in JSON
 
-Returns course info as object. 
+### `POST /user/updateUser`
 
-### `POST /course/tutor`
-Params (url-encoded):
-- userId
-- name
-- courseId
+Params:
+- userId (string)
+- email (string)
+- phoneNumber (string)
+- firstName (string)
+- lastName (string)
+- password (string)
+- photoURL (string)
 
-Signs up the student as a tutor for a course. Returns a test message for now.
+Updates user settings. Undefined or null values will not be updated.
+
+### `POST /user/updateTutor`
+Params:
+- userId (string)
+- phoneNumber (string)
+- description (string)
+- isPublic (boolean)
+- coursesTutored (array of strings)
+- selectedFile (string)
+- selectedImg (string)
+- tutor (boolean)
+
+Signs up the student as a tutor for a course or updates existing tutor information.
+
+### `POST /auth/signup`
+Params:
+- userId (string)
+- major (string)
+
+Adds new user to the cloud firestore database.
 
 ### `POST /auth/login`
-Params (url-encoded):
-- token (token from firebase when logged in on the frontend)
+Params:
+- userId (string)
+
+Logs user in and returns a cookie for user session. Adds user to database if they do not exist yet.
+
+### `POST /auth/logout`
+
+Revokes user tokens.
 
 # TODO:
-- make sure refresh token works with login
-- maybe lookin to firebase's refresh token instead of our own?
-- logout (delete refresh token)
-- apis: edit user settings on firebase
-- paginate tutor list
-- move firebase object to its own file
 
-once database is implemented:
-- properly implement course apis
-- paginate course/get
+### `GET /course/list`
+### `GET /course/get`
+Work with nhan to implement above with his code.
+
+- work with frontend to implement logout (delete cookie, redirect to signin screen)
+
+- stretch: paginate tutor list
+
+~~- make sure refresh token works with login~~
+
+~~- maybe lookin to firebase's refresh token instead of our own?~~
+
+~~- apis: edit user settings on firebase~~
+
+~~- move firebase object to its own file~~

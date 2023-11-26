@@ -9,5 +9,4 @@ const app = (0, express_1.default)();
 var router = express_1.default.Router();
 router.get("/get", CourseController_1.default.get);
 router.get("/list", CourseController_1.default.list);
-router.post("/tutor", CourseController_1.default.tutor);
 exports.default = router;

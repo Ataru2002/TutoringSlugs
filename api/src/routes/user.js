@@ -9,4 +9,6 @@ const verifyCookie_1 = require("../middlewares/verifyCookie");
 const app = (0, express_1.default)();
 var router = express_1.default.Router();
 router.get("/", [verifyCookie_1.verifyCookie], UserController_1.default.getUserData);
+router.post("/updateTutor", [verifyCookie_1.verifyCookie], UserController_1.default.updateTutor);
+router.post("/updateUser", [verifyCookie_1.verifyCookie], UserController_1.default.updateUser);
 exports.default = router;

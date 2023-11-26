@@ -1,10 +1,10 @@
-import * as React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import * as React from "react";
+import CssBaseline from "@mui/material/CssBaseline";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { initializeApp } from "firebase/app";
 import DropdownClassesSearch from '../components/DropdownClassesSearch';
 import DropdownCourseName from '../components/DropdownCourseName';
@@ -25,125 +25,113 @@ const firebaseConfig = {
 };
 
 initializeApp(firebaseConfig);
-/* run this once manually, make sure to have all_classes.json in the same file
-const db = getFirestore();
-const coursesRef = collection(db, "Courses");
-
-console.log(allClassesData);
-let instances = [];
-getDocs(coursesRef).then((snapshot) => {
-  let temp = [];
-  snapshot.docs.forEach((doc) => {
-    temp.push({ ...doc.data() });
-  });
-  temp.forEach((test) => {
-    instances.push(test.courseName);
-  });
-  console.log(temp);
-  //console.log(instances);
-}).then(() => {
-  allClassesData.forEach(course => {
-    const courseName = course.course_name;
-    const courseURL = course.course_url;
-    const courses = course.classes;
-    if(!instances.includes(courseName)){
-      addDoc(coursesRef, {
-        courseName: courseName,
-        courseURL: courseURL,
-        courseList: courses,
-      });
-    } 
-  })
-})
-*/
 
 const origin_url = window.location.origin;
 
 const sections = [
-  { title: 'Wanna be a tutor?', url: origin_url + '/tutor_signup' },
-  { title: 'Change your setting', url: origin_url + '/change_setting' },
-  { title: 'Change your tutor setting', url: origin_url + '/change_tutor_setting' },
+  { title: "Wanna be a tutor?", url: origin_url + "/tutor_signup" },
+  { title: "Change your setting", url: origin_url + "/change_setting" },
+  {
+    title: "Change your tutor setting",
+    url: origin_url + "/change_tutor_setting",
+  },
 ];
 
 export default function Search() {
   const [courses, setCourses] = React.useState([]);
-
+  // Checks if user is signed in - redirects to sign in if not signed in
   fetch("http://localhost:8080/user/", {
     method: "GET",
     credentials: "include",
-  }).then(res => {
-    res.json().then(json => {
-      console.log(json);
-    })
+  }).then((res) => {
+    if(res.status === 404){
+      window.location.href = "/signin";
+    }
+    else {
+      res.json().then((json) => {
+        console.log(json);
+      });
+    }
+  }).catch((err) => {
+    console.log(err);
   });
 
   return (
     <Container>
       <CssBaseline />
       <Container maxWidth="lg">
-      <Header title="Tutoring Slugs" sections={sections} />
-      <main>
-        <Paper
-        sx={{
-          backgroundImage: `url(${search_img})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          padding: '22%',
-        }}>
-          <Container container>
-            <Grid container
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-              spacing={2}
-            >
-              <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-                Need Help?
-              </Typography>
-              <Typography variant="h5" color="inherit" paragraph>
-                Search for tutors based on classes or a specific tutor to help you succeed in school
-              </Typography>
-              <Grid item container
-              spacing={6}
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
+        <Header title="Tutoring Slugs" sections={sections} />
+        <main>
+          <Paper
+            sx={{
+              backgroundImage: `url(${search_img})`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              padding: "22%",
+            }}
+          >
+            <Container container>
+              <Grid
+                container
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                spacing={2}
               >
+                <Typography
+                  component="h1"
+                  variant="h3"
+                  color="inherit"
+                  gutterBottom
+                >
+                  Need Help?
+                </Typography>
+                <Typography variant="h5" color="inherit" paragraph>
+                  Search for tutors based on classes or a specific tutor to help
+                  you succeed in school
+                </Typography>
+                <Grid
+                  item
+                  container
+                  spacing={6}
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="center"
+                >
                   <Grid item>
                       <DropdownCourseName courses={courses} setCourses={setCourses} />
                       <DropdownClassesSearch courses={courses} />
                   </Grid>
-                  <Grid item >
-                      <Button variant="contained">
-                          Search
-                      </Button>
-                  </Grid>
-              </Grid>
-              <Grid item container
-              spacing={6}
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-              style={{ height: "100%" }}>
                   <Grid item>
-                      <Dropdowntutors />
+                    <Button variant="contained">Search</Button>
                   </Grid>
-                  <Grid item >
-                      <Button variant="contained">
-                          Search
-                      </Button>
+                </Grid>
+                <Grid
+                  item
+                  container
+                  spacing={6}
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="center"
+                  style={{ height: "100%" }}
+                >
+                  <Grid item>
+                    <Dropdowntutors />
                   </Grid>
+                  <Grid item>
+                    <Button variant="contained">Search</Button>
+                  </Grid>
+                </Grid>
               </Grid>
-            </Grid>
-          </Container>
-        </Paper>
-      </main>
-    </Container>
-    <Footer
-      title="Tutoring Slugs | University of California, Santa Cruz | Support TutoringSlugsSupport@gmail.com"
-      description="Please fund us"
-    />
+            </Container>
+          </Paper>
+        </main>
+      </Container>
+      <Footer
+        title="Tutoring Slugs | University of California, Santa Cruz | Support TutoringSlugsSupport@gmail.com"
+        description="Please fund us"
+      />
     </Container>
   );
 }
