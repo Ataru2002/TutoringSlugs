@@ -82,7 +82,7 @@ UserController.updateUser = (req, res) => __awaiter(void 0, void 0, void 0, func
     }
 });
 // Tutor: Enlists the user as a tutor for the specified course
-UserController.tutor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+UserController.updateTutor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var userId = req.userId;
     var mandatoryParams = ["phoneNum", "coursesTutored", "isPublic", "tutor"];
     var missingParam = (0, util_1.checkMandatoryParams)(req.body, mandatoryParams);
@@ -99,10 +99,18 @@ UserController.tutor = (req, res) => __awaiter(void 0, void 0, void 0, function*
     var selectedImg = req.body.selectedImg;
     var tutor = req.body.tutor;
     var updateObj = {};
-    updateObj["phoneNumber"] = phoneNumber;
-    updateObj["isPublic"] = isPublic;
-    updateObj["coursesTutored"] = coursesTutored;
-    updateObj["tutor"] = tutor;
+    if (phoneNumber != null && phoneNumber.length > 0) {
+        updateObj["phoneNumber"] = phoneNumber;
+    }
+    if (isPublic != null) {
+        updateObj["isPublic"] = isPublic;
+    }
+    if (coursesTutored != null && coursesTutored.length > 0) {
+        updateObj["coursesTutored"] = coursesTutored;
+    }
+    if (tutor != null) {
+        updateObj["tutor"] = tutor;
+    }
     if (description != null && description.length > 0) {
         updateObj["description"] = description;
     }
@@ -114,8 +122,7 @@ UserController.tutor = (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
     console.log(updateObj);
     try {
-        const docRef = firebase_1.default.db.collection(config_1.default.USERS_COLLECTION).doc(userId);
-        const updateRes = yield docRef.set(updateObj);
+        const updateRes = yield firebase_1.default.db.collection(config_1.default.USERS_COLLECTION).doc(userId).set(updateObj, { merge: true });
         res.send(updateRes);
     }
     catch (err) {

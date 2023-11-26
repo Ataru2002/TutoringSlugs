@@ -94,7 +94,7 @@ export default function TutorSignUp() {
   };
 
   const handleSubmit = (tutor) => {
-    fetch("http://localhost:8080/user/tutor", {
+    fetch("http://localhost:8080/user/updateTutor", {
       method: "POST",
       headers: {
           Accept: "application/json",

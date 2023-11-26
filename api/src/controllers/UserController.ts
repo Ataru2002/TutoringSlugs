@@ -81,7 +81,7 @@ class UserController {
     }
 
     // Tutor: Enlists the user as a tutor for the specified course
-    static tutor = async (req: Request, res: Response) => {
+    static updateTutor = async (req: Request, res: Response) => {
         var userId : string = req.userId;
 
         var mandatoryParams = ["phoneNum", "coursesTutored", "isPublic", "tutor"];
@@ -110,11 +110,19 @@ class UserController {
             tutor? : boolean,
         } = {};
 
-        updateObj["phoneNumber"] = phoneNumber;
-        updateObj["isPublic"] = isPublic;
-        updateObj["coursesTutored"] = coursesTutored;
-        updateObj["tutor"] = tutor;
 
+        if(phoneNumber != null && phoneNumber.length > 0){
+            updateObj["phoneNumber"] = phoneNumber;
+        }
+        if(isPublic != null){
+            updateObj["isPublic"] = isPublic;
+        }
+        if(coursesTutored != null && coursesTutored.length > 0){
+            updateObj["coursesTutored"] = coursesTutored;
+        }
+        if(tutor != null){
+            updateObj["tutor"] = tutor;
+        }
         if(description != null && description.length > 0){
             updateObj["description"] = description;
         }
@@ -128,8 +136,7 @@ class UserController {
         console.log(updateObj);
 
         try {
-            const docRef = firebase.db.collection(config.USERS_COLLECTION).doc(userId);
-            const updateRes = await docRef.set(updateObj);
+            const updateRes = await firebase.db.collection(config.USERS_COLLECTION).doc(userId).set(updateObj, {merge: true});
             res.send(updateRes);
         } catch(err){
             res.send(err);
