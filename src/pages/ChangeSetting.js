@@ -31,10 +31,13 @@ export default function ChangeSetting() {
     if(res.status === 404){
       window.location.href = "/signin";
     }
+  }).catch((err) => {
+    console.log(err);
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
 
     // @TODO: get value from major dropdown
@@ -43,13 +46,7 @@ export default function ChangeSetting() {
     const firstName = data.get('First Name');
     const lastName = data.get('Last Name');
     const email = data.get('email');
-    const password = data.get('password');
-
-
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const password = data.get('new_password');
 
     // Update user on the backend
     fetch("http://localhost:8080/user/updateUser", {
@@ -63,11 +60,15 @@ export default function ChangeSetting() {
           firstName, lastName, email, password
         })
     }).then(res => {
-      console.log(res.headers);
+      if(res.status === 404){
+        window.location.href = "/signin";
+      }
       res.json().then(json => {
         console.log(json);
         window.location.href = "/search";
       })
+    }).catch((err) => {
+      console.log(err);
     })
   };
 

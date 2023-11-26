@@ -15,6 +15,7 @@ var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 const firebase_1 = __importDefault(require("../services/firebase"));
 const config_1 = __importDefault(require("../config/config"));
+const util_1 = require("../services/util");
 class UserController {
 }
 _a = UserController;
@@ -37,6 +38,7 @@ UserController.updateUser = (req, res) => __awaiter(void 0, void 0, void 0, func
     var photoURL = req.body.photoURL;
     var updateObj = {};
     var major = req.body.major;
+    console.log({ userId, email, phoneNumber, firstName, lastName, password, photoURL });
     // Update major in cloud firestore collection
     if (major != null && major.length > 0) {
         try {
@@ -81,21 +83,39 @@ UserController.updateUser = (req, res) => __awaiter(void 0, void 0, void 0, func
 });
 // Tutor: Enlists the user as a tutor for the specified course
 UserController.tutor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var userId = req.body.userId;
-    var mandatoryParams = ["firstName", "lastName", "phoneNumber", ""];
-    var firstName = req.body.firstName;
-    var lastName = req.body.lastName;
-    var phoneNum = req.body.phoneNum;
+    var userId = req.userId;
+    var mandatoryParams = ["phoneNum", "coursesTutored", "isPublic", "tutor"];
+    var missingParam = (0, util_1.checkMandatoryParams)(req.body, mandatoryParams);
+    if (missingParam != null) {
+        res.status(400).send({ message: "The " + missingParam + " parameter is missing. Mandatory params are: " + mandatoryParams });
+        return;
+    }
+    var phoneNumber = req.body.phoneNum;
     var description = req.body.description;
-    var isPublic = req.body.public;
+    // Bruh
+    var isPublic = req.body.public === "yes";
     var coursesTutored = req.body.coursesTutored;
     var selectedFile = req.body.selectedFile;
     var selectedImg = req.body.selectedImg;
     var tutor = req.body.tutor;
-    var email = req.body.email;
-    const fields = { firstName, lastName, phoneNum, description, isPublic, coursesTutored, selectedFile, selectedImg, tutor, email };
+    var updateObj = {};
+    updateObj["phoneNumber"] = phoneNumber;
+    updateObj["isPublic"] = isPublic;
+    updateObj["coursesTutored"] = coursesTutored;
+    updateObj["tutor"] = tutor;
+    if (description != null && description.length > 0) {
+        updateObj["description"] = description;
+    }
+    if (selectedFile != null && selectedFile.length > 0) {
+        updateObj["selectedFile"] = selectedFile;
+    }
+    if (selectedImg != null && selectedImg.length > 0) {
+        updateObj["selectedImg"] = selectedImg;
+    }
+    console.log(updateObj);
     try {
-        const updateRes = yield firebase_1.default.db.collection("users").doc(userId).update(fields);
+        const docRef = firebase_1.default.db.collection(config_1.default.USERS_COLLECTION).doc(userId);
+        const updateRes = yield docRef.set(updateObj);
         res.send(updateRes);
     }
     catch (err) {

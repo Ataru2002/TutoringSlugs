@@ -118,6 +118,8 @@ export default function Search() {
         console.log(json);
       });
     }
+  }).catch((err) => {
+    console.log(err);
   });
 
   return (

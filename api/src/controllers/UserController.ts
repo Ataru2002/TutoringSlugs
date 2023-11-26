@@ -1,6 +1,7 @@
 import {Request, Response} from 'express';
 import firebase from "../services/firebase";
 import config from "../config/config";
+import { checkMandatoryParams } from '../services/util';
 
 class UserController {
 
@@ -33,6 +34,7 @@ class UserController {
         } = {};
 
         var major : string = req.body.major;
+        console.log({userId, email, phoneNumber, firstName, lastName, password, photoURL});
 
         // Update major in cloud firestore collection
         if(major != null && major.length > 0){
@@ -80,25 +82,54 @@ class UserController {
 
     // Tutor: Enlists the user as a tutor for the specified course
     static tutor = async (req: Request, res: Response) => {
-        var userId : string = req.body.userId;
+        var userId : string = req.userId;
 
-        var mandatoryParams = ["firstName", "lastName", "phoneNumber", ""]
+        var mandatoryParams = ["phoneNum", "coursesTutored", "isPublic", "tutor"];
+        var missingParam = checkMandatoryParams(req.body, mandatoryParams);
+        if(missingParam != null){
+            res.status(400).send({message: "The " + missingParam + " parameter is missing. Mandatory params are: " + mandatoryParams});
+            return;
+        }
 
-        var firstName : string = req.body.firstName;
-        var lastName : string = req.body.lastName;
-        var phoneNum : string = req.body.phoneNum;
+        var phoneNumber : string = req.body.phoneNum;
         var description : string = req.body.description;
-        var isPublic : boolean = req.body.public;
+        // Bruh
+        var isPublic : boolean = req.body.public === "yes";
         var coursesTutored : Array<string> = req.body.coursesTutored;
         var selectedFile : string = req.body.selectedFile;
         var selectedImg : string = req.body.selectedImg;
         var tutor : boolean = req.body.tutor;
-        var email : string = req.body.email;
 
-        const fields = {firstName, lastName, phoneNum, description, isPublic, coursesTutored, selectedFile, selectedImg, tutor, email}
+        var updateObj : {
+            phoneNumber? : string,
+            description? : string,
+            isPublic? : boolean,
+            coursesTutored? : Array<string>,
+            selectedFile? : string,
+            selectedImg? : string,
+            tutor? : boolean,
+        } = {};
+
+        updateObj["phoneNumber"] = phoneNumber;
+        updateObj["isPublic"] = isPublic;
+        updateObj["coursesTutored"] = coursesTutored;
+        updateObj["tutor"] = tutor;
+
+        if(description != null && description.length > 0){
+            updateObj["description"] = description;
+        }
+        if(selectedFile != null && selectedFile.length > 0){
+            updateObj["selectedFile"] = selectedFile;
+        }
+        if(selectedImg != null && selectedImg.length > 0){
+            updateObj["selectedImg"] = selectedImg;
+        }
+
+        console.log(updateObj);
 
         try {
-            const updateRes = await firebase.db.collection("users").doc(userId).update(fields);
+            const docRef = firebase.db.collection(config.USERS_COLLECTION).doc(userId);
+            const updateRes = await docRef.set(updateObj);
             res.send(updateRes);
         } catch(err){
             res.send(err);
