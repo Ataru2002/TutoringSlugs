@@ -4,41 +4,18 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Dropdownclasses from '../../components/Dropdownclasses';
+import DropdownClassesTutors from '../../components/DropdownClassesTutors';
+import DropdownCourseName from '../../components/DropdownCourseName';
 
 export default function TutorFormUpdate(props) {
+  const [courses, setCourses] = React.useState([]);
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Tutor Information
       </Typography>
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="firstName"
-            name="firstName"
-            label="First name"
-            fullWidth
-            autoComplete="given-name"
-            variant="standard"
-            onChange={(e) => props.setTutor(previousState => {
-              return { ...previousState, firstName: e.target.value }
-            })}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="lastName"
-            name="lastName"
-            label="Last name"
-            fullWidth
-            autoComplete="family-name"
-            variant="standard"
-            onChange={(e) => props.setTutor(previousState => {
-              return { ...previousState, lastName: e.target.value }
-            })}
-          />
-        </Grid>
         <Grid item xs={12}>
           <TextField
             id="phonenumber"
@@ -65,7 +42,8 @@ export default function TutorFormUpdate(props) {
             })}
           />
         </Grid>
-        <Dropdownclasses />
+        <DropdownCourseName courses={courses} setCourses={setCourses}/>
+        <DropdownClassesTutors courses={courses} setTutor={props.setTutor}/>
         <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox color="secondary" name="saveAddress" value="yes" />}

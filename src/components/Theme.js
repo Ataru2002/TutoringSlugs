@@ -1,5 +1,4 @@
 import { createTheme } from '@mui/material/styles';
-import lion_school_rocks from '../assests/lion_school_rocks.jpg';
 
 const theme = createTheme({
   palette: {

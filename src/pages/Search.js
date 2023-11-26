@@ -6,21 +6,12 @@ import Button from "@mui/material/Button";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { initializeApp } from "firebase/app";
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  addDoc,
-  deleteDoc,
-} from "firebase/firestore";
-
-import Dropdownclasses from "../components/Dropdownclasses";
-import Dropdowntutors from "../components/Dropdowntutors";
-import search_img from "../assests/search_img.png";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import allClassesData from "./all_classes.json";
-import allMajors from "./data.txt"
+import DropdownClassesSearch from '../components/DropdownClassesSearch';
+import DropdownCourseName from '../components/DropdownCourseName';
+import Dropdowntutors from '../components/DropdownTutors';
+import search_img from '../assests/search_img.png';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -34,63 +25,6 @@ const firebaseConfig = {
 };
 
 initializeApp(firebaseConfig);
-const db = getFirestore();
-const coursesRef = collection(db, "Courses");
-let instances = [];
-let allClasses = {};
-
-getDocs(coursesRef).then((snapshot) => {
-  let temp = [];
-  //temp, and allClasses contains everything
-  //type allClasses.courseList to access all the courses from that class
-  //type allClasses.courseURL to access all the courses URL from that course
-  //instances contains all the names of the courses
-  snapshot.docs.forEach((doc) => {
-    temp.push({ ...doc.data() });
-  });
-  temp.forEach((test) => {
-    instances.push(test.courseName);
-    allClasses[test.courseName] = test.courseList;
-  });
-  console.log(temp);
-  console.log(instances);
-});
-
-/* Run this code only once (usually done manually every new quarter)
-const snapshot = await getDocs(collection(db, "Courses"));
-
-snapshot.forEach((doc) => {
-  deleteDoc(doc.ref).then(() => {
-    console.log(`Document ${doc.id} successfully deleted!`);
-  });
-});
-
-getDocs(coursesRef).then((snapshot) => {
-  let temp = [];
-  snapshot.docs.forEach((doc) => {
-    temp.push({ ...doc.data() });
-    allClassesData.push({...doc.data()});
-  });
-  temp.forEach((test) => {
-    instances.push(test.courseName);
-  });
-  console.log(temp);
-  //console.log(instances);
-}).then(() => {
-  allClassesData.forEach(course => {
-    const courseName = course.course_name;
-    const courseURL = course.course_url;
-    const courses = course.classes;
-    if(!instances.includes(courseName)){
-      addDoc(coursesRef, {
-        courseName: courseName,
-        courseURL: courseURL,
-        courseList: courses,
-      });
-    }
-  })
-})
-*/
 
 const origin_url = window.location.origin;
 
@@ -104,7 +38,7 @@ const sections = [
 ];
 
 export default function Search() {
-
+  const [courses, setCourses] = React.useState([]);
   // Checks if user is signed in - redirects to sign in if not signed in
   fetch("http://localhost:8080/user/", {
     method: "GET",
@@ -166,7 +100,8 @@ export default function Search() {
                   alignItems="center"
                 >
                   <Grid item>
-                    <Dropdownclasses />
+                      <DropdownCourseName courses={courses} setCourses={setCourses} />
+                      <DropdownClassesSearch courses={courses} />
                   </Grid>
                   <Grid item>
                     <Button variant="contained">Search</Button>
