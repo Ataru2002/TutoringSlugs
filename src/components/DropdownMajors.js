@@ -6,6 +6,8 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -18,46 +20,45 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'CSE 101',
-  'CMPM 80K',
-  'AM 100',
-  'MATH 100',
-];
+const names = [];
 
-export default function Dropdownclasses(props) {
-  const [classes, setClasses] = React.useState([]);
+const db = getFirestore();
+let majorsRef = collection(db, "Majors");
+const querySnapshot = await getDocs(majorsRef);
+querySnapshot.forEach((doc) => {
+  names.push(doc.data().fullName);
+});
+
+export default function DropdownMajor() {
+  const [major, setMajor] = React.useState([]);
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setClasses(
+    setMajor(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
-    props.setTutor(previousState => {
-        return { ...previousState, coursesTutored: event.target.value }
-    });
   };
 
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Select Classes</InputLabel>
+        <InputLabel id="demo-multiple-checkbox-label">Major</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
-          value={classes}
+          value={major}
           onChange={handleChange}
-          input={<OutlinedInput label="Select Classes for Tutoring" />}
+          input={<OutlinedInput label="Major" />}
           renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
         >
           {names.map((name) => (
             <MenuItem key={name} value={name}>
-              <Checkbox checked={classes.indexOf(name) > -1} />
+              <Checkbox checked={major.indexOf(name) > -1} />
               <ListItemText primary={name} />
             </MenuItem>
           ))}

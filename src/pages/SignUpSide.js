@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import DropDown from '../components/Dropdownmajor';
+import DropdownMajor from '../components/DropdownMajors';
 import lion_school_rocks from '../assests/lion_school_rocks.jpg';
 import { initializeApp } from "firebase/app";
 import {
@@ -139,7 +139,7 @@ export default function SignUpSide() {
               id="Last Name"
               autoComplete="Last Name"
             />
-            <DropDown />
+            <DropdownMajor />
             <TextField
               margin="normal"
               required

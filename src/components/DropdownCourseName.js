@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -18,21 +19,22 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Sarah Rammaha',
-  'Sarah Rammaha',
-  'Sarah Rammaha',
-  'Phuong Uyen Nguyen',
-];
+const names = [];
 
-export default function DropdownTutors() {
-  const [tutors, setTutors] = React.useState([]);
+const db = getFirestore();
+let coursesRef = collection(db, "Courses");
+const querySnapshot = await getDocs(coursesRef);
+querySnapshot.forEach((doc) => {
+  names.push(doc.data().courseName);
+});
+
+export default function DropdownCourseName(props) {
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setTutors(
+    props.setCourses(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
@@ -41,20 +43,20 @@ export default function DropdownTutors() {
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Select Tutors</InputLabel>
+        <InputLabel id="demo-multiple-checkbox-label">Courses</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
-          value={tutors}
+          value={props.courses}
           onChange={handleChange}
-          input={<OutlinedInput label="Select Classes for Tutoring" />}
+          input={<OutlinedInput label="Courses" />}
           renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
         >
           {names.map((name) => (
             <MenuItem key={name} value={name}>
-              <Checkbox checked={tutors.indexOf(name) > -1} />
+              <Checkbox checked={props.courses.indexOf(name) > -1} />
               <ListItemText primary={name} />
             </MenuItem>
           ))}

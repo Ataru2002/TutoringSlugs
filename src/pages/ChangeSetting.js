@@ -6,7 +6,7 @@ import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import DropDown from '../components/Dropdownmajor';
+import DropdownMajor from '../components/DropdownMajors';
 
 function Copyright(props) {
   return (
@@ -29,6 +29,7 @@ export default function ChangeSetting() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    window.location.href = "/search";
   };
 
   return (
@@ -64,7 +65,7 @@ export default function ChangeSetting() {
             id="Last Name"
             autoComplete="Last Name"
           />
-          <DropDown />
+          <DropdownMajor />
           <TextField
             margin="normal"
             fullWidth
