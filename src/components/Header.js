@@ -6,6 +6,27 @@ import Link from '@mui/material/Link';
 
 function Header(props) {
   const { sections, title } = props;
+  var [user, setUser] = React.useState(false);
+
+  // Checks if user is signed in - redirects to sign in if not signed in
+  fetch("http://localhost:8080/user/", {
+    method: "GET",
+    credentials: "include",
+  }).then((res) => {
+    if(res.status === 404){
+      window.location.href = "/signin";
+    }
+    else {
+      res.json().then((json) => {
+        user = json.displayName;
+        console.log(user);
+        setUser(json.displayName);
+      });
+    }
+  }).catch((err) => {
+    console.log(err);
+  });
+
 
   return (
     <React.Fragment>
@@ -20,7 +41,7 @@ function Header(props) {
         >
           {title}
         </Typography>
-        {/* <Typography
+        { <Typography
           component="h3"
           variant="h5"
           color="inherit"
@@ -29,7 +50,7 @@ function Header(props) {
           sx={{ flex: 1 }}
         >
           Hello, {user}
-        </Typography> */}
+        </Typography> }
       </Toolbar>
       <Toolbar
         component="nav"
