@@ -78,12 +78,13 @@ export default function SignInSide() {
                   Accept: "application/json",
                   "Content-Type": "application/json"
               },
+              withCredentials: true,
               credentials: "include",
               body: JSON.stringify({
                 idToken,
                 userId: user.user.uid,
-                firstName: user.user.displayName.split(" ")[0],
-                lastName: user.user.displayName.split(" ")[1],
+                firstName: user.user.displayName != null ? user.user.displayName.split(" ")[0] : "null",
+                lastName: user.user.displayName != null ? user.user.displayName.split(" ")[1] : "null",
                 email: user.user.email
               })
           }).then(res => {

@@ -69,7 +69,7 @@ AuthController.login = (req, res) => __awaiter(void 0, void 0, void 0, function*
                 res.send(err);
                 return;
             }
-            const options = { maxAge: expiresIn, httpOnly: false, secure: false, sameSite: 'none' };
+            const options = { maxAge: expiresIn, httpOnly: true, secure: true, sameSite: 'none' };
             res.cookie('session', sessionCookie, options);
             res.end(JSON.stringify({ status: "success" }));
         });
