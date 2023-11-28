@@ -64,7 +64,7 @@ class AuthController {
                 return;
             }
 
-            const options = { maxAge: expiresIn, httpOnly: false, secure: false, sameSite: 'none' as const};
+            const options = { maxAge: expiresIn, httpOnly: true, secure: true, sameSite: 'none' as const};
             res.cookie('session', sessionCookie, options);
             res.end(JSON.stringify({status: "success"}));
         }, (error) => {
