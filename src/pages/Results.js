@@ -8,6 +8,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import sarah from '../assests/sarah.jpg';
 import DynamicBox from '../components/DynamicBox';
+import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
 
 const origin_url = window.location.origin;
 
@@ -16,6 +17,14 @@ const sections = [
   { title: 'Change your setting', url: origin_url + '/change_setting' },
   { title: 'Change your tutor setting', url: origin_url + '/change_tutor_setting' },
 ];
+
+const db = getFirestore();
+const q = query(collection(db, "Users"), where("tutor", "==", true));
+const querySnapshot = await getDocs(q);
+querySnapshot.forEach((doc) => {
+  console.log(doc.data().description);
+  console.log(doc.data().phoneNumber);
+});
 
 export default function Results() {
     const name = "Sarah Ramamha";
