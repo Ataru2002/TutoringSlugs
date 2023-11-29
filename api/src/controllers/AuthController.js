@@ -75,7 +75,7 @@ AuthController.login = (req, res) => __awaiter(void 0, void 0, void 0, function*
                 res.send(err);
                 return;
             }
-            const options = { maxAge: expiresIn, httpOnly: true, secure: true, sameSite: 'none' };
+            const options = { maxAge: expiresIn, httpOnly: false, secure: true, sameSite: 'none' };
             res.cookie('session', sessionCookie, options);
             res.end(JSON.stringify({ status: "success" }));
         });
@@ -86,18 +86,13 @@ AuthController.login = (req, res) => __awaiter(void 0, void 0, void 0, function*
 });
 // Revoke tokens on server side. Client side should delete cookies and redirect to login.
 AuthController.logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var mandatoryParams = ["userId"];
-    var missingParam = (0, util_1.checkMandatoryParams)(req.body, mandatoryParams);
-    if (missingParam != null) {
-        res.status(400).send({ message: "The " + missingParam + " parameter is missing. Mandatory params are: " + mandatoryParams });
-        return;
-    }
-    var userId = req.userId;
     try {
-        var result = yield firebase_1.default.admin.auth().revokeRefreshTokens(userId);
-        var userRecord = yield firebase_1.default.admin.auth().getUser(userId);
-        var timestamp = new Date(userRecord.tokensValidAfterTime).getTime() / 1000;
-        res.send({ message: `Tokens revoked at: ${timestamp}` });
+        //var result = await firebase.admin.auth().revokeRefreshTokens(userId);
+        //var userRecord = await firebase.admin.auth().getUser(userId);
+        //var timestamp = new Date(userRecord.tokensValidAfterTime as string).getTime() / 1000;
+        //res.send({message: `Tokens revoked at: ${timestamp}`});
+        res.clearCookie('session', { path: "/", httpOnly: false, secure: true });
+        res.end("yo");
     }
     catch (err) {
         res.send(err);

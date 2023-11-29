@@ -5,6 +5,11 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import { Button } from '@mui/material';
 
+function logout() {
+    document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    window.location.href = "/signin";
+}
+
 function Header(props) {
     const { sections, title } = props;
     var [user, setUser] = React.useState(false);
@@ -52,7 +57,7 @@ function Header(props) {
                 >
                     Hello, {user}
                 </Typography>
-                <Button variant="contained">
+                <Button variant="contained" onClick={() => logout()}>
                     Logout
                 </Button>
             </Toolbar>

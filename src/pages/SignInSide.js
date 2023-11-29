@@ -14,19 +14,7 @@ import signin_message from '../assests/signin_message.jpg';
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-    apiKey: "AIzaSyAr9AWEzY55OMgNGJLRPNkeg3EIv7rT52A",
-    authDomain: "tutoringslugs.firebaseapp.com",
-    projectId: "tutoringslugs",
-    storageBucket: "tutoringslugs.appspot.com",
-    messagingSenderId: "577248810803",
-    appId: "1:577248810803:web:5807a43fb92cd400075046",
-    measurementId: "G-BNWVD69VNX",
-};
-
-initializeApp(firebaseConfig);
-const auth = getAuth();
+import firebase from "../Firebase";
 
 const origin_url = window.location.origin;
 
@@ -64,7 +52,7 @@ export default function SignInSide() {
         const email = data.get('email');
         const password = data.get('password');
 
-        signInWithEmailAndPassword(auth, email, password)
+        firebase.signInWithEmailAndPassword(firebase.auth, email, password)
             .then((user) => {
                 console.log("user logged in: ", JSON.stringify(user.user));
                 return user.user.getIdToken().then((idToken) => {

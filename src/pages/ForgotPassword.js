@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import signin_message from '../assests/signin_message.jpg';
+import firebase from "../Firebase";
 
 function Copyright(props) {
     return (
@@ -27,10 +28,17 @@ export default function ForgetPassword() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        const email = data.get('email');
+
+        firebase.sendPasswordResetEmail(firebase.auth, email)
+        .then(() => {
+            // password reset email sent
+            alert("Password reset email sent!");
+            window.location.href = "/signin";
+        })
+        .catch((err) => {
+            alert(err.message);
+        })
     };
 
     return (

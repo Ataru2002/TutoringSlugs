@@ -75,8 +75,9 @@ class UserController {
         try {
             var userRecord = await firebase.admin.auth().updateUser(userId, updateObj);
             res.send(userRecord.toJSON());
-        } catch(err){
-            res.send(err);
+        } catch(err : any){
+            console.log(err);
+            res.status(409).end(err.message);
         }
     }
 

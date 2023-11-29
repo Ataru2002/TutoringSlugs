@@ -71,13 +71,21 @@ export default function ChangeSetting() {
                 if (res.status === 404) {
                     window.location.href = "/signin";
                 }
-                res.json().then(json => {
-                    console.log(json);
-                    window.location.href = "/search";
-                })
+                // firebase error such as email already exists
+                else if(res.status === 409){
+                    res.text().then(err => {
+                        alert(err);
+                    })
+                }
+                else {
+                    res.json().then(json => {
+                        console.log(json);
+                        window.location.href = "/search";
+                    })
+                }
             }).catch((err) => {
                 console.log(err);
-            })
+            });
         };
     }
 

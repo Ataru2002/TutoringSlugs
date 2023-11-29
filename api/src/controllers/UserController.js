@@ -78,7 +78,8 @@ UserController.updateUser = (req, res) => __awaiter(void 0, void 0, void 0, func
         res.send(userRecord.toJSON());
     }
     catch (err) {
-        res.send(err);
+        console.log(err);
+        res.status(409).end(err.message);
     }
 });
 // Tutor: Enlists the user as a tutor for the specified course

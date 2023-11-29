@@ -70,36 +70,13 @@ class AuthController {
                 return;
             }
 
-            const options = { maxAge: expiresIn, httpOnly: true, secure: true, sameSite: 'none' as const};
+            const options = { maxAge: expiresIn, httpOnly: false, secure: true, sameSite: 'none' as const};
             res.cookie('session', sessionCookie, options);
             res.end(JSON.stringify({status: "success"}));
         }, (error) => {
             console.log(error);
             res.status(401).send("Unauthorized request.");
         })
-    }
-
-    // Revoke tokens on server side. Client side should delete cookies and redirect to login.
-
-    static logout = async (req: Request, res: Response) => {
-
-        var mandatoryParams = ["userId"];
-        var missingParam = checkMandatoryParams(req.body, mandatoryParams);
-        if(missingParam != null){
-            res.status(400).send({message: "The " + missingParam + " parameter is missing. Mandatory params are: " + mandatoryParams});
-            return;
-        }
-
-        var userId = req.userId;
-
-        try {
-            var result = await firebase.admin.auth().revokeRefreshTokens(userId);
-            var userRecord = await firebase.admin.auth().getUser(userId);
-            var timestamp = new Date(userRecord.tokensValidAfterTime as string).getTime() / 1000;
-            res.send({message: `Tokens revoked at: ${timestamp}`});
-        } catch(err){
-            res.send(err);
-        }
     }
 }
 
