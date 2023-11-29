@@ -1,0 +1,87 @@
+Current Department: ACEN - Academic English
+Current Department: ESCI - Environmental Sciences
+Current Department: AM - Applied Mathematics
+Current Department: ITAL - Italian
+Current Department: JRLC - John R Lewis College
+Current Department: SPHS - Spanish for Heritage Speakers
+Current Department: HEBR - Hebrew
+Current Department: FIL - Filipino
+Current Department: PRTR - Porter College
+Current Department: SPAN - Spanish
+Current Department: DANM - Digital Arts and New Media
+Current Department: HIS - History
+Current Department: WRIT - Writing
+Current Department: LATN - Latin
+Current Department: OAKS - Oakes College
+Current Department: GAME - Games and Playable Media
+Current Department: MATH - Mathematics
+Current Department: PERS - Persian
+Current Department: MUSC - Music
+Current Department: SOCD - Social Documentation
+Current Department: PBS - Physical Biological Sciences
+Current Department: ARTG - Art & Design: Games + Playable Media
+Current Department: CHEM - Chemistry and Biochemistry
+Current Department: CLST - Classical Studies
+Current Department: CRWN - Crown College
+Current Department: MERR - Merrill College
+Current Department: FMST - Feminist Studies
+Current Department: ENVS - Environmental Studies
+Current Department: PUNJ - Punjabi
+Current Department: JWST - Jewish Studies
+Current Department: THEA - Theater Arts
+Current Department: PHYS - Physics
+Current Department: YIDD - Yiddish
+Current Department: TIM - Technology Information Management
+Current Department: POLI - Politics
+Current Department: OCEA - Ocean Sciences
+Current Department: FREN - French
+Current Department: STEV - Stevenson College
+Current Department: EDUC - Education
+Current Department: CRES - Critical Race and Ethnic Studies
+Current Department: ECON - Economics
+Current Department: SCIC - Science Communication
+Current Department: BME - Biomolecular Engineering
+Current Department: PSYC - Psychology
+Current Department: LGST - Legal Studies
+Current Department: VAST - Visualizing Abolitionist Studies
+Current Department: BIOL - Biology Molecular Cell and Developmental
+Current Department: ASTR - Astronomy and Astrophysics
+Current Department: PORT - Portuguese
+Current Department: SOCY - Sociology
+Current Department: HISC - History of Consciousness
+Current Department: ECE - Electrical and Computer Engineering
+Current Department: JAPN - Japanese
+Current Department: ARBC - Arabic
+Current Department: BIOE - Biology Ecology and Evolutionary
+Current Department: CSP - Coastal Science and Policy
+Current Department: HUMN - Humanities
+Current Department: NLP - Natural Language Processing
+Current Department: KRSG - Kresge College
+Current Department: CMPM - Computational Media
+Current Department: METX - Microbiology and Environmental Toxicology
+Current Department: HAVC - History of Art and Visual Culture
+Current Department: PHIL - Philosophy
+Current Department: EART - Earth Sciences
+Current Department: CMMU - Community Studies
+Current Department: STAT - Statistics
+Current Department: GERM - German
+Current Department: FILM - Film and Digital Media
+Current Department: CRSN - Carson College
+Current Department: LALS - Latin American and Latino Studies
+Current Department: GREE - Greek
+Current Department: CHIN - Chinese
+Current Department: PHYE - Physical Education
+Current Department: ANTH - Anthropology
+Current Department: LING - Linguistics
+Current Department: CLNI - College Nine
+Current Department: LAAD - Languages
+Current Department: GCH - Global and Community Health
+Current Department: ART - Art
+Current Department: LIT - Literature
+Current Department: UCDC - UCDC
+Current Department: HCI - Human Computer Interaction
+Current Department: COWL - Cowell College
+Current Department: BIOC - Biochemistry and Molecular Biology
+Current Department: APLX - Applied Linguistics
+Current Department: CSE - Computer Science and Engineering
+Current Department: GRAD - Graduate

@@ -13,11 +13,14 @@ for lib in libraries:
         import subprocess
         subprocess.check_call(['pip', 'install', lib])
 
-import scraperMajors
-import scraperDeptsCourses
+# the 2 scrapers
+from scraperMajors import MajorScraper
+from scraperDeptsCourses import CourseScraper
 
 
 if __name__ == '__main__':
     # gets all the departments and courses offered
-    departmentsAndCourses = scraperDeptsCourses.CourseScraper()
-    majors = scraperMajors
+    departmentsAndCourses = CourseScraper()
+
+    # gets all the majors
+    majors = MajorScraper()

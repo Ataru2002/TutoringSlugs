@@ -1,0 +1,74 @@
+Current Major: Agroecology B.A.
+Current Major: Anthropology B.A.
+Current Major: Applied Linguistics and Multilingualism B.A.
+Current Major: Applied Mathematics B.S.
+Current Major: Applied Physics B.S.
+Current Major: Art B.A.
+Current Major: Art and Design: Games and Playable Media B.A.
+Current Major: Biochemistry and Molecular Biology B.S.
+Current Major: Biology B.A.
+Current Major: Biology B.S.
+Current Major: Biomolecular Engineering and Bioinformatics B.S.
+Current Major: Biotechnology B.A.
+Current Major: Business Management Economics B.A.
+Current Major: Chemistry B.A.
+Current Major: Chemistry B.S.
+Current Major: Classical Studies B.A.
+Current Major: Cognitive Science B.S.
+Current Major: Community Studies B.A.
+Current Major: Computer Engineering B.S.
+Current Major: Computer Science B.A.
+Current Major: Computer Science B.S.
+Current Major: Computer Science: Computer Game Design B.S.
+Current Major: Creative Technologies B.A.
+Current Major: Critical Race and Ethnic Studies B.A.
+Current Major: Earth Sciences B.S.
+Current Major: Earth Sciences/Anthropology B.A.
+Current Major: Ecology and evolution B.S.
+Current Major: Economics B.A.
+Current Major: Economics/Mathematics B.A.
+Current Major: Education, Democracy, and Justice B.A.
+Current Major: Electrical Engineering B.S.
+Current Major: Environmental Sciences B.S.
+Current Major: Environmental Studies B.A.
+Current Major: Environmental Studies/Biology B.A.
+Current Major: Environmental Studies/Earth Sciences B.A.
+Current Major: Environmental Studies/Economics B.A.
+Current Major: Feminist Studies B.A.
+Current Major: Film and Digital Media B.A.
+Current Major: Global Economics B.A.
+Current Major: Global and Community Health B.A.
+Current Major: Global and Community Health B.S.
+Current Major: History B.A.
+Current Major: History of Art and Visual Culture B.A.
+Current Major: Human Biology B.S.
+Current Major: Jewish Studies B.A.
+Current Major: Language Studies B.A.
+Current Major: Latin American and Latino Studies B.A.
+Current Major: Latin American and Latino Studies and Education, Democracy, and Justice Combined B.A.
+Current Major: Latin American and Latino Studies/Politics B.A.
+Current Major: Latin American and Latino Studies/Sociology B.A.
+Current Major: Legal Studies B.A.
+Current Major: Linguistics B.A.
+Current Major: Literature B.A.
+Current Major: Marine Biology B.S.
+Current Major: Mathematics B.A.
+Current Major: Mathematics B.S.
+Current Major: Microbiology B.S.
+Current Major: Molecular, Cell, and Developmental Biology B.S.
+Current Major: Music B.A.
+Current Major: Music B.M.
+Current Major: Network and Digital Technology B.A.
+Current Major: Neuroscience B.S.
+Current Major: Philosophy B.A.
+Current Major: Physics (Astrophysics) B.S.
+Current Major: Physics B.S.
+Current Major: Plant Sciences B.S.
+Current Major: Politics B.A.
+Current Major: Psychology B.A.
+Current Major: Robotics Engineering B.S.
+Current Major: Science Education B.S.
+Current Major: Sociology B.A.
+Current Major: Spanish Studies B.A.
+Current Major: Technology and Information Management B.S.
+Current Major: Theater Arts B.A.
