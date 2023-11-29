@@ -45,7 +45,3 @@ class MajorScraper:
                 allMajors += f"Current Major: {element}\n"
         
         return allMajors[:-1]
-
-
-if __name__ == '__main__':
-    obj = MajorScraper()
