@@ -1,19 +1,3 @@
-# to scrape class data from ucsc
-import importlib
-
-# Installs the required libraries if user doesnt have them
-libraries = ['urllib3', 'bs4']
-
-for lib in libraries:
-    try:
-        importlib.import_module(lib)
-    except ImportError:
-        print(f"{lib} is not installed, installing now...")
-
-        import subprocess
-        subprocess.check_call(['pip', 'install', lib])
-
-
 from typing import Any
 import json, os
 from copy import deepcopy
@@ -33,26 +17,24 @@ class CourseScraper:
         new_filepath = os.path.dirname(__file__) + "/major_and_links.txt"
  
 
-        self.soup_data = None   # contains the html data from the catalog url
-        self.major_data = dict() # contains the names and links of every major {name: link}
+        self.soupData = None   # contains the html data from the catalog url
+        self.majorData = dict() # contains the names and links of every major {name: link}
         self.course_data = list() # contains every course name and url <- eventual json
         self.get_html()    
 
         self.find_element()  
 
-            
         
         index = 0   # gets the index of the list to be modified
-
         
 
-        for major in self.major_data:
+        for major in self.majorData:
             self.url = "https://catalog.ucsc.edu/"
             self.course_data.append({
                 "course_name": major if '&amp;' not in major else major.replace('&amp;', '&'),
-                "course_url": self.url+self.major_data[major]
+                "course_url": self.url+self.majorData[major]
             }) 
-            self.url = "https://catalog.ucsc.edu/"+self.major_data[major]
+            self.url = "https://catalog.ucsc.edu/"+self.majorData[major]
             self.get_html()
                     
             # remove this once we can parse
@@ -77,11 +59,11 @@ class CourseScraper:
         http = urllib3.PoolManager()
         response = http.request('GET', self.url)
 
-        self.soup_data = BeautifulSoup(response.data, 'html.parser')
+        self.soupData = BeautifulSoup(response.data, 'html.parser')
     
     # to find a specific element in the html data, then returns the parsed version
     def find_element(self) -> None:
-        data = self.soup_data.find_all('a')
+        data = self.soupData.find_all('a')
         new_data = [x for x in data if 'a href="/en/current/general-catalog/courses/' in str(x)]
         new_data = list(set(new_data))
 
@@ -94,17 +76,17 @@ class CourseScraper:
 
             temp_parsing_list = [i.strip() for i in name.split('-')]
 
-            self.major_data.update({' - '.join(temp_parsing_list): link})
+            self.majorData.update({' - '.join(temp_parsing_list): link})
 
     
     # gets all the courses 
     def find_course(self, major_name: str) -> list:
-        data = self.soup_data.find_all("a")
+        data = self.soupData.find_all("a")
 
         # course_name = None
         temp_course_list = list()
         # separates the name of the major and its courses from the rest of the elements
-        list_courses = [str(x) for x in data if str(x).split('>')[0][10:-1] not in self.major_data.values() and "/en/current/general-catalog/courses/" in str(x)]
+        list_courses = [str(x) for x in data if str(x).split('>')[0][10:-1] not in self.majorData.values() and "/en/current/general-catalog/courses/" in str(x)]
         list_courses_dc = deepcopy(list_courses)
 
         # removes the Upper-Division, Lower-Division, and Graduate urls
@@ -139,9 +121,3 @@ class CourseScraper:
                 temp_course_list.append(class_dict)
 
         return temp_course_list
-
-
-
-
-if __name__  == '__main__':
-    obj = CourseScraper()
