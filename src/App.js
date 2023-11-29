@@ -1,11 +1,6 @@
 import { Switch } from "./Switch";
 
-function App() {
-    // const [user, setUser] = useState<ICurrentUser>({
-    //     name: '',
-    //     role: '',
-    //     username: '',
-    // });    
+function App() { 
   return (
     <Switch />
   );

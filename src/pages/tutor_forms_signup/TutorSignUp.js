@@ -58,15 +58,17 @@ export default function TutorSignUp() {
   });
 
   const sendBody = JSON.stringify({
-          phoneNum: tutor.phoneNum,
-          description: tutor.description,
-          isPublic: tutor.public,
-          coursesTutored: tutor.coursesTutored,
-          selectedFile: tutor.selectedFile,
-          selectedImg: tutor.selectedImg,
-          tutor: tutor.tutor
+    phoneNum: tutor.phoneNum,
+    description: tutor.description,
+    isPublic: tutor.public,
+    coursesTutored: tutor.coursesTutored,
+    selectedFile: tutor.selectedFile,
+    selectedImg: tutor.selectedImg,
+    tutor: tutor.tutor
   });
   console.log("Send body: " + sendBody);
+
+  console.log(tutor.selectedImg);
 
   function getStepContent(step) {
     switch (step) {

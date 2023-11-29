@@ -102,9 +102,6 @@ export default function SignUpSide() {
           //- password has less than 4 characters
           //- the account already existed
         });
-
-        //for frontend: switch back to the login page
-
     }
   };
 

@@ -20,16 +20,13 @@ const sections = [
 
 const db = getFirestore();
 const q = query(collection(db, "Users"), where("tutor", "==", true));
+const tutors = [];
 const querySnapshot = await getDocs(q);
 querySnapshot.forEach((doc) => {
-  console.log(doc.data().description);
-  console.log(doc.data().phoneNumber);
+  tutors.push(doc.data());
 });
 
 export default function Results() {
-    const name = "Sarah Ramamha";
-    const description = "Excellent experince for tutoring. Has 2 years of experience. Rate: 30 dollars per hour"
-    const email = "srammaha@ucsc.edu";
   return (
     <Container>
       <CssBaseline />
@@ -61,8 +58,9 @@ export default function Results() {
                       </Button>
                   </Grid>
               </Grid>
-              <DynamicBox image={sarah} name={name} description={description} email={email}/>
-              <DynamicBox image={sarah} name={name} description={description} email={email}/>
+                {tutors.map((tutor) => (
+                    <DynamicBox image={sarah} name={tutor.firstName + " " + tutor.lastName} description={tutor.description} email={tutor.email}/>
+                ))}
           </Grid>
       </main>
     </Container>
