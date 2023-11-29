@@ -71,31 +71,33 @@ export default function SignUpSide() {
     } else {
       createUserWithEmailAndPassword(auth, email, password)
         .then((cred) => {
+          console.log(cred.user);
           updateProfile(auth.currentUser, {
             displayName: fName + ' ' + lName
-          })
-          console.log(cred.user);
+          }).then(() => {
+            // Call sign up on backend
 
-          // Call sign up on backend
-
-          fetch("http://localhost:8080/auth/signup", {
-              method: "POST",
-              headers: {
-                  Accept: "application/json",
-                  "Content-Type": "application/json"
-              },
-              credentials: "include",
-              body: JSON.stringify({
-                userId: cred.user.uid,
-                major
+            fetch("http://localhost:8080/auth/signup", {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                  userId: cred.user.uid,
+                  firstName: fName,
+                  lastName: lName,
+                  email: email,
+                  major
+                })
+            }).then(res => {
+              res.json().then(json => {
+                console.log(json);
+                window.location.href = "/signin";
               })
-          }).then(res => {
-            res.json().then(json => {
-              console.log(json);
-              window.location.href = "/signin";
             })
           })
-
         }).catch((err) => {
           alert(err.message);
           //will alert if:

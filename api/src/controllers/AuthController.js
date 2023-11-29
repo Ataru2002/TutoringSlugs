@@ -21,16 +21,19 @@ class AuthController {
 _a = AuthController;
 AuthController.signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // Display name and email are already automatically added to firebase auth database
-    var mandatoryParams = ["userId", "major"];
+    var mandatoryParams = ["userId", "firstName", "lastName", "email", "major"];
     var missingParam = (0, util_1.checkMandatoryParams)(req.body, mandatoryParams);
     if (missingParam != null) {
         res.status(400).send({ message: "The " + missingParam + " parameter is missing. Mandatory params are: " + mandatoryParams });
         return;
     }
     var userId = req.body.userId;
+    var firstName = req.body.firstName;
+    var lastName = req.body.lastName;
+    var email = req.body.email;
     var major = req.body.major;
     var tutor = false;
-    var fields = { major, tutor };
+    var fields = { firstName, lastName, email, major, tutor };
     // Add user to the database
     try {
         const result = yield firebase_1.default.db.collection(config_1.default.USERS_COLLECTION).doc(userId).set(fields);
@@ -50,6 +53,9 @@ AuthController.login = (req, res) => __awaiter(void 0, void 0, void 0, function*
     // Firebase token
     var idToken = req.body.idToken;
     var userId = req.body.userId;
+    var firstName = req.body.firstName;
+    var lastName = req.body.lastName;
+    var email = req.body.email;
     // TODO: Change expires in
     var expiresIn = 60 * 1000 * 5;
     firebase_1.default.admin.auth().createSessionCookie(idToken, { expiresIn })
@@ -61,7 +67,7 @@ AuthController.login = (req, res) => __awaiter(void 0, void 0, void 0, function*
                 const doc = yield usersRef.get();
                 // User doesn't exist, add to database
                 if (!doc.exists) {
-                    var fields = { tutor: false };
+                    var fields = { firstName, lastName, email, tutor: false };
                     const result = yield firebase_1.default.db.collection(config_1.default.USERS_COLLECTION).doc(userId).set(fields);
                 }
             }
