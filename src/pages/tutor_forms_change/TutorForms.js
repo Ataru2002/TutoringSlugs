@@ -8,59 +8,59 @@ import DropdownClassesTutors from '../../components/DropdownClassesTutors';
 import DropdownCourseName from '../../components/DropdownCourseName';
 
 export default function TutorFormUpdate(props) {
-  const [courses, setCourses] = React.useState([]);
+    const [courses, setCourses] = React.useState([]);
 
-  return (
-    <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Tutor Information
-      </Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <TextField
-            id="phonenumber"
-            name="phonenumber"
-            label="Phone Number"
-            fullWidth
-            autoComplete="tel"
-            variant="standard"
-            onChange={(e) => props.setTutor(previousState => {
-              return { ...previousState, phoneNum: e.target.value }
-            })}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="Description"
-            name="Description"
-            label="Enter Your Page Description"
-            fullWidth
-            multiline
-            variant="standard"
-            onChange={(e) => props.setTutor(previousState => {
-              return { ...previousState, description: e.target.value }
-            })}
-          />
-        </Grid>
-        <DropdownCourseName courses={courses} setCourses={setCourses}/>
-        <DropdownClassesTutors courses={courses} setTutor={props.setTutor}/>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-            label="Put phone number in your public tutor page"
-            onChange={(e) => props.setTutor(previousState => {
-              return { ...previousState, public: e.target.value }
-            })}
-          />
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-            label="Remove phone number in your public tutor page"
-            onChange={(e) => props.setTutor(previousState => {
-              return { ...previousState, public: e.target.value }
-            })}
-          />
-        </Grid>
-      </Grid>
-    </React.Fragment>
-  );
+    return (
+        <React.Fragment>
+            <Typography variant="h6" gutterBottom>
+                Tutor Information
+            </Typography>
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <TextField
+                        id="phonenumber"
+                        name="phonenumber"
+                        label="Phone Number"
+                        fullWidth
+                        autoComplete="tel"
+                        variant="standard"
+                        onChange={(e) => props.setTutor(previousState => {
+                            return { ...previousState, phoneNum: e.target.value }
+                        })}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        id="Description"
+                        name="Description"
+                        label="Enter Your Page Description"
+                        fullWidth
+                        multiline
+                        variant="standard"
+                        onChange={(e) => props.setTutor(previousState => {
+                            return { ...previousState, description: e.target.value }
+                        })}
+                    />
+                </Grid>
+                <DropdownCourseName courses={courses} setCourses={setCourses} />
+                <DropdownClassesTutors courses={courses} setTutor={props.setTutor} />
+                <Grid item xs={12}>
+                    <FormControlLabel
+                        control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
+                        label="Put phone number in your public tutor page"
+                        onChange={(e) => props.setTutor(previousState => {
+                            return { ...previousState, public: e.target.value }
+                        })}
+                    />
+                    <FormControlLabel
+                        control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
+                        label="Remove phone number in your public tutor page"
+                        onChange={(e) => props.setTutor(previousState => {
+                            return { ...previousState, public: e.target.value }
+                        })}
+                    />
+                </Grid>
+            </Grid>
+        </React.Fragment>
+    );
 }
