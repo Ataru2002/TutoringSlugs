@@ -12,6 +12,8 @@ import Dropdowntutors from '../components/DropdownTutors';
 import search_img from '../assests/search_img.png';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import { useLocation, useNavigate } from "react-router-dom";
+// import queryString from 'query-string';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -37,13 +39,24 @@ const sections = [
     },
 ];
 
-function handleClick() {
-    window.location.href = "/results";
-}
+// function handleClick() {
+//     window.location.href = "/results";
+// }
 
 export default function Search() {
     const [courses, setCourses] = React.useState([]);
     const [classes, setClasses] = React.useState([]);
+
+    const location = useLocation();
+    const navigate = useNavigate();
+    const queryParams = new URLSearchParams(location.search);
+
+    function handleParamUpdate() {
+        // queryString.parse('foo[]=1&foo[]=2&foo[]=3', {arrayFormat: 'bracket'});
+        queryParams.set("class", `${classes}`);
+        const newSearch = `?${queryParams.toString()}`;
+        navigate({ search: newSearch });
+    }
 
     return (
         <Container>
@@ -93,7 +106,7 @@ export default function Search() {
                                         <DropdownClassesSearch courses={courses} classes={classes} setClasses={setClasses} />
                                     </Grid>
                                     <Grid item>
-                                        <Button variant="contained" onClick={() => handleClick(classes)}>Search</Button>
+                                        <Button variant="contained" onClick={ () => handleParamUpdate()}>Search</Button>
                                     </Grid>
                                 </Grid>
                                 <Grid

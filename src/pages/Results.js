@@ -29,6 +29,7 @@ querySnapshot.forEach((doc) => {
 });
 
 export default function Results() {
+
     return (
         <Container>
             <CssBaseline />
