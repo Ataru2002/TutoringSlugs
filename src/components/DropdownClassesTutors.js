@@ -38,7 +38,9 @@ export default function DropdownClassesTutors(props) {
     let names = [];
 
     props.courses.forEach((department) => {
-        Object.keys(allClasses[department]).forEach((courses) => {
+
+        let sortedArray = Object.keys(allClasses[department]).sort();
+        sortedArray.forEach((courses) => {
             names.push(courses);
         });
     });

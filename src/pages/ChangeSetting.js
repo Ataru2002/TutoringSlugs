@@ -51,7 +51,7 @@ export default function ChangeSetting() {
         else if (email != "" && !email.toString().includes("ucsc.edu")) {
             alert("Email doesn't contain ucsc.edu");
         }
-        else if (password.length < 6) {
+        else if (password.length > 0 && password.length < 6) {
             alert("Password is too short. Try again");
         }
 

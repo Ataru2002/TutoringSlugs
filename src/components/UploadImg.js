@@ -29,15 +29,7 @@ export default function InputFileUpload(props) {
                 window.location.href = "/signin";
             }
             else {
-                res.json().then(obj => {
-                    props.setTutor(previousState => {
-                        return {
-                            ...previousState,
-                            profilePhoto: obj.fileName
-                        }
-                    });
-                    alert("Success uploading image.");
-                })
+                alert("Success uploading image.");
             }
         }).catch((err) => {
             console.log(err);

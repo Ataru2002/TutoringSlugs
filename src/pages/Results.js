@@ -7,6 +7,7 @@ import { Button } from '@mui/material';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import sarah from '../assests/sarah.jpg';
+import defaultProfilePhoto from '../assests/default.jpg'
 import DynamicBox from '../components/DynamicBox';
 import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
 
@@ -25,11 +26,20 @@ function goSearch() {
 const db = getFirestore();
 let q = query(collection(db, "Users"), where("tutor", "==", true));
 let tutors = [];
-await getDocs(q).then((snapshot) => {
+await getDocs(q).then(async function(snapshot){
     let temp = []
-    snapshot.docs.forEach((doc) => {
-        temp.push({ ...doc.data() });
-    });
+
+    for await(var doc of snapshot.docs){
+        //const {loading, err, image} = useImage(doc.id + ".jpg");
+
+        try{
+            const image = await import(`../assests/profiles/${doc.id}.jpg`);
+            temp.push({profilePhoto: image.default, ...doc.data() });
+        }
+        catch(err){
+            temp.push({profilePhoto: defaultProfilePhoto, ...doc.data()});
+        }
+    }
 
     temp.map((obj) => {
         tutors.push(obj);
@@ -51,7 +61,7 @@ export default function Results() {
 
         tutors.forEach((tutor) => {
             courses.forEach((course) => {
-                if (tutor.coursesTutored.includes(course) && !filteredTutors.includes(tutor)){
+                if ("coursesTutored" in tutor && tutor.coursesTutored.includes(course) && !filteredTutors.includes(tutor)){
                     setFilteredTutors( (filteredTutors) => {
                         return [
                             ...filteredTutors,
@@ -85,8 +95,9 @@ export default function Results() {
                                 </Button>
                             </Grid>
                         </Grid>
-                        {filteredTutors.map((tutor) => (
-                            <DynamicBox image={sarah} name={tutor.firstName + " " + tutor.lastName}
+                        {
+                        filteredTutors.map((tutor) => (
+                            <DynamicBox image={tutor.profilePhoto} name={tutor.firstName + " " + tutor.lastName}
                                 description={tutor.description} email={tutor.email} />
                         ))}
                     </Grid>
