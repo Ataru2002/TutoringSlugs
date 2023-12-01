@@ -2,6 +2,7 @@ import {Request, Response} from 'express';
 import firebase from "../services/firebase";
 import config from "../config/config";
 import { checkMandatoryParams } from '../services/util';
+import fs from "fs";
 
 class UserController {
 
@@ -143,6 +144,14 @@ class UserController {
             res.send(err);
         }
     }
+
+    static uploadProfilePhoto = async (req: Request, res: Response) => {
+        var fileName : string = req.userId + ".jpg";
+        fs.writeFile("../src/assests/profiles/" + fileName, req.body, (err) => {
+            if(err) throw err;
+        })
+        res.send({message: "Success.", fileName});
+    };
 }
 
 export default UserController;

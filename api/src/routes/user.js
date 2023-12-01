@@ -11,4 +11,5 @@ var router = express_1.default.Router();
 router.get("/", [verifyCookie_1.verifyCookie], UserController_1.default.getUserData);
 router.post("/updateTutor", [verifyCookie_1.verifyCookie], UserController_1.default.updateTutor);
 router.post("/updateUser", [verifyCookie_1.verifyCookie], UserController_1.default.updateUser);
+router.post("/uploadProfilePhoto", [verifyCookie_1.verifyCookie, express_1.default.raw({ inflate: true, limit: '50mb', type: () => true })], UserController_1.default.uploadProfilePhoto);
 exports.default = router;

@@ -16,12 +16,33 @@ const VisuallyHiddenInput = styled('input')({
 
 export default function InputFileUpload(props) {
     const changeHandler = (event) => {
-        props.setTutor(previousState => {
-            return {
-                ...previousState,
-                selectedImg: event.target.files[0]
+
+        fetch("http://localhost:8080/user/uploadProfilePhoto", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "image/jpeg"
+            },
+            body: event.target.files[0]
+        }).then((res) => {
+            if (res.status === 404) {
+                window.location.href = "/signin";
             }
+            else {
+                res.json().then(obj => {
+                    props.setTutor(previousState => {
+                        return {
+                            ...previousState,
+                            profilePhoto: obj.fileName
+                        }
+                    });
+                    alert("Success uploading image.");
+                })
+            }
+        }).catch((err) => {
+            console.log(err);
         });
+
     };
     return (
         <Button component="label" variant="contained" onChange={changeHandler}>

@@ -11,9 +11,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import signin_message from '../assests/signin_message.jpg';
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
 import firebase from "../Firebase";
 
 const origin_url = window.location.origin;

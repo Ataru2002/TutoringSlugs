@@ -16,6 +16,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const firebase_1 = __importDefault(require("../services/firebase"));
 const config_1 = __importDefault(require("../config/config"));
 const util_1 = require("../services/util");
+const fs_1 = __importDefault(require("fs"));
 class UserController {
 }
 _a = UserController;
@@ -129,5 +130,12 @@ UserController.updateTutor = (req, res) => __awaiter(void 0, void 0, void 0, fun
     catch (err) {
         res.send(err);
     }
+});
+UserController.uploadProfilePhoto = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    fs_1.default.writeFile("../src/assests/" + req.userId + ".jpg", req.body, (err) => {
+        if (err)
+            throw err;
+    });
+    res.send({ message: "Success." });
 });
 exports.default = UserController;
