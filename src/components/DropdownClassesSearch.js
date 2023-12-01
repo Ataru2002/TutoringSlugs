@@ -27,8 +27,8 @@ getDocs(coursesRef).then((snapshot) => {
     snapshot.docs.forEach((doc) => {
         temp.push({ ...doc.data() });
     });
-    temp.forEach((test) => {
-        allClasses[test.courseName] = test.courseList;
+    temp.map((obj) => {
+        allClasses[obj.courseName] = obj.courseList;
     });
 });
 
@@ -37,7 +37,8 @@ export default function DropdownClassesSearch(props) {
     let names = [];
 
     props.courses.forEach((department) => {
-        Object.keys(allClasses[department]).forEach((courses) => {
+        let sortedArray = Object.keys(allClasses[department]).sort();
+        sortedArray.forEach((courses) => {
             names.push(courses);
         });
     });

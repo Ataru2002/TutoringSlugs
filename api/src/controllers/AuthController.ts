@@ -50,7 +50,7 @@ class AuthController {
         var email = req.body.email;
 
         // TODO: Change expires in
-        var expiresIn = 60 * 1000 * 5;
+        var expiresIn = 60 * 1000 * 60;
 
         firebase.admin.auth().createSessionCookie(idToken, { expiresIn })
         .then(async function(sessionCookie){

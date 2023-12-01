@@ -25,7 +25,6 @@ function Header(props) {
         else {
             res.json().then((json) => {
                 user = json.displayName;
-                console.log(user);
                 setUser(json.displayName);
             });
         }

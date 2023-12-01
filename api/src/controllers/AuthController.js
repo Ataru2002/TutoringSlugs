@@ -57,7 +57,7 @@ AuthController.login = (req, res) => __awaiter(void 0, void 0, void 0, function*
     var lastName = req.body.lastName;
     var email = req.body.email;
     // TODO: Change expires in
-    var expiresIn = 60 * 1000 * 5;
+    var expiresIn = 60 * 1000 * 60;
     firebase_1.default.admin.auth().createSessionCookie(idToken, { expiresIn })
         .then(function (sessionCookie) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -83,19 +83,5 @@ AuthController.login = (req, res) => __awaiter(void 0, void 0, void 0, function*
         console.log(error);
         res.status(401).send("Unauthorized request.");
     });
-});
-// Revoke tokens on server side. Client side should delete cookies and redirect to login.
-AuthController.logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        //var result = await firebase.admin.auth().revokeRefreshTokens(userId);
-        //var userRecord = await firebase.admin.auth().getUser(userId);
-        //var timestamp = new Date(userRecord.tokensValidAfterTime as string).getTime() / 1000;
-        //res.send({message: `Tokens revoked at: ${timestamp}`});
-        res.clearCookie('session', { path: "/", httpOnly: false, secure: true });
-        res.end("yo");
-    }
-    catch (err) {
-        res.send(err);
-    }
 });
 exports.default = AuthController;

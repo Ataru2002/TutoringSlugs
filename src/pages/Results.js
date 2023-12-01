@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
@@ -18,17 +18,50 @@ const sections = [
     { title: 'Change your tutor setting', url: origin_url + '/change_tutor_setting' },
 ];
 
-let courses = ["cse-103", "cse-20"];
+function goSearch() {
+    window.location.href = "/search";
+}
 
 const db = getFirestore();
+let q = query(collection(db, "Users"), where("tutor", "==", true));
 let tutors = [];
-const q = query(collection(db, "Users"), where("tutor", "==", true), where("coursesTutored", "array-contains-any", courses));
-const querySnapshot = await getDocs(q);
-querySnapshot.forEach((doc) => {
-    tutors.push(doc.data());
+await getDocs(q).then((snapshot) => {
+    let temp = []
+    snapshot.docs.forEach((doc) => {
+        temp.push({ ...doc.data() });
+    });
+
+    temp.map((obj) => {
+        tutors.push(obj);
+    });
 });
 
 export default function Results() {
+    const [filteredTutors, setFilteredTutors] = useState([]);
+
+    useEffect(() => {
+        let courses = [];
+        let url = window.location.href;
+        let hashes = url.split("?")[1];
+        let hash = hashes.split('&');
+        hash.forEach((space) => {
+            let revamp = space.replace("class[]=", "");
+            courses.push(revamp.replace("%20", " "));
+        });
+
+        tutors.forEach((tutor) => {
+            courses.forEach((course) => {
+                if (tutor.coursesTutored.includes(course) && !filteredTutors.includes(tutor)){
+                    setFilteredTutors( (filteredTutors) => {
+                        return [
+                            ...filteredTutors,
+                            tutor
+                        ];
+                    });
+                }
+            });
+        });
+    }, []);
 
     return (
         <Container>
@@ -46,22 +79,13 @@ export default function Results() {
                             justifyContent="center"
                             alignItems="center"
                         >
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="search_class"
-                                    name="search_class"
-                                    label="Search Class"
-                                    fullWidth
-                                    variant="standard"
-                                />
-                            </Grid>
                             <Grid item >
-                                <Button variant="contained">
-                                    Search
+                                <Button variant="contained" onClick={() => goSearch()}>
+                                    Home
                                 </Button>
                             </Grid>
                         </Grid>
-                        {tutors.map((tutor) => (
+                        {filteredTutors.map((tutor) => (
                             <DynamicBox image={sarah} name={tutor.firstName + " " + tutor.lastName}
                                 description={tutor.description} email={tutor.email} />
                         ))}
