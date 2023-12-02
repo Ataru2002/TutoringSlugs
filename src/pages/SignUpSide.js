@@ -51,14 +51,14 @@ export default function SignUpSide() {
             lname: data.get('Last Name'),
             email: data.get('email'),
             password: data.get('password'),
-            cpassword: data.get('confirm password')
+            cpassword: data.get('Confirm password')
         });
         const fName = data.get('First Name');
         const lName = data.get('Last Name')
         const email = data.get('email');
         const major = data.get('major');
         const password = data.get('password');
-        const cpassword = data.get('confirm password');
+        const cpassword = data.get('Confirm password');
 
         if (password != cpassword) {
             alert("Password doesn't match with confirm password");
