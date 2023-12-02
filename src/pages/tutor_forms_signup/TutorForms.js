@@ -2,8 +2,6 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import DropdownClassesTutors from '../../components/DropdownClassesTutors';
 import DropdownCourseName from '../../components/DropdownCourseName';
 
@@ -45,15 +43,6 @@ export default function TutorFormNew(props) {
                 </Grid>
                 <DropdownCourseName courses={courses} setCourses={setCourses} />
                 <DropdownClassesTutors courses={courses} setTutor={props.setTutor} />
-                <Grid item xs={12}>
-                    <FormControlLabel
-                        control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-                        label="Put phone number in your public tutor page"
-                        onChange={(e) => props.setTutor(previousState => {
-                            return { ...previousState, public: e.target.value }
-                        })}
-                    />
-                </Grid>
             </Grid>
         </React.Fragment>
     );

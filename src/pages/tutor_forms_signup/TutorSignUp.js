@@ -68,8 +68,6 @@ export default function TutorSignUp() {
     });
     console.log("Send body: " + sendBody);
 
-    console.log(tutor.selectedFile);
-
     function getStepContent(step) {
         switch (step) {
             case 0:
