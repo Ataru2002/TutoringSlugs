@@ -40,14 +40,20 @@ const sections = [
 export default function Search() {
     const [courses, setCourses] = React.useState([]);
     const [classes, setClasses] = React.useState([]);
+    const [tutors, setTutors] = React.useState([]);
 
     function parameterizeArray(key, array) {
         array = array.map(encodeURIComponent);
         return '?' + key + '[]=' + array.join('&' + key + '[]=');  
     }
 
-    function handleParamUpdate() {
+    function goToResults() {
         var url = "/results" + parameterizeArray('class', classes);
+        window.location.href = url;
+    }
+
+    function goToResultsTutors() {
+        var url = "/results_tutors" + parameterizeArray('tutor', tutors);
         window.location.href = url;
     }
 
@@ -99,7 +105,7 @@ export default function Search() {
                                         <DropdownClassesSearch courses={courses} classes={classes} setClasses={setClasses} />
                                     </Grid>
                                     <Grid item>
-                                        <Button variant="contained" onClick={() => handleParamUpdate()}>Search</Button>
+                                        <Button variant="contained" onClick={() => goToResults()}>Search</Button>
                                     </Grid>
                                 </Grid>
                                 <Grid
@@ -112,10 +118,10 @@ export default function Search() {
                                     style={{ height: "100%" }}
                                 >
                                     <Grid item>
-                                        <Dropdowntutors />
+                                        <Dropdowntutors tutors={tutors} setTutors={setTutors}/>
                                     </Grid>
                                     <Grid item>
-                                        <Button variant="contained">Search</Button>
+                                        <Button variant="contained" onClick={() => goToResultsTutors()}>Search</Button>
                                     </Grid>
                                 </Grid>
                             </Grid>

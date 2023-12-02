@@ -8,6 +8,7 @@ import ChangeTutorForm from './pages/tutor_forms_change/ChangeTutorForms';
 import Results from "./pages/Results";
 import ForgetPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import ResultsTutors from "./pages/ResultsTutors";
 
 export const Switch = () => {
     return (
@@ -20,6 +21,7 @@ export const Switch = () => {
                 <Route path="/change_setting" element={<ChangeSetting />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/results" element={<Results />} />
+                <Route path="/results_tutors" element={<ResultsTutors />} />
                 <Route path="/change_tutor_setting" element={<ChangeTutorForm />} />
                 <Route path="/forget_password" element={<ForgetPassword />} />
                 <Route path="/reset_password" element={<ResetPassword />} />
