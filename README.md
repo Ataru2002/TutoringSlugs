@@ -1,17 +1,12 @@
+# Tutoring Slugs
+
 ## Prerequisites
 You must have Node.js installed.
 
-## Install dependencies
-
-`npm i`
-
-## Run the Server
-
-`npm run start` or `node .`
-
-The web server will be running on [http://localhost:8080](http://localhost:8080)
-
 ## Run the website
+
+### Install dependencies
+### `npm i`
 
 In the project directory, you can run:
 
@@ -22,57 +17,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
-## Current endpoints
-
-### `GET /user/`
-Params: userId
-
-Gets userId from session cookie and returns user data in JSON
-
-### `POST /user/updateUser`
-
-Params:
-- userId (string)
-- email (string)
-- phoneNumber (string)
-- firstName (string)
-- lastName (string)
-- password (string)
-- photoURL (string)
-
-Updates user settings. Undefined or null values will not be updated.
-
-### `POST /user/updateTutor`
-Params:
-- userId (string)
-- phoneNumber (string)
-- description (string)
-- isPublic (boolean)
-- coursesTutored (array of strings)
-- selectedFile (string)
-- selectedImg (string)
-- tutor (boolean)
-
-Signs up the student as a tutor for a course or updates existing tutor information.
-
-### `POST /auth/signup`
-Params:
-- userId (string)
-- major (string)
-
-Adds new user to the cloud firestore database.
-
-### `POST /auth/login`
-Params:
-- userId (string)
-
-Logs user in and returns a cookie for user session. Adds user to database if they do not exist yet.
-
-### `POST /auth/logout`
-
-Revokes user tokens.
-
 
 ## Project Directory Scripts
 
@@ -104,3 +48,97 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ## SignInSide.js
 
 - This file utilizes the firebase authentication technology to allow users to sign in using the email that they just signed up. For this project, the sign in mechanism will alert the user if the password is incorrect by accessing the account within the database and perform a password check. Additionally, there will be a cookie created in order to keep the user signed in whenever the page is switched
+
+
+
+## Running the API server
+For authentication and user actions to work on the website, you must have the API server running. 
+
+Navigate to the `/api` directory.
+
+### Install dependencies
+`npm i`
+### Run the Server
+`node .`
+
+The web server will be running on [http://localhost:8080](http://localhost:8080)
+
+## API endpoints
+
+### Testing the API
+API endpoints for user actions will need authentication to run successfully. In a browser, this is done automatically through storing user data in the `session` cookie on login, and checking it on every API call. For testing in a non-browser environment, make sure to have cookies enabled.
+
+### `GET /user/`
+Authentication required: Yes 
+
+Params: userId
+
+Gets userId from session cookie and returns user data in JSON. Used to keep the user signed in.
+
+### `POST /user/updateUser`
+Authentication required: Yes
+
+Params:
+- userId (string)
+- email (string)
+- phoneNumber (string)
+- firstName (string)
+- lastName (string)
+- password (string)
+
+Updates user settings. Undefined or null values will not be updated.
+
+### `POST /user/updateTutor`
+Authentication required: Yes
+
+Params:
+- userId (string)
+- phoneNumber (string)
+- description (string)
+- isPublic (boolean)
+- coursesTutored (array of strings)
+- tutor (boolean)
+
+Signs up the student as a tutor for a course or updates existing tutor information.
+
+### `POST /user/uploadProfilePhoto`
+Authentication required: Yes
+
+Request body:
+
+- the image, in binary format
+
+Uploads the user provided image to server storage.
+
+### `POST /user/uploadTranscript`
+Authentication required: Yes
+
+Request body:
+
+- the transcript, in binary format
+
+Uploads the user provided transcript to server storage.
+
+
+### `POST /auth/signup`
+Authentication required: No
+
+Params:
+- userId (string)
+- firstName (string)
+- lastName (string)
+- email (string)
+- major (string)
+
+Adds new user to the cloud firestore database.
+
+### `POST /auth/login`
+Authentication required: No
+
+Params:
+- userId (string)
+- firstName (string)
+- lastName (string)
+- email (string)
+
+Logs user in and returns a cookie for user session. Adds user to database if they do not exist yet.
