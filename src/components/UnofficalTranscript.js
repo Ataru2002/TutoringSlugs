@@ -4,14 +4,14 @@ import Grid from '@mui/material/Grid';
 import UploadTranscript from './UploadTranscript.js'
 
 export default function UnofficalTranscript(props) {
-  return (
-    <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Upload Your Unoffical transcript!
-      </Typography>
-      <Grid container spacing={0}>
-        <UploadTranscript setTutor={props.setTutor}/>
-      </Grid>
-    </React.Fragment>
-  );
+    return (
+        <React.Fragment>
+            <Typography variant="h6" gutterBottom>
+                Upload Your Unoffical transcript!
+            </Typography>
+            <Grid container spacing={0}>
+                <UploadTranscript setTutor={props.setTutor} />
+            </Grid>
+        </React.Fragment>
+    );
 }

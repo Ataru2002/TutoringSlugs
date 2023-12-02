@@ -16,6 +16,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const firebase_1 = __importDefault(require("../services/firebase"));
 const config_1 = __importDefault(require("../config/config"));
 const util_1 = require("../services/util");
+const fs_1 = __importDefault(require("fs"));
 class UserController {
 }
 _a = UserController;
@@ -39,19 +40,11 @@ UserController.updateUser = (req, res) => __awaiter(void 0, void 0, void 0, func
     var updateObj = {};
     var major = req.body.major;
     console.log({ userId, email, phoneNumber, firstName, lastName, password, photoURL });
-    // Update major in cloud firestore collection
-    if (major != null && major.length > 0) {
-        try {
-            yield firebase_1.default.db.collection(config_1.default.USERS_COLLECTION).doc(userId).set({ major });
-        }
-        catch (err) {
-            res.send(err);
-            return;
-        }
-    }
+    var collectionObj = {};
     // Update authentication info, only update provided parameters
     if (email != null && email.length > 0) {
         updateObj["email"] = email;
+        collectionObj["email"] = email;
     }
     if (phoneNumber != null && phoneNumber.length > 0) {
         updateObj["phoneNumber"] = phoneNumber;
@@ -61,12 +54,25 @@ UserController.updateUser = (req, res) => __awaiter(void 0, void 0, void 0, func
     }
     if (firstName != null && firstName.length > 0) {
         updateObj["displayName"] = firstName;
+        collectionObj["firstName"] = firstName;
         if (lastName != null && lastName.length > 0) {
             updateObj["displayName"] = updateObj["displayName"] + " " + lastName;
+            collectionObj["lastName"] = lastName;
         }
     }
     if (photoURL != null && photoURL.length > 0) {
         updateObj["photoURL"] = photoURL;
+    }
+    if (major != null && major.length > 0) {
+        collectionObj["major"] = major;
+    }
+    // Update major in cloud firestore collection
+    try {
+        yield firebase_1.default.db.collection(config_1.default.USERS_COLLECTION).doc(userId).set(collectionObj, { merge: true });
+    }
+    catch (err) {
+        res.send(err);
+        return;
     }
     // Nothing is being updated
     if (Object.keys(updateObj).length === 0) {
@@ -78,7 +84,8 @@ UserController.updateUser = (req, res) => __awaiter(void 0, void 0, void 0, func
         res.send(userRecord.toJSON());
     }
     catch (err) {
-        res.send(err);
+        console.log(err);
+        res.status(409).end(err.message);
     }
 });
 // Tutor: Enlists the user as a tutor for the specified course
@@ -128,5 +135,13 @@ UserController.updateTutor = (req, res) => __awaiter(void 0, void 0, void 0, fun
     catch (err) {
         res.send(err);
     }
+});
+UserController.uploadProfilePhoto = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var fileName = req.userId + ".jpg";
+    fs_1.default.writeFile("../src/assests/profiles/" + fileName, req.body, (err) => {
+        if (err)
+            throw err;
+    });
+    res.send({ message: "Success.", fileName });
 });
 exports.default = UserController;

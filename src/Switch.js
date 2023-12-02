@@ -8,22 +8,24 @@ import ChangeTutorForm from './pages/tutor_forms_change/ChangeTutorForms';
 import Results from "./pages/Results";
 import ForgetPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import ResultsTutors from "./pages/ResultsTutors";
 
 export const Switch = () => {
     return (
-      <Router>
-        <Routes>
-          <Route path="/" element={<Navigate replace to="/signin" />} />
-          <Route path="/signin" element={<SignInSide />} />
-          <Route path="/signup" element={<SignUpSide />} />
-          <Route path="/tutor_signup" element={<TutorSignUp />} />
-          <Route path="/change_setting" element={<ChangeSetting />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/results" element={<Results />} />
-          <Route path="/change_tutor_setting" element={<ChangeTutorForm />} />
-          <Route path="/forget_password" element={<ForgetPassword />} />
-          <Route path="/reset_password" element={<ResetPassword />} />
-        </Routes>
-      </Router>
+        <Router>
+            <Routes>
+                <Route path="/" element={<Navigate replace to="/signin" />} />
+                <Route path="/signin" element={<SignInSide />} />
+                <Route path="/signup" element={<SignUpSide />} />
+                <Route path="/tutor_signup" element={<TutorSignUp />} />
+                <Route path="/change_setting" element={<ChangeSetting />} />
+                <Route path="/search" element={<Search />} />
+                <Route path="/results" element={<Results />} />
+                <Route path="/results_tutors" element={<ResultsTutors />} />
+                <Route path="/change_tutor_setting" element={<ChangeTutorForm />} />
+                <Route path="/forget_password" element={<ForgetPassword />} />
+                <Route path="/reset_password" element={<ResetPassword />} />
+            </Routes>
+        </Router>
     );
 }

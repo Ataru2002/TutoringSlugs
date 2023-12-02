@@ -2,6 +2,7 @@ import {Request, Response} from 'express';
 import firebase from "../services/firebase";
 import config from "../config/config";
 import { checkMandatoryParams } from '../services/util';
+import fs from "fs";
 
 class UserController {
 
@@ -36,19 +37,17 @@ class UserController {
         var major : string = req.body.major;
         console.log({userId, email, phoneNumber, firstName, lastName, password, photoURL});
 
-        // Update major in cloud firestore collection
-        if(major != null && major.length > 0){
-            try {
-                await firebase.db.collection(config.USERS_COLLECTION).doc(userId).set({major});
-            } catch(err){
-                res.send(err);
-                return;
-            }
-        }
+        var collectionObj : {
+            email? : string,
+            major? : string,
+            firstName? : string,
+            lastName? : string
+        } = {};
 
         // Update authentication info, only update provided parameters
         if(email != null && email.length > 0){
             updateObj["email"] = email;
+            collectionObj["email"] = email;
         }
         if(phoneNumber != null && phoneNumber.length > 0){
             updateObj["phoneNumber"] = phoneNumber;
@@ -58,12 +57,25 @@ class UserController {
         }
         if(firstName != null && firstName.length > 0){
             updateObj["displayName"] = firstName;
+            collectionObj["firstName"] = firstName;
             if(lastName != null && lastName.length > 0){
                 updateObj["displayName"] = updateObj["displayName"] + " " + lastName;
+                collectionObj["lastName"] = lastName;
             }
         }
         if(photoURL != null && photoURL.length > 0){
             updateObj["photoURL"] = photoURL;
+        }
+        if(major != null && major.length > 0){
+            collectionObj["major"] = major;
+        }
+
+        // Update major in cloud firestore collection
+        try {
+            await firebase.db.collection(config.USERS_COLLECTION).doc(userId).set(collectionObj, {merge: true});
+        } catch(err){
+            res.send(err);
+            return;
         }
 
         // Nothing is being updated
@@ -75,8 +87,9 @@ class UserController {
         try {
             var userRecord = await firebase.admin.auth().updateUser(userId, updateObj);
             res.send(userRecord.toJSON());
-        } catch(err){
-            res.send(err);
+        } catch(err : any){
+            console.log(err);
+            res.status(409).end(err.message);
         }
     }
 
@@ -142,6 +155,14 @@ class UserController {
             res.send(err);
         }
     }
+
+    static uploadProfilePhoto = async (req: Request, res: Response) => {
+        var fileName : string = req.userId + ".jpg";
+        fs.writeFile("../src/assests/profiles/" + fileName, req.body, (err) => {
+            if(err) throw err;
+        })
+        res.send({message: "Success.", fileName});
+    };
 }
 
 export default UserController;

@@ -8,7 +8,6 @@ import Footer from '../components/Footer';
 import defaultProfilePhoto from '../assests/default.jpg'
 import DynamicBox from '../components/DynamicBox';
 import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
-import { ContactSupportOutlined } from "@mui/icons-material";
 
 const origin_url = window.location.origin;
 
@@ -45,26 +44,25 @@ await getDocs(q).then(async function(snapshot){
     });
 });
 
-export default function Results() {
+export default function ResultsTutors() {
     const [filteredTutors, setFilteredTutors] = useState([]);
-    let newFilteredTutors = [];
 
     useEffect(() => {
-        let courses = [];
+        let names = [];
         let url = window.location.href;
         let hashes = url.split("?")[1];
         let hash = hashes.split('&');
         hash.forEach((space) => {
-            let revamp = space.replace("class[]=", "");
-            courses.push(revamp.replace("%20", " "));
+            let revamp = space.replace("tutor[]=", "");
+            names.push(revamp.replaceAll("%20", " "));
         });
 
         tutors.forEach((tutor) => {
-            courses.forEach((course) => {
-                if ("coursesTutored" in tutor && tutor.coursesTutored.includes(course)){
-                    setFilteredTutors( (prevState) => {
+            names.forEach((name) => {
+                if ("firstName" in tutor && (tutor.firstName + " " + tutor.lastName) === name  && !filteredTutors.includes(tutor)){
+                    setFilteredTutors( (filteredTutors) => {
                         return [
-                            ...prevState,
+                            ...filteredTutors,
                             tutor
                         ];
                     });
@@ -72,12 +70,6 @@ export default function Results() {
             });
         });
     }, []);
-
-    filteredTutors.map((tutor) => {
-        if (!newFilteredTutors.includes(tutor)){
-            newFilteredTutors.push(tutor);
-        }
-    })
 
     return (
         <Container>
@@ -102,7 +94,7 @@ export default function Results() {
                             </Grid>
                         </Grid>
                         {
-                        newFilteredTutors.map((tutor) => (
+                        filteredTutors.map((tutor) => (
                             <DynamicBox image={tutor.profilePhoto} name={tutor.firstName + " " + tutor.lastName}
                                 description={tutor.description} email={tutor.email} />
                         ))}

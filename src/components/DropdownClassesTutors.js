@@ -11,12 +11,12 @@ import { getFirestore, collection, getDocs } from "firebase/firestore";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
     },
-  },
 };
 
 const db = getFirestore();
@@ -33,51 +33,52 @@ getDocs(coursesRef).then((snapshot) => {
 });
 
 export default function DropdownClassesTutors(props) {
-  const [classes, setClasses] = React.useState([]);
+    const [classes, setClasses] = React.useState([]);
 
-  const names = [];
+    let names = [];
 
-  props.courses.forEach((department) => {
-    Object.keys(allClasses[department]).forEach((courses) => {
-        names.push(courses);
+    props.courses.forEach((department) => {
+        let sortedArray = Object.keys(allClasses[department]).sort();
+        sortedArray.forEach((courses) => {
+            names.push(courses);
+        });
     });
-  });
 
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setClasses(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
+    const handleChange = (event) => {
+        const {
+            target: { value },
+        } = event;
+        setClasses(
+            // On autofill we get a stringified value.
+            typeof value === 'string' ? value.split(',') : value,
+        );
+        props.setTutor(previousState => {
+            return { ...previousState, coursesTutored: event.target.value }
+        });
+    };
+
+    return (
+        <div>
+            <FormControl sx={{ m: 1, width: 300 }}>
+                <InputLabel id="demo-multiple-checkbox-label">Select Classes</InputLabel>
+                <Select
+                    labelId="demo-multiple-checkbox-label"
+                    id="demo-multiple-checkbox"
+                    multiple
+                    value={classes}
+                    onChange={handleChange}
+                    input={<OutlinedInput label="Select Classes for Tutoring" />}
+                    renderValue={(selected) => selected.join(', ')}
+                    MenuProps={MenuProps}
+                >
+                    {names.map((name) => (
+                        <MenuItem key={name} value={name}>
+                            <Checkbox checked={classes.indexOf(name) > -1} />
+                            <ListItemText primary={name} />
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+        </div>
     );
-    props.setTutor(previousState => {
-        return { ...previousState, coursesTutored: event.target.value }
-    });
-  };
-
-  return (
-    <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Select Classes</InputLabel>
-        <Select
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
-          multiple
-          value={classes}
-          onChange={handleChange}
-          input={<OutlinedInput label="Select Classes for Tutoring" />}
-          renderValue={(selected) => selected.join(', ')}
-          MenuProps={MenuProps}
-        >
-          {names.map((name) => (
-            <MenuItem key={name} value={name}>
-              <Checkbox checked={classes.indexOf(name) > -1} />
-              <ListItemText primary={name} />
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
-  );
 }

@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -19,36 +19,21 @@ const MenuProps = {
     },
 };
 
+let names = [];
+
 const db = getFirestore();
-let coursesRef = collection(db, "Courses");
-let allClasses = {};
-getDocs(coursesRef).then((snapshot) => {
-    let temp = [];
-    snapshot.docs.forEach((doc) => {
-        temp.push({ ...doc.data() });
-    });
-    temp.map((obj) => {
-        allClasses[obj.courseName] = obj.courseList;
-    });
+let q = query(collection(db, "Users"), where("tutor", "==", true));
+const querySnapshot = await getDocs(q);
+querySnapshot.forEach((doc) => {
+    names.push(doc.data().firstName + " " + doc.data().lastName);
 });
 
-export default function DropdownClassesSearch(props) {
-
-    let names = [];
-
-    props.courses.forEach((department) => {
-        let sortedArray = Object.keys(allClasses[department]).sort();
-        sortedArray.forEach((courses) => {
-            names.push(courses);
-        });
-    });
-
-
+export default function DropdownTutors(props) {
     const handleChange = (event) => {
         const {
             target: { value },
         } = event;
-        props.setClasses(
+        props.setTutors(
             // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
         );
@@ -57,20 +42,20 @@ export default function DropdownClassesSearch(props) {
     return (
         <div>
             <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id="demo-multiple-checkbox-label">Select Classes</InputLabel>
+                <InputLabel id="demo-multiple-checkbox-label">Select Tutors</InputLabel>
                 <Select
                     labelId="demo-multiple-checkbox-label"
                     id="demo-multiple-checkbox"
                     multiple
-                    value={props.classes}
+                    value={props.tutors}
                     onChange={handleChange}
-                    input={<OutlinedInput label="Select Classes" />}
+                    input={<OutlinedInput label="Select Classes for Tutoring" />}
                     renderValue={(selected) => selected.join(', ')}
                     MenuProps={MenuProps}
                 >
                     {names.map((name) => (
                         <MenuItem key={name} value={name}>
-                            <Checkbox checked={props.classes.indexOf(name) > -1} />
+                            <Checkbox checked={props.tutors.indexOf(name) > -1} />
                             <ListItemText primary={name} />
                         </MenuItem>
                     ))}
