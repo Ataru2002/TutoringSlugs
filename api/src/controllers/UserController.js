@@ -144,4 +144,13 @@ UserController.uploadProfilePhoto = (req, res) => __awaiter(void 0, void 0, void
     });
     res.send({ message: "Success.", fileName });
 });
+UserController.uploadTranscript = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var fileName = req.userId + ".pdf";
+    console.log(req.body.type);
+    fs_1.default.writeFile("../src/assests/transcripts/" + fileName, req.body, (err) => {
+        if (err)
+            throw err;
+    });
+    res.send({ message: "Success.", fileName });
+});
 exports.default = UserController;

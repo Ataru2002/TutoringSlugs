@@ -9,5 +9,6 @@ router.get("/", [verifyCookie] , UserController.getUserData);
 router.post("/updateTutor", [verifyCookie], UserController.updateTutor);
 router.post("/updateUser", [verifyCookie], UserController.updateUser);
 router.post("/uploadProfilePhoto", [verifyCookie, express.raw({inflate: true, limit: '50mb', type: () => true})], UserController.uploadProfilePhoto);
+router.post("/uploadTranscript", [verifyCookie, express.raw({inflate: true, limit: '50mb', type: "pdf"})], UserController.uploadTranscript);
 
 export default router;

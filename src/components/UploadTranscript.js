@@ -16,13 +16,31 @@ const VisuallyHiddenInput = styled('input')({
 
 export default function InputFileUpload(props) {
     const changeHandler = (event) => {
-        props.setTutor(previousState => {
-            return {
-                ...previousState,
-                selectedFile: event.target.files[0]
+        if(event.target.files[0].type !== "application/pdf"){
+            console.log(event.target.files[0].type);
+            alert("File type must be pdf.");
+            return;
+        }
+
+        fetch("http://localhost:8080/user/uploadTranscript", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/pdf"
+            },
+            body: event.target.files[0]
+        }).then((res) => {
+            if (res.status === 404) {
+                window.location.href = "/signin";
             }
+            else {
+                alert("Success uploading transcript.");
+            }
+        }).catch((err) => {
+            alert(err);
         });
     };
+
     return (
         <Button component="label" variant="contained" onChange={changeHandler}>
             Upload file

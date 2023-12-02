@@ -16,6 +16,11 @@ const VisuallyHiddenInput = styled('input')({
 
 export default function InputFileUpload(props) {
     const changeHandler = (event) => {
+        if(event.target.files[0].type.split("/")[0] !== "image"){
+            console.log(event.target.files[0].type.split("/")[0]);
+            alert("File type must be an image.");
+            return;
+        }
 
         fetch("http://localhost:8080/user/uploadProfilePhoto", {
             method: "POST",

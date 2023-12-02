@@ -163,6 +163,15 @@ class UserController {
         })
         res.send({message: "Success.", fileName});
     };
+
+    static uploadTranscript = async (req: Request, res: Response) => {
+        var fileName : string = req.userId + ".pdf";
+        console.log(req.body.type);
+        fs.writeFile("../src/assests/transcripts/" + fileName, req.body, (err) => {
+            if(err) throw err;
+        })
+        res.send({message: "Success.", fileName});
+    }
 }
 
 export default UserController;
