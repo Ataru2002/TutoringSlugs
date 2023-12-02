@@ -1,8 +1,17 @@
-# Getting Started with Create React App
+## Prerequisites
+You must have Node.js installed.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Install dependencies
 
-## Available Scripts
+`npm i`
+
+## Run the Server
+
+`npm run start` or `node .`
+
+The web server will be running on [http://localhost:8080](http://localhost:8080)
+
+## Run the website
 
 In the project directory, you can run:
 
@@ -13,6 +22,59 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+## Current endpoints
+
+### `GET /user/`
+Params: userId
+
+Gets userId from session cookie and returns user data in JSON
+
+### `POST /user/updateUser`
+
+Params:
+- userId (string)
+- email (string)
+- phoneNumber (string)
+- firstName (string)
+- lastName (string)
+- password (string)
+- photoURL (string)
+
+Updates user settings. Undefined or null values will not be updated.
+
+### `POST /user/updateTutor`
+Params:
+- userId (string)
+- phoneNumber (string)
+- description (string)
+- isPublic (boolean)
+- coursesTutored (array of strings)
+- selectedFile (string)
+- selectedImg (string)
+- tutor (boolean)
+
+Signs up the student as a tutor for a course or updates existing tutor information.
+
+### `POST /auth/signup`
+Params:
+- userId (string)
+- major (string)
+
+Adds new user to the cloud firestore database.
+
+### `POST /auth/login`
+Params:
+- userId (string)
+
+Logs user in and returns a cookie for user session. Adds user to database if they do not exist yet.
+
+### `POST /auth/logout`
+
+Revokes user tokens.
+
+
+## Project Directory Scripts
 
 ### `npm test`
 
@@ -29,42 +91,16 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Individual files
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Search.js
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- This file contains the main page of the website and will be the place users can search for classes they need tutoring on. This feature would require another database to store all the courses and the class code associated with it. Which is why there's code associated with the firestore database in this file. When Search.js is loaded, a piece of code will run that fetches the data from a web-scrapper from a different file to add them all to the database. Note that there's a getDocs() first to prevent any duplicated data from entering into the database.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## SignUpSide.js
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- This file uses the firebase authentication technology to allow users to signup using their email. For this project, the signup mechanism will only accept @ucsc.edu for the emails. Additionally, the authenticator also detect duplicated accounts, alert the user if the password is only less than 4 characters long.
 
-## Learn More
+## SignInSide.js
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- This file utilizes the firebase authentication technology to allow users to sign in using the email that they just signed up. For this project, the sign in mechanism will alert the user if the password is incorrect by accessing the account within the database and perform a password check. Additionally, there will be a cookie created in order to keep the user signed in whenever the page is switched
