@@ -8,9 +8,8 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import BasicRating from '../components/BasicRatings';
 
-
 export default function DynamicBox(props) {
-    const { image, name, description, email } = props;
+    const { image, name, description, email, phoneNum } = props;
     return (
         <Grid item container
             justifyContent="center"
@@ -41,6 +40,9 @@ export default function DynamicBox(props) {
                 <CardActions>
                     <Button size="small" color="primary">
                         {email}
+                    </Button>
+                    <Button size="small" color="primary">
+                        {phoneNum}
                     </Button>
                 </CardActions>
             </Card>

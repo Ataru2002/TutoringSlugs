@@ -8,7 +8,6 @@ import Footer from '../components/Footer';
 import defaultProfilePhoto from '../assests/default.jpg'
 import DynamicBox from '../components/DynamicBox';
 import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
-import { ContactSupportOutlined } from "@mui/icons-material";
 
 const origin_url = window.location.origin;
 
@@ -104,7 +103,7 @@ export default function Results() {
                         {
                         newFilteredTutors.map((tutor) => (
                             <DynamicBox image={tutor.profilePhoto} name={tutor.firstName + " " + tutor.lastName}
-                                description={tutor.description} email={tutor.email} />
+                                description={tutor.description} email={tutor.email} phoneNum={tutor.phoneNum} />
                         ))}
                     </Grid>
                 </main>
