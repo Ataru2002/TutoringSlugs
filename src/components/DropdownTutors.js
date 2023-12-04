@@ -28,6 +28,8 @@ querySnapshot.forEach((doc) => {
     names.push(doc.data().firstName + " " + doc.data().lastName);
 });
 
+names.sort();
+
 export default function DropdownTutors(props) {
     const handleChange = (event) => {
         const {

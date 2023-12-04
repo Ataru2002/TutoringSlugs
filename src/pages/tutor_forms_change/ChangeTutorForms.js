@@ -47,10 +47,8 @@ export default function TutorUpdate() {
     const [tutor, setTutor] = React.useState({
         firstName: "",
         lastName: "",
-        phoneNum: "",
         description: "",
         email: "",
-        public: false,
         coursesTutored: "",
         selectedFile: "",
         selectedImg: "",
@@ -91,9 +89,7 @@ export default function TutorUpdate() {
             },
             credentials: "include",
             body: JSON.stringify({
-                phoneNum: tutor.phoneNum,
                 description: tutor.description,
-                isPublic: tutor.public,
                 coursesTutored: tutor.coursesTutored,
                 selectedFile: tutor.selectedFile,
                 selectedImg: tutor.selectedImg,

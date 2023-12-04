@@ -47,26 +47,13 @@ export default function TutorSignUp() {
     const [tutor, setTutor] = React.useState({
         firstName: "",
         lastName: "",
-        phoneNum: "",
         description: "",
         email: "",
-        public: false,
         coursesTutored: "",
         selectedFile: "",
         selectedImg: "",
         tutor: true,
     });
-
-    const sendBody = JSON.stringify({
-        phoneNum: tutor.phoneNum,
-        description: tutor.description,
-        isPublic: tutor.public,
-        coursesTutored: tutor.coursesTutored,
-        selectedFile: tutor.selectedFile,
-        selectedImg: tutor.selectedImg,
-        tutor: tutor.tutor
-    });
-    console.log("Send body: " + sendBody);
 
     function getStepContent(step) {
         switch (step) {
@@ -102,9 +89,7 @@ export default function TutorSignUp() {
             },
             credentials: "include",
             body: JSON.stringify({
-                phoneNum: tutor.phoneNum,
                 description: tutor.description,
-                isPublic: tutor.public,
                 coursesTutored: tutor.coursesTutored,
                 selectedFile: tutor.selectedFile,
                 selectedImg: tutor.selectedImg,
