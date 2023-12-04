@@ -29,6 +29,8 @@ querySnapshot.forEach((doc) => {
     names.push(doc.data().fullName);
 });
 
+names.sort();
+
 export default function DropdownMajor() {
     const [major, setMajor] = React.useState([]);
 

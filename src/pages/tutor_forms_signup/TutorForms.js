@@ -14,7 +14,7 @@ export default function TutorFormNew(props) {
                 Tutor Information
             </Typography>
             <Grid container spacing={3}>
-                <Grid item xs={12}>
+                {/* <Grid item xs={12}>
                     <TextField
                         required
                         id="phonenumber"
@@ -27,7 +27,7 @@ export default function TutorFormNew(props) {
                             return { ...previousState, phoneNum: e.target.value }
                         })}
                     />
-                </Grid>
+                </Grid> */}
                 <Grid item xs={12}>
                     <TextField
                         id="Description"

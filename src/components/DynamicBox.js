@@ -6,10 +6,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-import BasicRating from '../components/BasicRatings';
 
 export default function DynamicBox(props) {
-    const { image, name, description, email, phoneNum } = props;
+    const { image, name, description, email } = props;
     return (
         <Grid item container
             justifyContent="center"
@@ -31,19 +30,15 @@ export default function DynamicBox(props) {
                         <Typography gutterBottom variant="h5" component="div">
                             {name}
                         </Typography>
-                        <BasicRating />
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="body1" color="text.secondary">
                             {description}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button size="small" color="primary">
+                    <Typography gutterBottom variant="h8" component="div">
                         {email}
-                    </Button>
-                    <Button size="small" color="primary">
-                        {phoneNum}
-                    </Button>
+                    </Typography>
                 </CardActions>
             </Card>
         </Grid>

@@ -28,6 +28,8 @@ querySnapshot.forEach((doc) => {
     names.push(doc.data().courseName);
 });
 
+names.sort();
+
 export default function DropdownCourseName(props) {
 
     const handleChange = (event) => {
