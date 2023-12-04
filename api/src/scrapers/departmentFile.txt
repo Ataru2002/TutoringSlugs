@@ -1,87 +1,87 @@
-Current Department: JAPN - Japanese
-Current Department: ARTG - Art & Design: Games + Playable Media
-Current Department: FILM - Film and Digital Media
-Current Department: ITAL - Italian
-Current Department: FREN - French
-Current Department: APLX - Applied Linguistics
-Current Department: ENVS - Environmental Studies
-Current Department: PSYC - Psychology
-Current Department: JWST - Jewish Studies
-Current Department: CMMU - Community Studies
-Current Department: HEBR - Hebrew
-Current Department: PBS - Physical Biological Sciences
-Current Department: GERM - German
-Current Department: METX - Microbiology and Environmental Toxicology
-Current Department: SOCY - Sociology
-Current Department: CHIN - Chinese
-Current Department: LGST - Legal Studies
-Current Department: LAAD - Languages
-Current Department: PERS - Persian
-Current Department: CSE - Computer Science and Engineering
-Current Department: CLST - Classical Studies
-Current Department: TIM - Technology Information Management
-Current Department: CRWN - Crown College
-Current Department: FIL - Filipino
-Current Department: BME - Biomolecular Engineering
-Current Department: CMPM - Computational Media
-Current Department: GAME - Games and Playable Media
-Current Department: ACEN - Academic English
-Current Department: ESCI - Environmental Sciences
-Current Department: POLI - Politics
-Current Department: EART - Earth Sciences
-Current Department: THEA - Theater Arts
-Current Department: CLNI - College Nine
-Current Department: ASTR - Astronomy and Astrophysics
-Current Department: KRSG - Kresge College
-Current Department: GREE - Greek
-Current Department: HISC - History of Consciousness
-Current Department: PHYE - Physical Education
-Current Department: FMST - Feminist Studies
-Current Department: CRSN - Carson College
-Current Department: UCDC - UCDC
-Current Department: BIOC - Biochemistry and Molecular Biology
-Current Department: VAST - Visualizing Abolitionist Studies
-Current Department: PHIL - Philosophy
-Current Department: HUMN - Humanities
-Current Department: ART - Art
-Current Department: GRAD - Graduate
-Current Department: SPAN - Spanish
-Current Department: ECE - Electrical and Computer Engineering
-Current Department: HCI - Human Computer Interaction
-Current Department: ARBC - Arabic
-Current Department: LIT - Literature
-Current Department: JRLC - John R Lewis College
-Current Department: BIOE - Biology Ecology and Evolutionary
-Current Department: AM - Applied Mathematics
-Current Department: ANTH - Anthropology
-Current Department: PHYS - Physics
-Current Department: SOCD - Social Documentation
-Current Department: EDUC - Education
 Current Department: ECON - Economics
-Current Department: SCIC - Science Communication
-Current Department: LING - Linguistics
+Current Department: CHIN - Chinese
 Current Department: CSP - Coastal Science and Policy
-Current Department: STEV - Stevenson College
-Current Department: WRIT - Writing
-Current Department: LATN - Latin
-Current Department: PORT - Portuguese
-Current Department: CHEM - Chemistry and Biochemistry
-Current Department: YIDD - Yiddish
-Current Department: BIOL - Biology Molecular Cell and Developmental
-Current Department: MUSC - Music
-Current Department: MATH - Mathematics
-Current Department: GCH - Global and Community Health
-Current Department: CRES - Critical Race and Ethnic Studies
-Current Department: DANM - Digital Arts and New Media
-Current Department: OCEA - Ocean Sciences
-Current Department: HIS - History
-Current Department: MERR - Merrill College
-Current Department: PUNJ - Punjabi
-Current Department: NLP - Natural Language Processing
-Current Department: PRTR - Porter College
+Current Department: ARBC - Arabic
+Current Department: CMMU - Community Studies
+Current Department: GAME - Games and Playable Media
+Current Department: CRWN - Crown College
+Current Department: ANTH - Anthropology
 Current Department: SPHS - Spanish for Heritage Speakers
-Current Department: OAKS - Oakes College
-Current Department: STAT - Statistics
-Current Department: COWL - Cowell College
-Current Department: HAVC - History of Art and Visual Culture
+Current Department: EART - Earth Sciences
+Current Department: HEBR - Hebrew
+Current Department: SOCY - Sociology
+Current Department: CLST - Classical Studies
+Current Department: SCIC - Science Communication
+Current Department: APLX - Applied Linguistics
+Current Department: GERM - German
+Current Department: CMPM - Computational Media
+Current Department: HCI - Human Computer Interaction
+Current Department: PORT - Portuguese
+Current Department: MERR - Merrill College
+Current Department: TIM - Technology Information Management
+Current Department: ESCI - Environmental Sciences
+Current Department: BME - Biomolecular Engineering
+Current Department: KRSG - Kresge College
+Current Department: EDUC - Education
+Current Department: CRSN - Carson College
+Current Department: ACEN - Academic English
+Current Department: SPAN - Spanish
+Current Department: STEV - Stevenson College
 Current Department: LALS - Latin American and Latino Studies
+Current Department: BIOE - Biology Ecology and Evolutionary
+Current Department: CRES - Critical Race and Ethnic Studies
+Current Department: YIDD - Yiddish
+Current Department: PBS - Physical Biological Sciences
+Current Department: OAKS - Oakes College
+Current Department: DANM - Digital Arts and New Media
+Current Department: MUSC - Music
+Current Department: PUNJ - Punjabi
+Current Department: HISC - History of Consciousness
+Current Department: PHYS - Physics
+Current Department: ASTR - Astronomy and Astrophysics
+Current Department: ENVS - Environmental Studies
+Current Department: OCEA - Ocean Sciences
+Current Department: JWST - Jewish Studies
+Current Department: AM - Applied Mathematics
+Current Department: BIOC - Biochemistry and Molecular Biology
+Current Department: JAPN - Japanese
+Current Department: PSYC - Psychology
+Current Department: HAVC - History of Art and Visual Culture
+Current Department: UCDC - UCDC
+Current Department: POLI - Politics
+Current Department: ECE - Electrical and Computer Engineering
+Current Department: PHIL - Philosophy
+Current Department: PRTR - Porter College
+Current Department: JRLC - John R Lewis College
+Current Department: ARTG - Art & Design: Games + Playable Media
+Current Department: STAT - Statistics
+Current Department: LING - Linguistics
+Current Department: FIL - Filipino
+Current Department: WRIT - Writing
+Current Department: THEA - Theater Arts
+Current Department: BIOL - Biology Molecular Cell and Developmental
+Current Department: COWL - Cowell College
+Current Department: LATN - Latin
+Current Department: HUMN - Humanities
+Current Department: NLP - Natural Language Processing
+Current Department: LGST - Legal Studies
+Current Department: GCH - Global and Community Health
+Current Department: VAST - Visualizing Abolitionist Studies
+Current Department: FMST - Feminist Studies
+Current Department: ART - Art
+Current Department: LIT - Literature
+Current Department: LAAD - Languages
+Current Department: SOCD - Social Documentation
+Current Department: PERS - Persian
+Current Department: HIS - History
+Current Department: MATH - Mathematics
+Current Department: FILM - Film and Digital Media
+Current Department: GRAD - Graduate
+Current Department: CLNI - College Nine
+Current Department: CSE - Computer Science and Engineering
+Current Department: FREN - French
+Current Department: CHEM - Chemistry and Biochemistry
+Current Department: GREE - Greek
+Current Department: ITAL - Italian
+Current Department: PHYE - Physical Education
+Current Department: METX - Microbiology and Environmental Toxicology
