@@ -103,7 +103,7 @@ export default function Results() {
                         {
                         newFilteredTutors.map((tutor) => (
                             <DynamicBox image={tutor.profilePhoto} name={tutor.firstName + " " + tutor.lastName}
-                                description={tutor.description} email={tutor.email} phoneNum={tutor.phoneNum} />
+                                description={tutor.description} email={tutor.email} />
                         ))}
                     </Grid>
                 </main>

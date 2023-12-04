@@ -16,20 +16,6 @@ export default function TutorFormNew(props) {
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <TextField
-                        required
-                        id="phonenumber"
-                        name="phonenumber"
-                        label="Phone Number"
-                        fullWidth
-                        autoComplete="tel"
-                        variant="standard"
-                        onChange={(e) => props.setTutor(previousState => {
-                            return { ...previousState, phoneNum: e.target.value }
-                        })}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
                         id="Description"
                         name="Description"
                         label="Enter Your Page Description"
