@@ -1,3 +1,6 @@
+// user.ts
+// Handles user api routes and middlewares. Calls the user controller to handle logic.
+
 import express, {Application, Router} from 'express';
 import UserController from '../controllers/UserController';
 import { verifyCookie } from '../middlewares/verifyCookie';

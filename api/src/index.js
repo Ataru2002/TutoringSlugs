@@ -1,4 +1,6 @@
 "use strict";
+// index.ts
+// Main class of the Node.js server. Set headers, middlewares, and initializes express server.
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };

@@ -1,3 +1,6 @@
+// index.ts
+// Main class of the Node.js server. Set headers, middlewares, and initializes express server.
+
 import express, {Application} from "express";
 import routes from "./routes/routes";
 import cookies from "cookie-parser";

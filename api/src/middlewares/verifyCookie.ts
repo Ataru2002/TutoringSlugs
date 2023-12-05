@@ -1,3 +1,6 @@
+// verifyCookie.ts
+// Middleware to verify a user session cookie. Required for all authenticated apis and keeps a user signed in across pages of the website.
+
 import { Request, Response, NextFunction } from "express";
 import * as admin from "firebase-admin";
 

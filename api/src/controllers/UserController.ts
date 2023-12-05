@@ -1,3 +1,6 @@
+// UserController.ts
+// Handles all user action api logic such as getting user data and updating user/tutor information.
+
 import {Request, Response} from 'express';
 import firebase from "../services/firebase";
 import config from "../config/config";

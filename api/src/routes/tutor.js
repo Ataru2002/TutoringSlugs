@@ -1,4 +1,6 @@
 "use strict";
+// tutor.ts
+// Handles tutor api routes and middlewares. Calls the tutor controller to handle logic.
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };

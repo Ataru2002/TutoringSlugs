@@ -1,4 +1,6 @@
 "use strict";
+// auth.ts
+// Handles authentication api routes and middlewares. Calls the authentication controller to handle logic.
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };

@@ -1,4 +1,6 @@
 "use strict";
+// user.ts
+// Handles user api routes and middlewares. Calls the user controller to handle logic.
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };

@@ -1,6 +1,8 @@
+// CourseController.ts
+// Handles logic of the course api such as getting a single course or listing courses.  
+
 import {Request, Response} from 'express';
 import * as fs from 'fs';
-import firebase from "../services/firebase";
 var course_list : Array<String> = [];
 
 

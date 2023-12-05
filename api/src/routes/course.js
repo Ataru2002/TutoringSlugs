@@ -1,4 +1,6 @@
 "use strict";
+// course.ts
+// Handles course api routes and middlewares. Calls the course controller to handle logic.
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };

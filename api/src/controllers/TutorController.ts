@@ -1,3 +1,6 @@
+// TutorController.ts
+// Handles all tutor action api logic such as listing all tutors.
+
 import { DocumentData } from '@google-cloud/firestore';
 import {Request, Response} from 'express';
 import config from "../config/config";

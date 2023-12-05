@@ -1,3 +1,6 @@
+// AuthController.ts:
+// Handles logic of the authentication api such as signup and login by verifying tokens passed in from the frontend with the Firebase admin SDK
+
 import {Request, Response} from "express";
 import firebase from "../services/firebase";
 import config from "../config/config";

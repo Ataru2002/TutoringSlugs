@@ -1,6 +1,8 @@
+// auth.ts
+// Handles authentication api routes and middlewares. Calls the authentication controller to handle logic.
+
 import express, {Application, Router} from "express";
 import AuthController from "../controllers/AuthController";
-import { verifyCookie } from '../middlewares/verifyCookie';
 
 var router : Router = express.Router();
 

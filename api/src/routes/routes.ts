@@ -1,3 +1,6 @@
+// routes.ts
+// Handles all routing by delegating to the according route class.
+
 import express, {Application, Router} from "express";
 import auth from "./auth";
 import user from "./user";

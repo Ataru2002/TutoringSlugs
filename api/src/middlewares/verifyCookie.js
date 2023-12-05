@@ -1,4 +1,6 @@
 "use strict";
+// verifyCookie.ts
+// Middleware to verify a user session cookie. Required for all authenticated apis and keeps a user signed in across pages of the website.
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);

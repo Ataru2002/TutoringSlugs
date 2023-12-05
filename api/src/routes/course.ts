@@ -1,3 +1,6 @@
+// course.ts
+// Handles course api routes and middlewares. Calls the course controller to handle logic.
+
 import express, {Application, Router} from 'express';
 import CourseController from '../controllers/CourseController';
 
