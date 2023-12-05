@@ -93,7 +93,6 @@ Authentication required: Yes
 Params:
 - userId (string)
 - description (string)
-- isPublic (boolean)
 - coursesTutored (array of strings)
 - tutor (boolean)
 

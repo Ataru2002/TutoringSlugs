@@ -9,7 +9,7 @@ class AuthController {
 
         // Display name and email are already automatically added to firebase auth database
 
-        var mandatoryParams = ["userId", "firstName", "lastName", "email", "major"];
+        var mandatoryParams = ["userId", "firstName", "lastName", "email"];
         var missingParam = checkMandatoryParams(req.body, mandatoryParams);
         if(missingParam != null){
             res.status(400).send({message: "The " + missingParam + " parameter is missing. Mandatory params are: " + mandatoryParams});
@@ -35,7 +35,7 @@ class AuthController {
 
     static login = async (req: Request, res: Response) => {
 
-        var mandatoryParams = ["userId"];
+        var mandatoryParams = ["userId", "idToken"];
         var missingParam = checkMandatoryParams(req.body, mandatoryParams);
         if(missingParam != null){
             res.status(400).send({message: "The " + missingParam + " parameter is missing. Mandatory params are: " + mandatoryParams});

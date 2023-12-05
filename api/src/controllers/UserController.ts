@@ -21,21 +21,19 @@ class UserController {
         var userId : string = req.userId;
 
         var email : string = req.body.email;
-        var phoneNumber : string = req.body.phoneNumber;
         var firstName : string = req.body.firstName;
         var lastName : string = req.body.lastName;
         var password : string = req.body.password;
         var photoURL : string = req.body.photoURL;
         var updateObj : {
             email?: string,
-            phoneNumber?: string,
             password?: string,
             displayName?: string,
             photoURL?: string
         } = {};
 
         var major : string = req.body.major;
-        console.log({userId, email, phoneNumber, firstName, lastName, password, photoURL});
+        console.log({userId, email, firstName, lastName, password, photoURL});
 
         var collectionObj : {
             email? : string,
@@ -48,9 +46,6 @@ class UserController {
         if(email != null && email.length > 0){
             updateObj["email"] = email;
             collectionObj["email"] = email;
-        }
-        if(phoneNumber != null && phoneNumber.length > 0){
-            updateObj["phoneNumber"] = phoneNumber;
         }
         if(password != null && password.length > 0){
             updateObj["password"] = password;
@@ -97,26 +92,21 @@ class UserController {
     static updateTutor = async (req: Request, res: Response) => {
         var userId : string = req.userId;
 
-        var mandatoryParams = ["phoneNum", "coursesTutored", "isPublic", "tutor"];
+        var mandatoryParams = ["coursesTutored", "tutor"];
         var missingParam = checkMandatoryParams(req.body, mandatoryParams);
         if(missingParam != null){
             res.status(400).send({message: "The " + missingParam + " parameter is missing. Mandatory params are: " + mandatoryParams});
             return;
         }
 
-        var phoneNumber : string = req.body.phoneNum;
         var description : string = req.body.description;
-        // Bruh
-        var isPublic : boolean = req.body.public === "yes";
         var coursesTutored : Array<string> = req.body.coursesTutored;
         var selectedFile : string = req.body.selectedFile;
         var selectedImg : string = req.body.selectedImg;
         var tutor : boolean = req.body.tutor;
 
         var updateObj : {
-            phoneNumber? : string,
             description? : string,
-            isPublic? : boolean,
             coursesTutored? : Array<string>,
             selectedFile? : string,
             selectedImg? : string,
@@ -124,12 +114,6 @@ class UserController {
         } = {};
 
 
-        if(phoneNumber != null && phoneNumber.length > 0){
-            updateObj["phoneNumber"] = phoneNumber;
-        }
-        if(isPublic != null){
-            updateObj["isPublic"] = isPublic;
-        }
         if(coursesTutored != null && coursesTutored.length > 0){
             updateObj["coursesTutored"] = coursesTutored;
         }
@@ -166,7 +150,6 @@ class UserController {
 
     static uploadTranscript = async (req: Request, res: Response) => {
         var fileName : string = req.userId + ".pdf";
-        console.log(req.body.type);
         fs.writeFile("../src/assests/transcripts/" + fileName, req.body, (err) => {
             if(err) throw err;
         })

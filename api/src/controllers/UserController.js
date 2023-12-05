@@ -32,22 +32,18 @@ UserController.getUserData = (req, res) => __awaiter(void 0, void 0, void 0, fun
 UserController.updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var userId = req.userId;
     var email = req.body.email;
-    var phoneNumber = req.body.phoneNumber;
     var firstName = req.body.firstName;
     var lastName = req.body.lastName;
     var password = req.body.password;
     var photoURL = req.body.photoURL;
     var updateObj = {};
     var major = req.body.major;
-    console.log({ userId, email, phoneNumber, firstName, lastName, password, photoURL });
+    console.log({ userId, email, firstName, lastName, password, photoURL });
     var collectionObj = {};
     // Update authentication info, only update provided parameters
     if (email != null && email.length > 0) {
         updateObj["email"] = email;
         collectionObj["email"] = email;
-    }
-    if (phoneNumber != null && phoneNumber.length > 0) {
-        updateObj["phoneNumber"] = phoneNumber;
     }
     if (password != null && password.length > 0) {
         updateObj["password"] = password;
@@ -91,27 +87,18 @@ UserController.updateUser = (req, res) => __awaiter(void 0, void 0, void 0, func
 // Tutor: Enlists the user as a tutor for the specified course
 UserController.updateTutor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var userId = req.userId;
-    var mandatoryParams = ["phoneNum", "coursesTutored", "isPublic", "tutor"];
+    var mandatoryParams = ["coursesTutored", "tutor"];
     var missingParam = (0, util_1.checkMandatoryParams)(req.body, mandatoryParams);
     if (missingParam != null) {
         res.status(400).send({ message: "The " + missingParam + " parameter is missing. Mandatory params are: " + mandatoryParams });
         return;
     }
-    var phoneNumber = req.body.phoneNum;
     var description = req.body.description;
-    // Bruh
-    var isPublic = req.body.public === "yes";
     var coursesTutored = req.body.coursesTutored;
     var selectedFile = req.body.selectedFile;
     var selectedImg = req.body.selectedImg;
     var tutor = req.body.tutor;
     var updateObj = {};
-    if (phoneNumber != null && phoneNumber.length > 0) {
-        updateObj["phoneNumber"] = phoneNumber;
-    }
-    if (isPublic != null) {
-        updateObj["isPublic"] = isPublic;
-    }
     if (coursesTutored != null && coursesTutored.length > 0) {
         updateObj["coursesTutored"] = coursesTutored;
     }
@@ -146,7 +133,6 @@ UserController.uploadProfilePhoto = (req, res) => __awaiter(void 0, void 0, void
 });
 UserController.uploadTranscript = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var fileName = req.userId + ".pdf";
-    console.log(req.body.type);
     fs_1.default.writeFile("../src/assests/transcripts/" + fileName, req.body, (err) => {
         if (err)
             throw err;

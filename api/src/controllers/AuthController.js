@@ -21,7 +21,7 @@ class AuthController {
 _a = AuthController;
 AuthController.signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // Display name and email are already automatically added to firebase auth database
-    var mandatoryParams = ["userId", "firstName", "lastName", "email", "major"];
+    var mandatoryParams = ["userId", "firstName", "lastName", "email"];
     var missingParam = (0, util_1.checkMandatoryParams)(req.body, mandatoryParams);
     if (missingParam != null) {
         res.status(400).send({ message: "The " + missingParam + " parameter is missing. Mandatory params are: " + mandatoryParams });
@@ -44,7 +44,7 @@ AuthController.signup = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 });
 AuthController.login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var mandatoryParams = ["userId"];
+    var mandatoryParams = ["userId", "idToken"];
     var missingParam = (0, util_1.checkMandatoryParams)(req.body, mandatoryParams);
     if (missingParam != null) {
         res.status(400).send({ message: "The " + missingParam + " parameter is missing. Mandatory params are: " + mandatoryParams });
