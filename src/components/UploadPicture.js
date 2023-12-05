@@ -3,6 +3,8 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import UploadImg from './UploadImg.js'
 
+// skeleton for the page for uploading profile pictures
+
 export default function UploadPicture(props) {
     return (
         <React.Fragment>

@@ -7,6 +7,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
+// skeleton for the tutor boxes that appear on the results pages
+
 export default function DynamicBox(props) {
     const { image, name, description, email } = props;
     return (

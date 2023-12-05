@@ -1,5 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 
+// the consistant theming of the website
+
 const theme = createTheme({
     palette: {
         mode: 'light',

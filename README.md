@@ -81,7 +81,6 @@ Authentication required: Yes
 Params:
 - userId (string)
 - email (string)
-- phoneNumber (string)
 - firstName (string)
 - lastName (string)
 - password (string)
@@ -93,7 +92,6 @@ Authentication required: Yes
 
 Params:
 - userId (string)
-- phoneNumber (string)
 - description (string)
 - isPublic (boolean)
 - coursesTutored (array of strings)

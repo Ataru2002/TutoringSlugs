@@ -8,6 +8,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import DropdownMajor from '../components/DropdownMajors';
 
+// let the users change their settings if they make a mistake
+// use api to send the new information to the database
+
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>

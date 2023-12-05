@@ -10,6 +10,8 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import lion_school_rocks from '../assests/lion_school_rocks.jpg';
 
+// let the user reset their passwords
+
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>

@@ -15,6 +15,9 @@ import lion_school_rocks from '../assests/lion_school_rocks.jpg';
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
+// sign up page with image on the side, sends information to the database
+// will redirect you to the sign in page once you sign up
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyAr9AWEzY55OMgNGJLRPNkeg3EIv7rT52A",
