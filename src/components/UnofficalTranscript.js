@@ -3,6 +3,8 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import UploadTranscript from './UploadTranscript.js'
 
+// skeleton for the page for uploading transcripts
+
 export default function UnofficalTranscript(props) {
     return (
         <React.Fragment>

@@ -5,6 +5,8 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import { Button } from '@mui/material';
 
+// skeleton for the header with the title and navigation bar
+
 function logout() {
     document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     window.location.href = "/signin";

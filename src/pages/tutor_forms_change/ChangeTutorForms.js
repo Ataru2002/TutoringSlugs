@@ -15,6 +15,9 @@ import TutorForms from './TutorForms';
 import UploadPicture from '../../components/UploadPicture';
 import UnofficalTranscript from '../../components/UnofficalTranscript';
 
+// allows the users to change their tutor information
+// uses api to send the information to the database
+
 function Copyright() {
     return (
         <Typography variant="body2" color="text.secondary" align="center">

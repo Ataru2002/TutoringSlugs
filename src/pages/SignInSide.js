@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import signin_message from '../assests/signin_message.jpg';
 import firebase from "../Firebase";
 
+// sign in page with image on the side, will let the sign in for an hour
+
 const origin_url = window.location.origin;
 
 function Copyright(props) {

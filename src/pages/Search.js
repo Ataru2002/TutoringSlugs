@@ -13,6 +13,8 @@ import search_img from '../assests/search_img.png';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
+// searches for tutors or searches for courses
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyAr9AWEzY55OMgNGJLRPNkeg3EIv7rT52A",

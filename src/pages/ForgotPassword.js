@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import signin_message from '../assests/signin_message.jpg';
 import firebase from "../Firebase";
 
+// the user enters their email and they will get sent a email to reset their password
+
 function Copyright(props) {
     return (
         <Typography variant="body2" color="text.secondary" align="center" {...props}>

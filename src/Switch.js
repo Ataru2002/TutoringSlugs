@@ -10,6 +10,8 @@ import ForgetPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import ResultsTutors from "./pages/ResultsTutors";
 
+// pages that you can navigate to
+
 export const Switch = () => {
     return (
         <Router>

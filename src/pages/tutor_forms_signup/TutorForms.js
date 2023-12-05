@@ -5,6 +5,8 @@ import TextField from '@mui/material/TextField';
 import DropdownClassesTutors from '../../components/DropdownClassesTutors';
 import DropdownCourseName from '../../components/DropdownCourseName';
 
+// this is part of the tutor sign up form
+
 export default function TutorFormNew(props) {
     const [courses, setCourses] = React.useState([]);
 

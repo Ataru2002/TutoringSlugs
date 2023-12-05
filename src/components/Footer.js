@@ -5,6 +5,8 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 
+// skeleton for the footer that appears on some of the pages
+
 function Copyright() {
     return (
         <Typography variant="body2" color="text.secondary" align="center">

@@ -9,6 +9,9 @@ import defaultProfilePhoto from '../assests/default.jpg'
 import DynamicBox from '../components/DynamicBox';
 import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
 
+// will display the result of searching for courses
+// grabbing query search data and filter though the database
+
 const origin_url = window.location.origin;
 
 const sections = [

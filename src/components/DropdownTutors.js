@@ -8,6 +8,9 @@ import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
 
+// dropdown for the tutors on the search page
+// grabs data using firebase
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
