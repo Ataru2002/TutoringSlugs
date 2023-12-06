@@ -12,9 +12,12 @@ import Dropdowntutors from '../components/DropdownTutors';
 import search_img from '../assests/search_img.png';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-
-// searches for tutors or searches for courses
-
+/*
+- searches for tutors or searches for courses
+- if updates arises, an outside piece of code will added manually to add all the data from the webscrapper to the firestore database when:
+    + A new quarter comes and the classes are updated for each department
+    + Change in majors
+*/
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyAr9AWEzY55OMgNGJLRPNkeg3EIv7rT52A",
