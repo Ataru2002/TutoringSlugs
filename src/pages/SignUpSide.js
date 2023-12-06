@@ -188,10 +188,6 @@ export default function SignUpSide() {
                             type="password"
                             id="confirm-password"
                         />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
-                        />
                         <Button
                             type="submit"
                             fullWidth

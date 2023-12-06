@@ -20,7 +20,8 @@ export default function TutorFormNew(props) {
                     <TextField
                         id="Description"
                         name="Description"
-                        label="Enter Your Page Description"
+                        label="Enter Your Page Description."
+                        placeholder="Please include the classes you are tutoring for, who you took it with, and your grade."
                         fullWidth
                         multiline
                         variant="standard"
