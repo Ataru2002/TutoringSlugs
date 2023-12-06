@@ -28,14 +28,14 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-const origin_url = window.location.origin;
+const originUrl = window.location.origin;
 
 const sections = [
-    { title: "Wanna be a tutor?", url: origin_url + "/tutor_signup" },
-    { title: "Change your setting", url: origin_url + "/change_setting" },
+    { title: "Wanna be a tutor?", url: originUrl + "/tutor_signup" },
+    { title: "Change your setting", url: originUrl + "/change_setting" },
     {
         title: "Change your tutor setting",
-        url: origin_url + "/change_tutor_setting",
+        url: originUrl + "/change_tutor_setting",
     },
 ];
 

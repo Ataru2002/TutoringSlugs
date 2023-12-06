@@ -13,7 +13,7 @@ import firebase from "../Firebase";
 
 // sign in page with image on the side, will let the sign in for an hour
 
-const origin_url = window.location.origin;
+const originUrl = window.location.origin;
 
 function Copyright(props) {
     return (
@@ -146,12 +146,12 @@ export default function SignInSide() {
                         </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link href={origin_url + '/forget_password'} variant="body2">
+                                <Link href={originUrl + '/forget_password'} variant="body2">
                                     Forgot password?
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href={origin_url + '/signup'} variant="body2">
+                                <Link href={originUrl + '/signup'} variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>
