@@ -5,16 +5,16 @@ import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "fir
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyAr9AWEzY55OMgNGJLRPNkeg3EIv7rT52A",
-    authDomain: "tutoringslugs.firebaseapp.com",
-    projectId: "tutoringslugs",
-    storageBucket: "tutoringslugs.appspot.com",
-    messagingSenderId: "577248810803",
-    appId: "1:577248810803:web:5807a43fb92cd400075046",
-    measurementId: "G-BNWVD69VNX",
+  apiKey: "AIzaSyA9ds9N44U4LmvCUZ6eE1HIAsv4ELrWPwo",
+  authDomain: "tutoringslugemergence.firebaseapp.com",
+  projectId: "tutoringslugemergence",
+  storageBucket: "tutoringslugemergence.appspot.com",
+  messagingSenderId: "233830887681",
+  appId: "1:233830887681:web:fd0e7ecaa39118b4f42b00",
+  measurementId: "G-1VZV18LX6Q"
 };
-
 initializeApp(firebaseConfig);
+
 const auth = getAuth();
 
 var firebase = {
