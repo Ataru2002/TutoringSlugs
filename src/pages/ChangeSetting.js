@@ -25,17 +25,31 @@ function Copyright(props) {
 }
 
 export default function ChangeSetting() {
+
+    var [oldDisplayName, setOldDisplayName] = React.useState(""); 
+    var [autofillFirstName, setAutofillFirstName] = React.useState("");
+    var [autofillLastName, setAutofillLastName] = React.useState("");
+    var [autofillEmail, setAutofillEmail] = React.useState("");
+
     // Checks if user is signed in - redirects to sign in if not signed in
-    fetch("http://localhost:8080/user/", {
-        method: "GET",
-        credentials: "include",
-    }).then((res) => {
-        if (res.status === 404) {
-            window.location.href = "/signin";
-        }
-    }).catch((err) => {
-        console.log(err);
-    });
+    React.useEffect(() => {
+        fetch("http://localhost:8080/user/", {
+            method: "GET",
+            credentials: "include",
+        }).then((res) => {
+            if (res.status === 404) {
+                window.location.href = "/signin";
+            }
+            res.json().then((json) => {
+                setOldDisplayName(json.displayName);
+                setAutofillFirstName(json.displayName.split(" ")[0])
+                setAutofillLastName(json.displayName.split(" ")[1])
+                setAutofillEmail(json.email);
+            });
+        }).catch((err) => {
+            console.log(err);
+        });
+    }, []);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -68,7 +82,7 @@ export default function ChangeSetting() {
                 },
                 credentials: "include",
                 body: JSON.stringify({
-                    firstName, lastName, email, password
+                    firstName, lastName, email, password, oldDisplayName
                 })
             }).then(res => {
                 if (res.status === 404) {
@@ -116,6 +130,8 @@ export default function ChangeSetting() {
                         type="First Name"
                         id="First Name"
                         autoComplete="First Name"
+                        value={autofillFirstName}
+                        onChange={(e) => setAutofillFirstName(e.target.value)}
                     />
                     <TextField
                         margin="normal"
@@ -125,6 +141,8 @@ export default function ChangeSetting() {
                         type="Last Name"
                         id="Last Name"
                         autoComplete="Last Name"
+                        value={autofillLastName}
+                        onChange={(e) => setAutofillLastName(e.target.value)}
                     />
                     <DropdownMajor />
                     <TextField
@@ -133,8 +151,10 @@ export default function ChangeSetting() {
                         id="email"
                         label="Email Address"
                         name="email"
+                        value={autofillEmail}
                         autoComplete="email"
                         autoFocus
+                        onChange={(e) => setAutofillEmail(e.target.value)}
                     />
                     <TextField
                         margin="normal"

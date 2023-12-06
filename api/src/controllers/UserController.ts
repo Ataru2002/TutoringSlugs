@@ -27,16 +27,16 @@ class UserController {
         var firstName : string = req.body.firstName;
         var lastName : string = req.body.lastName;
         var password : string = req.body.password;
-        var photoURL : string = req.body.photoURL;
+        var oldDisplayName : string = req.body.oldDisplayName;
+
         var updateObj : {
             email?: string,
             password?: string,
             displayName?: string,
-            photoURL?: string
         } = {};
 
         var major : string = req.body.major;
-        console.log({userId, email, firstName, lastName, password, photoURL});
+        console.log({userId, email, firstName, lastName, password, oldDisplayName});
 
         var collectionObj : {
             email? : string,
@@ -45,7 +45,25 @@ class UserController {
             lastName? : string
         } = {};
 
-        // Update authentication info, only update provided parameters
+        // Update authentication info, only update provided parameters 
+        var oldFirstName = oldDisplayName.split(" ")[0]
+        var oldLastName = oldDisplayName.split(" ")[1]
+
+        if(firstName != null && firstName.length > 0){
+            updateObj["displayName"] = firstName;
+            collectionObj["firstName"] = firstName;
+        }
+        else {
+            updateObj["displayName"] = oldFirstName;
+        }
+
+        if(lastName != null && lastName.length > 0){
+            updateObj["displayName"] = updateObj["displayName"] + " " + lastName;
+            collectionObj["lastName"] = lastName;
+        }
+        else {
+            updateObj["displayName"] = updateObj["displayName"] + " " + oldLastName;
+        }
         if(email != null && email.length > 0){
             updateObj["email"] = email;
             collectionObj["email"] = email;
@@ -53,17 +71,7 @@ class UserController {
         if(password != null && password.length > 0){
             updateObj["password"] = password;
         }
-        if(firstName != null && firstName.length > 0){
-            updateObj["displayName"] = firstName;
-            collectionObj["firstName"] = firstName;
-            if(lastName != null && lastName.length > 0){
-                updateObj["displayName"] = updateObj["displayName"] + " " + lastName;
-                collectionObj["lastName"] = lastName;
-            }
-        }
-        if(photoURL != null && photoURL.length > 0){
-            updateObj["photoURL"] = photoURL;
-        }
+
         if(major != null && major.length > 0){
             collectionObj["major"] = major;
         }
